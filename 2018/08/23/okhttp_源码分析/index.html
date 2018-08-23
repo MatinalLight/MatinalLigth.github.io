@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>okhttp 源码分析 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="根据okhttp使用，分析每一步相关源码  OkHttpClient.Builder builder = new OkHttpClient.Builder(); HttpLoggingInterceptor logging = new HttpLoggingInterceptor(); logging.setLevel(Constants.ISDEBUG? HttpLoggingIntercept">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="okhttp 源码分析">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/okhttp_源码分析/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="根据okhttp使用，分析每一步相关源码  OkHttpClient.Builder builder = new OkHttpClient.Builder(); HttpLoggingInterceptor logging = new HttpLoggingInterceptor(); logging.setLevel(Constants.ISDEBUG? HttpLoggingIntercept">
+<meta property="og:updated_time" content="2018-04-11T07:38:23.838Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="okhttp 源码分析">
+<meta name="twitter:description" content="根据okhttp使用，分析每一步相关源码  OkHttpClient.Builder builder = new OkHttpClient.Builder(); HttpLoggingInterceptor logging = new HttpLoggingInterceptor(); logging.setLevel(Constants.ISDEBUG? HttpLoggingIntercept">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">okhttp 源码分析</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p>根据<a href="http://square.github.io/okhttp/" target="_blank" rel="external">okhttp</a>使用，分析每一步相关源码</p>
+<pre>
+OkHttpClient.Builder builder = new OkHttpClient.Builder();
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+OkHttpClient client = builder
+    .addNetworkInterceptor(new DesInterceptor())
+    .addInterceptor(logging)
+    .build();
+</pre>
+
+<h2 id="Builder"><a href="#Builder" class="headerlink" title="Builder()"></a>Builder()</h2><p>默认配置，可根据对应参数的方法自定义配置</p>
+<pre>
+public Builder() {
+      dispatcher = new Dispatcher(); //执行异步请求的策略，内部由1个ExecutorService调用
+      protocols = DEFAULT_PROTOCOLS; //协议Protocol.HTTP_2和Protocol.HTTP_1_1
+
+      //连接方式ConnectionSpec.MODERN_TLS(HTTPS), ConnectionSpec.CLEARTEXT(HTTP)      
+      connectionSpecs = DEFAULT_CONNECTION_SPECS; 
+      /*指标事件的监听器。扩展此类以监控应用程序HTTP调用的数量，大小和持续时间
+        默认不处理
+       */
+      eventListenerFactory = EventListener.factory(EventListener.NONE);
+
+      proxySelector = ProxySelector.getDefault(); //处理代理服务器，如果有
+      cookieJar = CookieJar.NO_COOKIES; //处理Cookie 默认不处理
+      socketFactory = SocketFactory.getDefault(); //创建socket
+      hostnameVerifier = OkHostnameVerifier.INSTANCE; //安全证书验证
+      certificatePinner = CertificatePinner.DEFAULT; //约束哪些证书是可信的
+      proxyAuthenticator = Authenticator.NONE; //处理请求头 Proxy-Authorization 默认不处理
+      authenticator = Authenticator.NONE; //处理请求头 Authorization  默认不处理
+
+      /*为单个用户创建一个恰当参数的连接池，参数随版本变化。
+        目前，该池最多可容纳5个闲置连接，闲置5分钟后将被驱逐。
+        public ConnectionPool() {this(5, 5, TimeUnit.MINUTES);}
+       */
+      connectionPool = new ConnectionPool();
+
+      /*使用InetAddress.getAllByName来请求底层操作系统查找IP地址的DNS。 
+        大多数自定义的Dns实现应该委托给这个实例
+       */
+      dns = Dns.SYSTEM;
+
+      followSslRedirects = true; //允许从HTTPS到HTTP以及从HTTP到HTTPS的重定向。
+      followRedirects = true; //允许重定向
+
+      /*配置此客户端在遇到连接问题时重试或不重试。 
+        默认情况下，此客户端将从以下问题中静默恢复：
+        * 无法访问的IP地址。 一个host对应多个IP。
+        * 陈旧的连接池。ConnectionPool重用套接字来减少请求延迟，但这些连接偶尔会超时。 
+        * 无法访问的代理服务器。ProxySelector可用于尝试按顺序多个代理服务器，最终回落到直接连接。
+       */
+      retryOnConnectionFailure = true;
+      connectTimeout = 10_000; //默认连接超时（以毫秒为单位）。
+      readTimeout = 10_000; //默认读取超时（以毫秒为单位）。
+      writeTimeout = 10_000; //默认写入超时（以毫秒为单位）。
+      pingInterval = 0; //Web套接字ping时间间隔（以毫秒为单位）。
+    }
+</pre>
+
+<h2 id="addNetworkInterceptor-new-DesInterceptor"><a href="#addNetworkInterceptor-new-DesInterceptor" class="headerlink" title="addNetworkInterceptor(new DesInterceptor())"></a>addNetworkInterceptor(new DesInterceptor())</h2><p>返回观察单个网络请求和响应的拦截器的可修改列表。 这些拦截器必须调用Interceptor.Chain.proceed（okhttp3.Request）正好一次：它是一种用于在网络拦截到短路的错误或重复的网络请求。</p>
+<p>当调用Response response = chain.proceed(request); 后，可使用下面方式重新返回Response</p>
+<pre>
+ResponseBody body = ResponseBody.create(mediaType, json);
+return response.newBuilder().body(body).build();
+</pre>
+
+
+<h2 id="addInterceptor-logging"><a href="#addInterceptor-logging" class="headerlink" title="addInterceptor(logging)"></a>addInterceptor(logging)</h2><p>返回一个可修改的拦截器列表，用于观察每个调用的完整跨度：从连接建立之前（如果有）到选择响应源（源服务器，缓存或两者）之后。</p>
+<h2 id="build"><a href="#build" class="headerlink" title="build()"></a>build()</h2><p>OkHttpClient(Builder builder) 将Builder中的参数对应的赋值给OkHttpClient</p>
+<pre>
+//通过isTLS判断是否是HTTPS连接
+if (builder.sslSocketFactory != null || !isTLS) {
+  this.sslSocketFactory = builder.sslSocketFactory;
+  this.certificateChainCleaner = builder.certificateChainCleaner;
+} else {
+  X509TrustManager trustManager = systemDefaultTrustManager();
+  this.sslSocketFactory = systemDefaultSslSocketFactory(trustManager);
+  this.certificateChainCleaner = CertificateChainCleaner.get(trustManager);
+}
+</pre>
+如果使用HTTPS的话,可以通过Builder#sslSocketFactory(
+        SSLSocketFactory sslSocketFactory, X509TrustManager trustManager)添加自定义的证书
+
+
+## 访问网络
+
+<pre>
+String run(String url) throws IOException {
+  Request request = new Request.Builder()
+      .url(url)
+      .build();
+
+  Response response = client.newCall(request).execute();
+  return response.body().string();
+}
+</pre>
+
+<h3 id="创建Request"><a href="#创建Request" class="headerlink" title="创建Request"></a>创建Request</h3><pre>
+Request(Builder builder) {
+    this.url = builder.url; //访问地址
+    this.method = builder.method; //请求方式 GET POST HEAD DELETE PUT PATCH
+    this.headers = builder.headers.build(); //请求头 Headers
+    this.body = builder.body; //请求体 RequestBody
+    this.tag = builder.tag != null ? builder.tag : this;//标签，可以用来取消请求
+  }
+</pre>
+
+<h3 id="client-newCall-request"><a href="#client-newCall-request" class="headerlink" title="client.newCall(request)"></a>client.newCall(request)</h3><p>准备将来要执行的请求。</p>
+<pre>
+@Override public Call newCall(Request request) {
+    return RealCall.newRealCall(this, request, false /* for web socket */);
+  }
+->RealCall->static RealCall newRealCall(OkHttpClient client, Request originalRequest, boolean forWebSocket) {
+    // 安全地将Call实例发布到EventListener。
+    RealCall call = new RealCall(client, originalRequest, forWebSocket);
+    call.eventListener = client.eventListenerFactory().create(call);
+    return call;
+  }
+</pre>
+
+<h3 id="RealCall"><a href="#RealCall" class="headerlink" title="RealCall"></a>RealCall</h3><pre>
+private RealCall(OkHttpClient client, Request originalRequest, boolean forWebSocket) {
+    this.client = client;
+    this.originalRequest = originalRequest;
+    this.forWebSocket = forWebSocket;
+    this.retryAndFollowUpInterceptor = new RetryAndFollowUpInterceptor(client, forWebSocket);
+  }
+
+/*这个拦截器从故障中恢复并在必要时遵循重定向。 
+如果调用被取消，它可能会抛出IOException,因为底层是调用的socket.close
+*/
+->RetryAndFollowUpInterceptor
+->public RetryAndFollowUpInterceptor(OkHttpClient client, boolean forWebSocket) {
+    this.client = client;
+    this.forWebSocket = forWebSocket;
+  }
+</pre>
+
+<h3 id="RealCall-execute-和enqueue"><a href="#RealCall-execute-和enqueue" class="headerlink" title="RealCall#execute()和enqueue()"></a>RealCall#execute()和enqueue()</h3><p>同一个RealCall只能同时请求一次，不管是execute还是enqueue</p>
+<ul>
+<li><p>同步请求</p>
+<pre>
+@Override public Response execute() throws IOException {
+  synchronized (this) {
+    if (executed) throw new IllegalStateException("Already Executed");
+    executed = true;
+  }
+  captureCallStackTrace();//在执行呼叫或排队时捕获堆栈跟踪。确定连接泄漏的来源。
+  eventListener.callStart(this);
+  try {
+    client.dispatcher().executed(this);
+    Response result = getResponseWithInterceptorChain();
+    if (result == null) throw new IOException("Canceled");
+    return result;
+  } catch (IOException e) {
+    eventListener.callFailed(this, e);
+    throw e;
+  } finally {
+    client.dispatcher().finished(this);
+  }
+}
+</pre>
+client.dispatcher().executed(this);
+<pre>
+->synchronized void executed(RealCall call) {
+  runningSyncCalls.add(call);
+}
+//运行同步调用。包括取消尚未完成的调用。
+runningSyncCalls = new ArrayDeque<>();
+//Deque 线性队列(双端队列)，不是线程安全的，当用作堆栈时，该类可能比Stack快，并且在用作队列时比LinkedList快。 
+</pre>
+Response result = getResponseWithInterceptorChain();
+<pre>
+->Response getResponseWithInterceptorChain() throws IOException {
+  // Build a full stack of interceptors.
+  List<interceptor> interceptors = new ArrayList<>();
+  interceptors.addAll(client.interceptors());//创建client是配置的自定义Interceptor
+  interceptors.add(retryAndFollowUpInterceptor);//处理故障并恢复的拦截器
+  interceptors.add(new BridgeInterceptor(client.cookieJar()));//从应用程序代码到网络代码的桥梁。 主要是配置请求头信息
+  interceptors.add(new CacheInterceptor(client.internalCache()));//返回304使用缓存，有缓存使用缓存，没有就请求网络，并更新缓存
+
+  /*打开到目标服务器的连接并继续到下一个拦截器。
+    由RealConnection建立连接，
+    由HttpCodec对HTTP请求进行编码并对HTTP响应进行解码。
+   */
+  interceptors.add(new ConnectInterceptor(client));
+  if (!forWebSocket) {//forWebSocket=false
+    interceptors.addAll(client.networkInterceptors());//自定义网络拦截器
+  }
+
+  /*这是链中的最后一个拦截器。 它会对服务器进行网络调用。
+    if (forWebSocket && code == 101) {返回非空响应体}
+   */
+  interceptors.add(new CallServerInterceptor(forWebSocket));//
+
+  /*一个包含整个拦截器链的具体拦截器链：
+   所有应用程序拦截器(application interceptors)，
+   OkHttp核心(OkHttp core)，
+   所有网络拦截器(network interceptors)，
+   最后是网络调用者(CallServerInterceptor)。
+   */
+  Interceptor.Chain chain = new RealInterceptorChain(interceptors, null, null, null, 0,
+      originalRequest, this, eventListener, client.connectTimeoutMillis(),
+      client.readTimeoutMillis(), client.writeTimeoutMillis());
+
+  return chain.proceed(originalRequest);
+}
+</interceptor></pre>
+</li>
+<li><p>异步请求</p>
+<pre>
+@Override public void enqueue(Callback responseCallback) {
+  synchronized (this) {
+    if (executed) throw new IllegalStateException("Already Executed");
+    executed = true;
+  }
+  captureCallStackTrace();
+  eventListener.callStart(this);
+  client.dispatcher().enqueue(new AsyncCall(responseCallback));
+}
+</pre>
+client.dispatcher().enqueue(new AsyncCall(responseCallback));
+<pre>
+->synchronized void enqueue(AsyncCall call) {
+  /*maxRequests=64,maxRequestsPerHost=5
+   请求数小于64并且host数小于5，访问网络，否则排队
+   */
+  if (runningAsyncCalls.size() < maxRequests && runningCallsForHost(call) < maxRequestsPerHost) {
+    runningAsyncCalls.add(call);
+    executorService().execute(call);
+  } else {
+    readyAsyncCalls.add(call);//加入队列
+  }
+}
+</pre>
+
+</li>
+</ul>
+<p>executorService().execute(call);</p>
+<pre>
+//默认是一个数量无限制的线程池
+->public synchronized ExecutorService executorService() {
+    if (executorService == null) {
+      executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
+          new SynchronousQueue<runnable>(), Util.threadFactory("OkHttp Dispatcher", false));
+    }
+    return executorService;
+  }
+</runnable></pre>
+
+<p>AsyncCall<br><br>    -&gt; AsyncCall extends NamedRunnable<br><br>    -&gt; NamedRunnable implements Runnable#run()-&gt;execute()<br></p>
+<pre>
+//访问网络部分和同步请求一样，加了异步回调方法
+@Override protected void execute() {
+      boolean signalledCallback = false;
+      try {
+        Response response = getResponseWithInterceptorChain();
+        if (retryAndFollowUpInterceptor.isCanceled()) {
+          signalledCallback = true;
+          responseCallback.onFailure(RealCall.this, new IOException("Canceled"));
+        } else {
+          signalledCallback = true;
+          responseCallback.onResponse(RealCall.this, response);
+        }
+      } catch (IOException e) {
+        if (signalledCallback) {
+          // Do not signal the callback twice!
+          Platform.get().log(INFO, "Callback failure for " + toLoggableString(), e);
+        } else {
+          eventListener.callFailed(RealCall.this, e);
+          responseCallback.onFailure(RealCall.this, e);
+        }
+      } finally {
+        client.dispatcher().finished(this);
+      }
+    }
+  }
+</pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/国际化笔记/" class="styled-border">
+                    ←
+                    国际化适配笔记
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="styled-border">
+                    
+                    Retrofit 源码分析
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

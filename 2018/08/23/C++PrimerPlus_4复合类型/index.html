@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus复合类型 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="数组  字符串  string  结构  共同体  枚举  数组数组声明数组的声明应指出一下三点：  存储在每个元素中的值的类型 数组名 数组中的元素数  声明数组的通用格式：typeName arrayName[arraySize]通过arrayName[number]来访问数组元素，编号从0开始 数组初始化int cards[4]={3,6,8,10}; int hand[4]; 初始化规则">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus复合类型">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_4复合类型/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="数组  字符串  string  结构  共同体  枚举  数组数组声明数组的声明应指出一下三点：  存储在每个元素中的值的类型 数组名 数组中的元素数  声明数组的通用格式：typeName arrayName[arraySize]通过arrayName[number]来访问数组元素，编号从0开始 数组初始化int cards[4]={3,6,8,10}; int hand[4]; 初始化规则">
+<meta property="og:updated_time" content="2018-04-08T09:51:52.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus复合类型">
+<meta name="twitter:description" content="数组  字符串  string  结构  共同体  枚举  数组数组声明数组的声明应指出一下三点：  存储在每个元素中的值的类型 数组名 数组中的元素数  声明数组的通用格式：typeName arrayName[arraySize]通过arrayName[number]来访问数组元素，编号从0开始 数组初始化int cards[4]={3,6,8,10}; int hand[4]; 初始化规则">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus复合类型</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p><a href="#array">数组</a>  <a href="#chars">字符串</a>  <a href="#string">string</a>  <a href="#struct">结构</a>  <a href="#union">共同体</a>  <a href="#enum">枚举</a></p>
+<p></p><h1 id="array"></h1><p></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h6 id="数组声明"><a href="#数组声明" class="headerlink" title="数组声明"></a>数组声明</h6><p>数组的声明应指出一下三点：</p>
+<ul>
+<li>存储在每个元素中的值的类型</li>
+<li>数组名</li>
+<li>数组中的元素数</li>
+</ul>
+<p>声明数组的通用格式：<code>typeName arrayName[arraySize]</code><br>通过arrayName[number]来访问数组元素，编号从0开始</p>
+<h6 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h6><pre><code>int cards[4]={3,6,8,10};
+int hand[4];
+</code></pre><p>初始化规则</p>
+<ul>
+<li>只有在定义数组时才能使用初始化，此后就不能使用了</li>
+<li>不能将一个数组赋给另一个数组</li>
+<li>可以使用下标分别给数组中的元素赋值</li>
+<li>初始化数组时，提供的值可以少于数组的元素，编译器将把其他元素设置为0</li>
+<li>如果初始化数组时方括号内[]为空，c++编译器将计算元素个数<br>  计算数组个数：<pre><code>  short things[]={1.5.3.8};
+  int num_elements=sizeof things / sizeof(short);
+</code></pre></li>
+<li>初始化数组时，可省略等号=</li>
+<li>列表初始化禁止缩窄转换</li>
+<li>大括号内为空，则所有元素都置为零</li>
+</ul>
+<p></p><h1 id="chars"></h1><p></p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h5 id="C-处理字符串的方式有两种："><a href="#C-处理字符串的方式有两种：" class="headerlink" title="C++处理字符串的方式有两种："></a>C++处理字符串的方式有两种：</h5><ul>
+<li>string类库</li>
+<li>C-风格字符串 <ul>
+<li>以空字符结尾，空字符被写作’\0’，其ASCII码为0；<br><code>char cat[8]={&#39;f&#39;,&#39;a&#39;,&#39;t&#39;,&#39;e&#39;,&#39;s&#39;,&#39;s&#39;,&#39;a&#39;,&#39;\0&#39;};</code></li>
+<li>更好的方式：<code>char bird[11]=&quot;Mr. Cheeps&quot;;</code>用引号括起的字符串隐式的包括结尾的空字符，因此不用显示的包括它</li>
+<li>确保数组足够大，能够存储字符串中所有字符——包括空字符</li>
+<li>char shirt=’s’;和char shirt=”s”;不一样，”S”不是字符常量，它表示两个字符(字符s和\0)。”s”实际上表示字符串所在的内存地址</li>
+<li>strlen()函数计算可见的字符串长度，用于存储字符串的数组长度不短于<code>strlen(value)+1</code></li>
+</ul>
+</li>
+</ul>
+<h6 id="拼接字符串常量"><a href="#拼接字符串常量" class="headerlink" title="拼接字符串常量"></a>拼接字符串常量</h6><ul>
+<li>任何两个由空白(空格、制表符和换行符)分隔的字符串常量都将自动拼接成一个。<br><code>cout&lt;&lt;&quot;I&#39;d give my right arm to be&quot; &quot; a great violinist.\n&quot;;</code>和<code>cout&lt;&lt;&quot;&quot;I&#39;d give my right arm to be a great violinist.\n&quot;</code>等效。</li>
+<li>拼接时不会再被连接的字符串之间添加空格</li>
+</ul>
+<h5 id="字符串输入"><a href="#字符串输入" class="headerlink" title="字符串输入"></a>字符串输入</h5><ul>
+<li>cin使用空白(空格、制表符、换行符)来确定字符串的结束位置</li>
+<li>面向行的输入<ul>
+<li>cin.getline(savename,strsize)函数读取整行，在读取strsize数目的字符或遇到换行符时停止读取</li>
+<li>cin.get(savename,strsize)用法和getline类似，但是get()并不在读取并丢弃换行符，而是将其留在输入队列中，下次再调用get()时将不能跨过该换行符。</li>
+<li>cin.get()可读取换行符，为读取下一行输入做好准备<br><code>cin.get(name,arsize).get()；cin.get(dessert,arsize)</code></li>
+</ul>
+</li>
+<li>空行 当get()读取空行后将设置失效位(failbit)，之后的输入将被阻断，可以使用<code>cin.clear();</code>恢复输入</li>
+</ul>
+<h5 id="混合输入字符串和数字"><a href="#混合输入字符串和数字" class="headerlink" title="混合输入字符串和数字"></a>混合输入字符串和数字</h5><ul>
+<li>字符串连接数字直接&lt;&lt;连接</li>
+<li>数字连接字符串：(cin&gt;&gt;number).get()；</li>
+</ul>
+<p></p><h1 id="string"></h1><p></p>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><h5 id="C-字符串初始化"><a href="#C-字符串初始化" class="headerlink" title="C++字符串初始化"></a>C++字符串初始化</h5><pre><code>`string date={&quot;Le Chapon Dodu&quot;};`
+`string date {&quot;Le Chapon Dodu&quot;};`
+</code></pre><h5 id="string类操作"><a href="#string类操作" class="headerlink" title="string类操作"></a>string类操作</h5><pre><code>* 使用+拼接
+* C-风格字符串使用strcpy(charr3,charr1)将charr1复制到charr3,strcat(charr3,charr2)将charr2拼接在charr3后面
+* 使用date.size()确定字符串的长度
+* getline(cin,str)读取行内容赋值给string
+</code></pre><p></p><h1 id="struct"></h1>    <p></p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><h6 id="结构声明"><a href="#结构声明" class="headerlink" title="结构声明"></a>结构声明</h6><p>关键字struct，inflatable标记成新类型的名称<br><code>inflatable hat；</code>创建变量，hat.price访问各成员</p>
+<pre><code>struct inflatable
+{
+    char name[20];//结构的成员
+    float volume;//结构的成员
+    double price;//结构的成员
+}；
+</code></pre><ul>
+<li>结构初始化和数组一样<code>inflatable duck{&quot;Daphne&quot;,0.12,9.98}</code></li>
+<li>可以将结构赋给另一个同类型的结构，结构中的每个成员都将被设置为另一个结构中相应的值，即使成员是数组。</li>
+<li>结构数组初始化规则<ul>
+<li>结合数组初始化规则<pre><code>inflatable guests[2]=
+  {
+      {&quot;Bambi&quot;,0.5,24.99},
+      {&quot;Godzilla&quot;,2000,565.99}    
+  };
+</code></pre></li>
+<li>初始化结构的规则<pre><code>inflatable gifts[100];
+gifts[0].volume=22.22;
+</code></pre></li>
+</ul>
+</li>
+<li>结构中的位字段:字段的类型因为整形或枚举,接下来是冒号，冒号后面是数字，它指定了使用的位数。可以使用没有名称的字段来提供间距</li>
+</ul>
+<pre><code>struct torgle_register
+{
+    unsigned int SN : 4;
+    bool goodIn : 1;    
+};
+
+torgle_register tr={14,true};
+if(tr.gooIn)//使用标准的结构表示法来访问位字段
+</code></pre><p></p><h1 id="union"></h1><p></p>
+<h2 id="共同体"><a href="#共同体" class="headerlink" title="共同体"></a>共同体</h2><p>共同体(union)是一种数据格式，它能够存储不同的数据类型，但只能同时存储其中的一种类型</p>
+<pre><code>union one4all
+{
+    int int_val;
+    long long_val;
+    double double_val;
+};
+</code></pre><p>共同体的用途：当数据项使用多种格式，但不会同时使用时，可以节省空间</p>
+<p></p><h1 id="enum"></h1><p></p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>C++的enum工具提供了另一种创建符号常量的方式，可以替代const。<br><code>enum spectrum{red,orange,yellow,green,blue,violet,indigo,ultraviolet};</code></p>
+<ul>
+<li>创建枚举spectrum</li>
+<li>将red、orange、yellow等作为符号常量，对应整数0~7.这些常量叫枚举量。</li>
+<li>枚举量不可改变</li>
+<li>枚举量是整型，可被提升为int类型，但int类型不能自动转换为枚举类型</li>
+</ul>
+<h5 id="设置枚举量的值"><a href="#设置枚举量的值" class="headerlink" title="设置枚举量的值"></a>设置枚举量的值</h5><ul>
+<li><p><code>enum bits{one=1,two=2,four=4,eight=8};</code></p>
+</li>
+<li><p><code>enum bigstep{first,four=-6,secont=100,third}</code><br>first默认为0，后面没有初始化的枚举量的值将比前面的枚举量大1，third的值为101</p>
+</li>
+<li>可以创建多个值相同的枚举量</li>
+</ul>
+<h5 id="枚举的取值范围"><a href="#枚举的取值范围" class="headerlink" title="枚举的取值范围"></a>枚举的取值范围</h5><ul>
+<li>上限：找到大于枚举量最大值的、最小的2的幂，将它减去1<br>bigstep的上限是：127</li>
+<li>下限：如果最小值不小于0，则取0；否则与上限相同，但加上负号<br>bigstep的下限是：-7</li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="styled-border">
+                    ←
+                    C++PrimerPlus指针
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_13类继承/" class="styled-border">
+                    
+                    C++PrimerPlus类继承
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

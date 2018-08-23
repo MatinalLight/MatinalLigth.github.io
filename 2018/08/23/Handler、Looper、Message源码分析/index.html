@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Handler、Looper、Message源码分析 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="class LooperThread extends Thread {       public Handler mHandler;        public void run() {           Looper.prepare();            mHandler = new Handler() {               public void handleMes">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handler、Looper、Message源码分析">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Handler、Looper、Message源码分析/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="class LooperThread extends Thread {       public Handler mHandler;        public void run() {           Looper.prepare();            mHandler = new Handler() {               public void handleMes">
+<meta property="og:updated_time" content="2018-04-10T07:55:30.817Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Handler、Looper、Message源码分析">
+<meta name="twitter:description" content="class LooperThread extends Thread {       public Handler mHandler;        public void run() {           Looper.prepare();            mHandler = new Handler() {               public void handleMes">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Handler、Looper、Message源码分析</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <pre>
+    class LooperThread extends Thread {
+      public Handler mHandler;
+
+      public void run() {
+          Looper.prepare();
+
+          mHandler = new Handler() {
+              public void handleMessage(Message msg) {
+                  // process incoming messages here
+              }
+          };
+
+          Looper.loop();
+      }
+  }
+</pre>
+
+<h2 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h2><p>用于为线程运行消息轮询的类。线程默认没有与它们相关的消息轮询;在要运行轮询的线程中调用prepare()，然后调用loop()处理消息，直到轮询停止。大多数与消息循环的交互是通过Handler。<br>Looper.prepare();<br>创建一个与当前线程唯一关联的Looper，同时创建一个MessageQueue。</p>
+<pre>
+    public final class Looper{
+        ...
+        static final ThreadLocal<looper> sThreadLocal = new ThreadLocal<looper>();
+        final MessageQueue mQueue;
+        final Thread mThread;
+
+        //通过prepareMainLooper()获得
+        private static Looper sMainLooper; 
+
+        //获得主线程的looper
+        //调用new Handler(Looper.getMainLooper)可以创建主线程的Handler
+        public static Looper getMainLooper() {
+            synchronized (Looper.class) {
+                return sMainLooper;
+            }
+        }
+
+        public static void prepare() {
+            prepare(true);
+        }
+
+        private static void prepare(boolean quitAllowed) {
+            //ThreadLocal将Thread和Looper以键值对的形式存起来，类似用户ID。
+            //这里每个线程只可以有一个Looper
+            if (sThreadLocal.get() != null) {
+                throw new RuntimeException("Only one Looper may be created per thread");
+            }
+            sThreadLocal.set(new Looper(quitAllowed));
+        }
+
+        private Looper(boolean quitAllowed) {
+            mQueue = new MessageQueue(quitAllowed);
+            mThread = Thread.currentThread();
+        }
+        ...
+    }
+</looper></looper></pre>
+
+<p>退出loop():</p>
+<ul>
+<li>quit();立即退出，不再处理消息队列中的消息，之后发送消息到消息队列都将失败。</li>
+<li>quiSafely();所有消息队列中的方法都处理完，立即终止loop(),然而，在循环终止之前，在未来的延迟消息将不会被交付。</li>
+</ul>
+<h2 id="MessageQueue"><a href="#MessageQueue" class="headerlink" title="MessageQueue"></a>MessageQueue</h2><p>持有由Looper分发消息的列表，通过与Looper关联的Handler对象添加消息。</p>
+<pre>
+    public final class MessageQueue {
+        ...
+        // True if the message queue can be quit.
+        private final boolean mQuitAllowed;   
+
+        MessageQueue(boolean quitAllowed) {
+            mQuitAllowed = quitAllowed;
+            mPtr = nativeInit();
+        }
+        ...
+    }    
+</pre>
+
+<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p>Handler允许您发送和处理与线程的MessageQueue关联的Message和Runnable对象。<br><br>有两个主要用途：</p>
+<ul>
+<li>将message和在将来某个时刻执行的runnable加入队列</li>
+<li>异步处理任务</li>
+</ul>
+<pre>
+    public class Handler {
+        ...
+        public Handler() {
+            this(null, false);
+        }
+        public Handler(Callback callback, boolean async) {
+            ...
+            mLooper = Looper.myLooper();
+            if (mLooper == null) {
+                throw new RuntimeException(
+                    "Can't create handler inside thread that has not called Looper.prepare()");
+            }
+            mQueue = mLooper.mQueue;
+            mCallback = callback;
+            mAsynchronous = async;
+        }
+        ...
+    }
+Looper.myLooper();
+  ->public static @Nullable Looper myLooper() {
+        //获得当前线程相关联的Looper
+        return sThreadLocal.get();
+    }
+</pre>
+
+<p>发送消息的方法有:</p>
+<ul>
+<li><p><strong>post(Runnable)</strong></p>
+<pre>
+  public final boolean post(Runnable r)
+  {
+     return  sendMessageDelayed(getPostMessage(r), 0);
+  }
+getPostMessage(r)->
+  private static Message getPostMessage(Runnable r) {
+      Message m = Message.obtain();
+      //将异步Runnable赋给callback
+      m.callback = r;
+      return m;
+  }
+</pre>
+</li>
+<li><p><strong>postDelayed(Runnable, long)</strong></p>
+</li>
+<li><p><strong>sendMessageDelayed(Message, long)</strong></p>
+</li>
+<li><p><strong>postAtTime(Runnable, long)</strong></p>
+</li>
+<li><p><strong>sendMessageAtTime(Message, long)</strong></p>
+</li>
+<li><p><strong>sendMessage(Message)</strong></p>
+</li>
+<li><p><strong>sendEmptyMessage(int)</strong></p>
+</li>
+</ul>
+<pre>
+    //最终都是调用Handler的这个方法
+    private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) {
+        msg.target = this;//target即Handler实例
+        if (mAsynchronous) {
+            msg.setAsynchronous(true);
+        }
+        //将消息加入队列。
+        //如果是延迟消息，直到当前任务时间高于延迟时间，然后将任务插入队列
+        //如果调用了quite方法，将调用 msg.recycle();回收消息，可能抛出IllegalStateException消息正在使用异常
+        return queue.enqueueMessage(msg, uptimeMillis);
+    }        
+</pre>
+
+<h2 id="Looper-loop"><a href="#Looper-loop" class="headerlink" title="Looper.loop();"></a>Looper.loop();</h2><pre>
+public static void loop() {
+        final Looper me = myLooper();
+        if (me == null) {
+            throw new RuntimeException("No Looper; Looper.prepare() wasn't called on this thread.");
+        }
+        ...
+        for (;;) {
+            Message msg = queue.next(); // might block
+            if (msg == null) {
+                // No message indicates that the message queue is quitting.
+                return;
+            }
+            ...
+            try {
+                //target是Handler的实例，所以调用的是Handler的dispatchMessage(msg)方法
+                msg.target.dispatchMessage(msg);
+                ...
+            } finally {
+                ...
+            }
+            ...
+            //回收可能正在使用的消息
+            msg.recycleUnchecked();
+        }
+    }
+
+Hander#
+  ->public void dispatchMessage(Message msg) {
+        //如果是异步任务，就执行异步任务
+        if (msg.callback != null) {
+            handleCallback(msg);
+        //如果不是就交由handleMessage来处理，需要自己实现
+        } else {
+            if (mCallback != null) {
+                if (mCallback.handleMessage(msg)) {
+                    return;
+                }
+            }
+            handleMessage(msg);
+        }
+    }
+
+handleCallback(msg);
+  ->private static void handleCallback(Message message) {
+        message.callback.run();
+    }
+</pre>
+
+<h2 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h2><pre>
+    //链表结构
+    Message next;
+
+    //从系统启动到现在的时间+要延迟的时间
+    long when;
+
+    //通过Handler的实例创建message
+    public final Message obtainMessage()
+    {
+        return Message.obtain(this);
+    }
+
+Message.obtain(this);
+  ->public static Message obtain(Handler h) {
+        //obtain实现Message的复用
+        Message m = obtain();
+        m.target = h;//将Handler实例赋值给target
+
+        return m;
+    }
+
+</pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="styled-border">
+                    ←
+                    C++PrimerPlus内存模型和名称空间
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="styled-border">
+                    
+                    Java并发编程实战-基础知识_对象的共享
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

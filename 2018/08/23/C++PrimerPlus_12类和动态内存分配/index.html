@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus类和动态内存分配 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="动态内存和类C++自动提供了下面这些成员函数：  默认构造函数，如果没有定义构造函数 默认析构函数，如果没有定义 复制构造函数，如果没有定义 赋值运算符，如果没有定义 地址运算符，如果没有定义 移动构造函数(C++11) 移动赋值运算符(C++11)  复制构造函数复制构造函数用于将一个对象赋值到新创建的对象中，复制构造函数原型：Class_name(const Class_name &amp;amp;)">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus类和动态内存分配">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_12类和动态内存分配/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="动态内存和类C++自动提供了下面这些成员函数：  默认构造函数，如果没有定义构造函数 默认析构函数，如果没有定义 复制构造函数，如果没有定义 赋值运算符，如果没有定义 地址运算符，如果没有定义 移动构造函数(C++11) 移动赋值运算符(C++11)  复制构造函数复制构造函数用于将一个对象赋值到新创建的对象中，复制构造函数原型：Class_name(const Class_name &amp;amp;)">
+<meta property="og:updated_time" content="2017-06-27T18:50:33.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus类和动态内存分配">
+<meta name="twitter:description" content="动态内存和类C++自动提供了下面这些成员函数：  默认构造函数，如果没有定义构造函数 默认析构函数，如果没有定义 复制构造函数，如果没有定义 赋值运算符，如果没有定义 地址运算符，如果没有定义 移动构造函数(C++11) 移动赋值运算符(C++11)  复制构造函数复制构造函数用于将一个对象赋值到新创建的对象中，复制构造函数原型：Class_name(const Class_name &amp;amp;)">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus类和动态内存分配</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="动态内存和类"><a href="#动态内存和类" class="headerlink" title="动态内存和类"></a>动态内存和类</h2><p>C++自动提供了下面这些成员函数：</p>
+<ul>
+<li>默认构造函数，如果没有定义构造函数</li>
+<li>默认析构函数，如果没有定义</li>
+<li>复制构造函数，如果没有定义</li>
+<li>赋值运算符，如果没有定义</li>
+<li>地址运算符，如果没有定义</li>
+<li>移动构造函数(C++11)</li>
+<li>移动赋值运算符(C++11)</li>
+</ul>
+<h5 id="复制构造函数"><a href="#复制构造函数" class="headerlink" title="复制构造函数"></a>复制构造函数</h5><p>复制构造函数用于将一个对象赋值到新创建的对象中，复制构造函数原型：<br><code>Class_name(const Class_name &amp;);</code></p>
+<p>何时调用复制构造函数？<br>新建一个对象并将其初始化为同类现有对象时，复制构造函数都将被调用。具体的说，当函数按值传递对象或函数返回对象时，都将使用复制构造函数，按引用传递对象可以节省调用构造函数的时间以及存储新对象的空间。</p>
+<pre><code>//4种声明都将调用复制构造函数
+StringBad ditto(motto);
+StringBad metoo=motto;
+StringBad alse=StringBad(motto);
+StringBad * pStringBad=new StringBad(motto);
+</code></pre><p>默认的复制构造函数功能：逐个复制非静态成员(成员复制也称为浅复制)，复制的是成员的值。</p>
+<p>复制构造函数造成的问题？</p>
+<ol>
+<li>无法准确的记录创建对象计数<br><code>StringBad::StringBad(const StringBad &amp;st){num_strings++;...} //提供一个对计数进行更新的显示复制构造函数</code></li>
+<li>如果成员变量是动态创建的，在调用析构函数时将引发问题<br><code>str=new char[len+1];std::strcpy(str,st.str);//进行深度复制</code></li>
+</ol>
+<p>深度复制：复制指向的数据而不是指针。</p>
+<p>何时使用复制构造函数？<br>如果类中包含了使用new初始化的指针成员，应当定义一个复制构造函数，以复制指向的数据，而不是指针</p>
+<h5 id="复制运算符"><a href="#复制运算符" class="headerlink" title="复制运算符"></a>复制运算符</h5><p>复制运算符会出现与隐式复制构造函数相同的问题：数据受损<br>如何解决：<br>提供赋值运算符(进行深度复制)定义</p>
+<ul>
+<li>由于目标对象可能引用了以前分配的数据，所以函数应使用delete来释放这些数据</li>
+<li>函数应当避免将对象赋给自身;否则，给对对象重新复制前，释放内存操作可能删除对象的内容</li>
+<li>函数返回一个指向调用对象的引用</li>
+</ul>
+<h2 id="在构造函数中使用new时应注意的事项"><a href="#在构造函数中使用new时应注意的事项" class="headerlink" title="在构造函数中使用new时应注意的事项"></a>在构造函数中使用new时应注意的事项</h2><ul>
+<li>对于指向的内存是由new分配的所有类成员，都应该在类的析构函数中对其使用delete，该运算符将释放分配的内存</li>
+<li>如果析构函数通过对指针类成员使用delete来释放内存，则每个构造函数中都应当使用new来初始化指针，或将它设置为空指针</li>
+<li>构造函数中要么使用new[]，要么使用new，而不能混用</li>
+<li>定义一个分配内存(而不是将指针指向已有内存)的复制构造函数</li>
+</ul>
+<p><code>className(cosnt className &amp;)//通用格式</code></p>
+<ul>
+<li>定义一个重载赋值运算符的类成员函数，其函数定义如下(c_pointer是c_name的类成员，类型为指向type_name的指针)<pre><code>//假设使用new[]来初始化变量c_pointer
+c_name &amp; c_name::operator=(const c_name &amp; cn)
+{
+  if(this==&amp;cn)
+      return *this;
+  delete[] c_pointer;
+  c_pointer=new type_name[size];
+  ...    
+  return *this;
+}
+</code></pre></li>
+<li>应当定义一个赋值运算符，通过深度复制将一个对象复制给另一对象</li>
+</ul>
+<pre><code>String &amp; String::operator=(const String &amp; st)
+{
+    if(this==&amp;st)
+        return *this;
+    delete [] str;
+    len=st.len;
+    str=new char[len+1];
+    std::strcpy(str,st.str);
+    return *this;
+}
+</code></pre><p><em>C++11提供了关键字<code>nullptr</code>来表示空指针</em></p>
+<h5 id="默认构造函数标准写法"><a href="#默认构造函数标准写法" class="headerlink" title="默认构造函数标准写法"></a>默认构造函数标准写法</h5><pre><code>String::String()
+{
+    str=&quot;default string&quot;;
+    len=str::strlen(str);
+}
+//可改为下面任何一种形式
+String::String()
+{
+    len=0;
+    str=new char[1];
+    str=[0]=&#39;\0&#39;;
+}
+
+String::String()
+{
+    len=0;
+    str=0; // str=nullptr;
+}
+
+String::String()
+{
+    static const char * s=&quot;C++&quot;;
+    len=std::strlen(s);
+    str=new char[len+1];
+    std::strcpy(str,s);
+}
+</code></pre><h2 id="有关返回对象说明"><a href="#有关返回对象说明" class="headerlink" title="有关返回对象说明"></a>有关返回对象说明</h2><h5 id="返回指向const对象的引用"><a href="#返回指向const对象的引用" class="headerlink" title="返回指向const对象的引用"></a>返回指向const对象的引用</h5><p>返回引用不会调用复制构造函数，效率更高</p>
+<h5 id="返回指向非const对象的引用"><a href="#返回指向非const对象的引用" class="headerlink" title="返回指向非const对象的引用"></a>返回指向非const对象的引用</h5><ul>
+<li>重载赋值运算符，提高效率</li>
+<li>重载与cout一起使用的<code>&lt;&lt;</code>运算符，必须这样做</li>
+</ul>
+<h5 id="使用指针对象，需要注意几点"><a href="#使用指针对象，需要注意几点" class="headerlink" title="使用指针对象，需要注意几点"></a>使用指针对象，需要注意几点</h5><ul>
+<li><p>使用常规表示法来声明指向对象指针</p>
+</li>
+<li><p>可以将指针初始化为指向已有的对象；</p>
+</li>
+<li>可以使用new来初始化指针，这将创建一个新的对象</li>
+<li>对类使用new将调用相应的类构造函数来初始化新创建的对象</li>
+<li>可以使用-&gt;运算符通过指针访问类方法</li>
+<li>可以对对象指针应用解除引用运算符<code>*</code>来获得对象</li>
+</ul>
+<h5 id="成员初始化列表的语法"><a href="#成员初始化列表的语法" class="headerlink" title="成员初始化列表的语法"></a>成员初始化列表的语法</h5><pre><code>//mem1,mem2,mem3是Classy类的数据成员
+Classy::Classsy(int n,int m) :mem1(n),mem2(0),mem3(n*m+2){ ... }
+</code></pre><p>初始化工作是在对象创建时完成的，请注意以下几点：</p>
+<ul>
+<li>这种格式只能用于构造函数</li>
+<li>必须用这种格式来初始化非静态const数据成员(C++11之前)</li>
+<li>必须用这种格式来初始化引用数据成员</li>
+</ul>
+<p>C++11的类内初始化</p>
+<pre><code>//与上面等价
+Class Classy
+{
+    int mem1=10;
+    const int mem2=20;
+}
+</code></pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="styled-border">
+                    ←
+                    C++PrimerPlus处理数据
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="styled-border">
+                    
+                    C++PrimerPlus对象和类
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

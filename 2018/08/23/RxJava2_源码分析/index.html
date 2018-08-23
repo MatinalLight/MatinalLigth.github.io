@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RxJava2 源码分析 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="结合Retrofit中RxJava2的使用，分析每一步相关源码 关联RxjavaRxJava2CallAdapterFactory.create()返回创建同步观测值的实例，该实例默认情况下不在任何调度器上运行。  -&amp;gt;public static RxJava2CallAdapterFactory create() {     return new RxJava2CallAdapterFactor">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava2 源码分析">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/RxJava2_源码分析/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="结合Retrofit中RxJava2的使用，分析每一步相关源码 关联RxjavaRxJava2CallAdapterFactory.create()返回创建同步观测值的实例，该实例默认情况下不在任何调度器上运行。  -&amp;gt;public static RxJava2CallAdapterFactory create() {     return new RxJava2CallAdapterFactor">
+<meta property="og:updated_time" content="2018-04-02T10:51:08.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava2 源码分析">
+<meta name="twitter:description" content="结合Retrofit中RxJava2的使用，分析每一步相关源码 关联RxjavaRxJava2CallAdapterFactory.create()返回创建同步观测值的实例，该实例默认情况下不在任何调度器上运行。  -&amp;gt;public static RxJava2CallAdapterFactory create() {     return new RxJava2CallAdapterFactor">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">RxJava2 源码分析</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p>结合<a href="https://square.github.io/retrofit/#contributing" target="_blank" rel="external">Retrofit</a>中<a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">RxJava2</a>的使用，分析每一步相关源码</p>
+<h2 id="关联Rxjava"><a href="#关联Rxjava" class="headerlink" title="关联Rxjava"></a>关联Rxjava</h2><h4 id="RxJava2CallAdapterFactory-create"><a href="#RxJava2CallAdapterFactory-create" class="headerlink" title="RxJava2CallAdapterFactory.create()"></a>RxJava2CallAdapterFactory.create()</h4><p>返回创建同步观测值的实例，该实例默认情况下不在任何调度器上运行。</p>
+<pre>
+->public static RxJava2CallAdapterFactory create() {
+    return new RxJava2CallAdapterFactory(null, false);
+  }
+
+->private RxJava2CallAdapterFactory(@Nullable Scheduler scheduler, boolean isAsync) {
+    this.scheduler = scheduler;
+    this.isAsync = isAsync;
+  }
+
+//最终会调用RxJava2CallAdapterFactory#get方法
+->return new RxJava2CallAdapter(responseType, scheduler, isAsync, isResult, isBody, isFlowable, isSingle, isMaybe, false);
+参数对应的值：
+     responseType:接口方法返回类型 Obeservable<t>中的T
+     scheduler:null
+     isAsync:false
+     isResult:false
+     isBody:true
+     isFlowable:false
+     isSingle:false
+     isMaybe:false
+     isCompletable:false
+   */
+
+->RxJava2CallAdapter#adapt返回observable
+</t></pre>
+
+<h4 id="RxJava2CallAdapter"><a href="#RxJava2CallAdapter" class="headerlink" title="RxJava2CallAdapter"></a>RxJava2CallAdapter</h4><p>根据上创建对象时传入的参数，最终确定<br>responseObservable = new CallExecuteObservable&lt;&gt;(call);<br>observable= new BodyObservable&lt;&gt;(responseObservable);</p>
+<pre>
+    @Override public Object adapt(Call<r> call) {
+    Observable<response<r>> responseObservable = isAsync
+        ? new CallEnqueueObservable<>(call)
+        : new CallExecuteObservable<>(call);
+
+    Observable<?> observable;
+    if (isResult) {
+      observable = new ResultObservable<>(responseObservable);
+    } else if (isBody) {
+      observable = new BodyObservable<>(responseObservable);
+    } else {
+      observable = responseObservable;
+    }
+
+    if (scheduler != null) {
+      observable = observable.subscribeOn(scheduler);
+    }
+
+    if (isFlowable) {
+      return observable.toFlowable(BackpressureStrategy.LATEST);
+    }
+    if (isSingle) {
+      return observable.singleOrError();
+    }
+    if (isMaybe) {
+      return observable.singleElement();
+    }
+    if (isCompletable) {
+      return observable.ignoreElements();
+    }
+    return observable;
+  }
+</response<r></r></pre>
+
+<h2 id="接口访问"><a href="#接口访问" class="headerlink" title="接口访问"></a>接口访问</h2><pre>
+ api.login(parameter)
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread()，true)
+    .subscribeWith(new DisposableObserver<base<userinfo>>() {
+        @Override
+        public void onNext(@NonNull Base<userinfo> result) {
+
+        }
+
+        @Override
+        public void onError(@NonNull Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    });
+</userinfo></base<userinfo></pre>
+
+<h2 id="涉及到的类继承关系"><a href="#涉及到的类继承关系" class="headerlink" title="涉及到的类继承关系"></a>涉及到的类继承关系</h2><ul>
+<li><p>Observable<t> implements ObservableSource<t></t></t></p>
+<pre>
+public interface ObservableSource<t> {
+
+  /**
+   * 将给定的Observer订阅到此ObservableSource实例。
+   */
+  void subscribe(@NonNull Observer<? super T> observer);
+}
+</t></pre>
+</li>
+<li><p>ObservableObserveOn&lt;T&gt; extends AbstractObservableWithUpstream&lt;T, T&gt;</p>
+</li>
+<li>ObservableSubscribeOn&lt;T&gt; extends AbstractObservableWithUpstream&lt;T, T&gt;</li>
+</ul>
+<pre>
+abstract class AbstractObservableWithUpstream&lt;T, U&gt; extends Observable&lt;U&gt; implements HasUpstreamObservableSource&lt;T&gt; {
+
+    /* 可消费的Observable */
+    protected final ObservableSource&lt;T&gt; source;
+
+    /**
+     * 持有上游ObservableSource。
+     */
+    AbstractObservableWithUpstream(ObservableSource&lt;T&gt; source) {
+        this.source = source;
+    }
+
+    @Override
+    public final ObservableSource&lt;T&gt; source() {
+        return source;
+    }
+
+}
+</pre>
+
+<p>subscribeOn和observeOn都是Observable的方法，所以可以重复链式调用</p>
+<h4 id="subscribeOn-Schedulers-io"><a href="#subscribeOn-Schedulers-io" class="headerlink" title="subscribeOn(Schedulers.io())"></a>subscribeOn(Schedulers.io())</h4><p>在指定的Scheduler上异步地将观察者订阅到此ObservableSource。<br></p>
+<pre>
+  @CheckReturnValue
+  @SchedulerSupport(SchedulerSupport.CUSTOM)
+  public final Observable<t> subscribeOn(Scheduler scheduler) {
+      ObjectHelper.requireNonNull(scheduler, "scheduler is null");
+      return RxJavaPlugins.onAssembly(new ObservableSubscribeOn<t>(this, scheduler));
+  }
+->RxJavaPlugins#onAssembly可以添加自定义变换的Function这里f=null返回source
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  @NonNull
+  public static <t> Observable<t> onAssembly(@NonNull Observable<t> source) {
+      Function<? super Observable, ? extends Observable> f = onObservableAssembly;
+      if (f != null) {
+          return apply(f, source);
+      }
+      return source;
+  }
+
+/*this指向BodyObservable
+  scheduler指向IoScheduler*/
+new ObservableSubscribeOn<t>(this, scheduler)
+->public ObservableSubscribeOn(ObservableSource<t> source, Scheduler scheduler) {
+      super(source);
+      this.scheduler = scheduler;
+  }
+</t></t></t></t></t></t></t></pre>
+
+<p>将BodyObservable订阅到ObservableSubscribeOn并返回</p>
+<h4 id="observeOn-AndroidSchedulers-mainThread"><a href="#observeOn-AndroidSchedulers-mainThread" class="headerlink" title="observeOn(AndroidSchedulers.mainThread())"></a>observeOn(AndroidSchedulers.mainThread())</h4><p>修改ObservableSource以在指定调度程序上通知观察者</p>
+<pre>
+  @CheckReturnValue
+  @SchedulerSupport(SchedulerSupport.CUSTOM)
+  public final Observable<t> observeOn(Scheduler scheduler, boolean delayError) {
+      return observeOn(scheduler, delayError, bufferSize());
+  }
+->@CheckReturnValue
+  @SchedulerSupport(SchedulerSupport.CUSTOM)
+  public final Observable<t> observeOn(Scheduler scheduler, boolean delayError, int bufferSize) {
+      ObjectHelper.requireNonNull(scheduler, "scheduler is null");
+      ObjectHelper.verifyPositive(bufferSize, "bufferSize");
+      //可以添加自定义变换的Function
+      return RxJavaPlugins.onAssembly(new ObservableObserveOn<t>(this, scheduler, delayError, bufferSize));
+  }
+参数说明：
+delayError：如果调度程序是真正异步的，onError通知将在发射线程上的onNext通知之前调用。
+bufferSize():
+    ->public static int bufferSize() {
+         return Flowable.bufferSize();
+      }
+
+/*this指向ObservableSubscribeOn
+  scheduler指向HandlerScheduler(new Handler(Looper.getMainLooper()))*/
+new ObservableObserveOn<t>(this, scheduler, delayError, bufferSize)
+->ObservableObserveOn
+->public final class ObservableObserveOn<t> extends AbstractObservableWithUpstream<t, t=""> {
+    final Scheduler scheduler;
+    final boolean delayError;
+    final int bufferSize;
+    public ObservableObserveOn(ObservableSource<t> source, Scheduler scheduler, boolean delayError, int bufferSize) {
+        super(source);//source指向ObservableSubscribeOn
+        this.scheduler = scheduler;
+        this.delayError = delayError;
+        this.bufferSize = bufferSize;
+    }
+    ...
+  }
+</t></t,></t></t></t></t></t></pre>
+
+<p>订阅主线程ObservableObserveOn接收上游ObservableSubscribeOn的发射任务和通知。</p>
+<h4 id="subscribeWith-new-DisposableObserver"><a href="#subscribeWith-new-DisposableObserver" class="headerlink" title="subscribeWith(new DisposableObserver"></a>subscribeWith(new DisposableObserver<base<userinfo>&gt;(){…})；</base<userinfo></h4><p>将给定的观察者（子类）订阅到此Observable并按原样返回给定的观察者。</p>
+<pre>
+->@CheckReturnValue
+  @SchedulerSupport(SchedulerSupport.NONE)
+  public final <e extends="" observer<?="" super="" t="">> E subscribeWith(E observer) {
+      subscribe(observer);
+      return observer;
+  }
+//observer指向DisposableObserver
+subscribe(observer);
+  ->ObservableObserveOn
+  ->@SchedulerSupport(SchedulerSupport.NONE)
+    @Override
+    protected void subscribeActual(Observer<? super T> observer) {
+        if (scheduler instanceof TrampolineScheduler) {
+            source.subscribe(observer);
+        } else {
+            //HandlerScheduler#createWorker->new HandlerWorker(new Handler(Looper.getMainLooper()));
+            Scheduler.Worker w = scheduler.createWorker();
+            //source指向ObservableSubscribeOn
+            //observer指向DisposableObserver
+            source.subscribe(new ObserveOnObserver<t>(observer, w, delayError, bufferSize));
+        }
+    }
+</t></e></pre>
+
+<p>将主线程DisposableObserver的观察者ObserveOnObserver订阅到工作线程的ObservableSubscribeOn<br>source.subscribe(new ObserveOnObserver<t>(observer, w, delayError, bufferSize));</t></p>
+<pre>
+  ->ObservableSubscribeOn
+  ->@SchedulerSupport(SchedulerSupport.NONE)
+    @Override
+    public final void subscribe(Observer<? super T> observer) {
+        ObjectHelper.requireNonNull(observer, "observer is null");
+        try {
+            observer = RxJavaPlugins.onSubscribe(this, observer);
+
+            ObjectHelper.requireNonNull(observer, "Plugin returned null Observer");
+
+            subscribeActual(observer);
+        } catch (NullPointerException e) { // NOPMD
+            throw e;
+        } catch (Throwable e) {
+            ...
+        }
+    }
+  ->@Override
+    public void subscribeActual(final Observer<? super T> s) {
+
+        /*s指向ObserveOnObserver  
+          SubscribeOnObserver#actual指向ObserveOnObserver
+          创建新的SubscribeOnObserver*/
+        final SubscribeOnObserver<t> parent = new SubscribeOnObserver<t>(s);
+        //将SubscribeOnObserver订阅到ObserveOnObserver
+        s.onSubscribe(parent);
+
+        parent.setDisposable(scheduler.scheduleDirect(new SubscribeTask(parent)));
+    }
+
+</t></t></pre>
+
+<p>s.onSubscribe(parent);</p>
+<pre>
+->ObserveOnObserver 
+      ->@Override
+        public void onSubscribe(Disposable s) {
+            if (DisposableHelper.validate(this.s, s)) {
+                this.s = s;
+                ...
+
+                queue = new SpscLinkedArrayQueue<t>(bufferSize);
+                /*actual指向ObserveOnObserver
+                 ObserveOnObserver#actual指向DisposableObserver*/
+                actual.onSubscribe(this);
+            }
+        }
+
+actual.onSubscribe(this);
+->DisposableObserver
+->public final void onSubscribe(@NonNull Disposable s) {
+        if (EndConsumerHelper.setOnce(this.s, s, getClass())) {
+            onStart();
+        }
+    }
+
+</t></pre>
+
+<p>parent.setDisposable(scheduler.scheduleDirect(new SubscribeTask(parent)));</p>
+<pre>
+->scheduler指向IoScheduler
+
+new SubscribeTask(parent)
+->final class SubscribeTask implements Runnable {
+        private final SubscribeOnObserver<t> parent;
+
+        SubscribeTask(SubscribeOnObserver<t> parent) {
+            this.parent = parent;
+        }
+
+        @Override
+        public void run() {
+            //source指向BodyObservable
+            source.subscribe(parent);
+        }
+    }
+source.subscribe(parent);
+
+->final class BodyObservable<t> extends Observable<t> {
+      private final Observable<response<t>> upstream;
+
+      BodyObservable(Observable<response<t>> upstream) {
+          //upstream指向responseObservable
+          this.upstream = upstream;
+      }
+
+      @Override protected void subscribeActual(Observer<? super T> observer) {
+        //observer指向SubscribeOnObserver
+        upstream.subscribe(new BodyObserver<t>(observer));
+      }
+      ...
+  }
+
+upstream.subscribe(new BodyObserver<t>(observer));
+->final class CallExecuteObservable<t> extends Observable<response<t>> {
+  private final Call<t> originalCall;
+
+  CallExecuteObservable(Call<t> originalCall) {
+    this.originalCall = originalCall;
+  }
+
+  @Override protected void subscribeActual(Observer<? super Response<T>> observer) {
+    //call指向OkhttpCall
+    Call<t> call = originalCall.clone();
+    //BodyObserver订阅OkhttpCall
+    observer.onSubscribe(new CallDisposable(call));
+
+    boolean terminated = false;
+    try {
+      Response<t> response = call.execute();
+      if (!call.isCanceled()) {
+        observer.onNext(response);
+      }
+      if (!call.isCanceled()) {
+        terminated = true;
+        observer.onComplete();
+      }
+    } catch (Throwable t) {
+      ...
+    }
+  }
+  ...
+ }
+</t></t></t></t></response<t></t></t></t></response<t></response<t></t></t></t></t></pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="styled-border">
+                    ←
+                    Retrofit 源码分析
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题4_Java内存模型/" class="styled-border">
+                    
+                    Java并发编程实战-高级主题4_Java内存模型
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

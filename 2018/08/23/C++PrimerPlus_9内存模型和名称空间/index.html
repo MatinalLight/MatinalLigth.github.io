@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus内存模型和名称空间 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="单独编译组织程序的策略  头文件:包含结构声明和使用这些结构的函数的原型，包含： 函数原型 使用#define或const定义的符号常量 结构声明 类声明 模板声明 内联函数   源代码文件:包含与结构有关的函数的代码 源代码文件:包含调用与结构相关的函数的代码  头文件管理在同一个文件中只能将同一个头文件包含一次。如何避免多次包含同一个文件? #ifndef COORDIN_H_//COORDI">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus内存模型和名称空间">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_9内存模型和名称空间/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="单独编译组织程序的策略  头文件:包含结构声明和使用这些结构的函数的原型，包含： 函数原型 使用#define或const定义的符号常量 结构声明 类声明 模板声明 内联函数   源代码文件:包含与结构有关的函数的代码 源代码文件:包含调用与结构相关的函数的代码  头文件管理在同一个文件中只能将同一个头文件包含一次。如何避免多次包含同一个文件? #ifndef COORDIN_H_//COORDI">
+<meta property="og:updated_time" content="2017-06-26T05:38:41.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus内存模型和名称空间">
+<meta name="twitter:description" content="单独编译组织程序的策略  头文件:包含结构声明和使用这些结构的函数的原型，包含： 函数原型 使用#define或const定义的符号常量 结构声明 类声明 模板声明 内联函数   源代码文件:包含与结构有关的函数的代码 源代码文件:包含调用与结构相关的函数的代码  头文件管理在同一个文件中只能将同一个头文件包含一次。如何避免多次包含同一个文件? #ifndef COORDIN_H_//COORDI">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus内存模型和名称空间</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="单独编译"><a href="#单独编译" class="headerlink" title="单独编译"></a>单独编译</h2><p>组织程序的策略</p>
+<ul>
+<li>头文件:包含结构声明和使用这些结构的函数的原型，包含：<ul>
+<li>函数原型</li>
+<li>使用#define或const定义的符号常量</li>
+<li>结构声明</li>
+<li>类声明</li>
+<li>模板声明</li>
+<li>内联函数</li>
+</ul>
+</li>
+<li>源代码文件:包含与结构有关的函数的代码</li>
+<li>源代码文件:包含调用与结构相关的函数的代码</li>
+</ul>
+<h5 id="头文件管理"><a href="#头文件管理" class="headerlink" title="头文件管理"></a>头文件管理</h5><p>在同一个文件中只能将同一个头文件包含一次。如何避免多次包含同一个文件?</p>
+<pre><code>#ifndef COORDIN_H_//COORDIN是文件名，规范命名格式
+#define COORDIN_H_
+
+#endif
+</code></pre><ul>
+<li>编译器将查看#ifndef和#endif之间的内容，并读取定义#define COORDIN<em>H</em>的一行，会忽略除第一次包含之外的所有内容。</li>
+<li>在多个库的链接编译模块时，确保所有对象文件或库都是由同一个编译器生成的</li>
+</ul>
+<h2 id="存储持续性、作用域和链接性"><a href="#存储持续性、作用域和链接性" class="headerlink" title="存储持续性、作用域和链接性"></a>存储持续性、作用域和链接性</h2><h5 id="存储持续性"><a href="#存储持续性" class="headerlink" title="存储持续性"></a>存储持续性</h5><p>C++11采用4种不同的方案来存储数据，区别是数据保留在内存中的时间</p>
+<ul>
+<li>自动存储持续性:在函数定义中声明的变量(包括函数参数)的存储持续性为自动的</li>
+<li>静态存储持续性:在函数定义外定义的变量和使用关键字static定义的变量的存储持续性都为静态</li>
+<li>线程存储持续性</li>
+<li>动态存储持续性:用new运算符分配的内存将一直存在，直到使用delete运算符将其释放或程序结束为止，也被称为自由存储(free store)或堆(heap)</li>
+</ul>
+<h5 id="作用域和链接"><a href="#作用域和链接" class="headerlink" title="作用域和链接"></a>作用域和链接</h5><ul>
+<li>链接 链接性描述了名称如何在不同单元间共享<ul>
+<li>链接性为外部的名称可在文件间共享</li>
+<li>链接性为内部的名称只能由一个文件中的函数共享</li>
+<li>自动变量的名称没有链接性，因为它们不能共享</li>
+</ul>
+</li>
+<li>作用域<ul>
+<li>局部变量只在定义它的代码块中可用</li>
+<li>全局变量在定义位置到文件结尾之间都可用</li>
+<li>函数原型中的参数名只在参数列表的括号内可用</li>
+<li>在类中声明的成员的作用域为整个类</li>
+<li>在名称空间中声明的变量的作用域为整个名称空间</li>
+<li>C++函数的作用域可以是整个类或整个名称空间(包括全局)，但不能是局部的</li>
+</ul>
+</li>
+</ul>
+<h5 id="自动存储持续性"><a href="#自动存储持续性" class="headerlink" title="自动存储持续性"></a>自动存储持续性</h5><ul>
+<li>在默认情况下，在函数中声明的函数参数和变量的存储持续性为自动，作用域为局部，没有链接性</li>
+<li>如果在代码块中定义了变量，则该变量的存在时间和作用域将被限制在该代码块内</li>
+<li>如果在代码块中定义了和代码块外相同的变量名，程序执行内部代码中的变量时，内部变量可见，外部变量不可见，当代码块执行完毕时，外部变量重新可见</li>
+</ul>
+<p>自动变量和栈<br>栈式LIFO(后进先出)的，即最后加入到栈中的变量首先被弹出<br>程序使用两个指针来跟踪栈，一个指针指向栈底——栈的开始位置，另一个指针指向栈顶——下一个可用内存单元</p>
+<ul>
+<li>当函数被调用时，其自动变量将被加入到栈中，栈顶指针指向变量后面的下一个可用的存储单元</li>
+<li>函数结束时，栈顶指针被重置为函数被调用前的值，从而释放新变量使用的内存</li>
+</ul>
+<p>寄存器变量<br><code>register int count_fast;</code><br>register是由C语言引入的，它建议编译器使用CPU寄存器来存储自动变量，旨在提高访问变量的速度，但在C++11，这种提示作用失去了，只是显示地指出变量是自动的</p>
+<h5 id="静态持续变量"><a href="#静态持续变量" class="headerlink" title="静态持续变量"></a>静态持续变量</h5><p>静态存储持续性变量提供了3种链接性</p>
+<ul>
+<li>外部链接性(可在其他文件中访问)，必须在代码块的外面声明</li>
+<li>内部链接性(只能在当前文件中访问)，必须在代码块的外面声明，并使用static限定符</li>
+<li>无链接性(只能在当前函数或代码块中访问)，必须在代码块内声明，并使用static限定符</li>
+</ul>
+<p>——5种变量存储方式——</p>
+<table>
+<thead>
+<tr>
+<th>存储描述</th>
+<th style="text-align:center">持 续 性</th>
+<th style="text-align:center">作 用 域</th>
+<th style="text-align:center">链 接 性</th>
+<th style="text-align:center">如何声明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自动</td>
+<td style="text-align:center">自动</td>
+<td style="text-align:center">代码块</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">在代码块中</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td style="text-align:center">自动</td>
+<td style="text-align:center">代码块</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">在代码块中，使用关键字register</td>
+</tr>
+<tr>
+<td>静态，无链接性</td>
+<td style="text-align:center">静态</td>
+<td style="text-align:center">代码块</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">在代码块中，使用关键字static</td>
+</tr>
+<tr>
+<td>静态，外部链接性</td>
+<td style="text-align:center">静态</td>
+<td style="text-align:center">文件</td>
+<td style="text-align:center">外部</td>
+<td style="text-align:center">不在任何函数内</td>
+</tr>
+<tr>
+<td>静态，内部链接性</td>
+<td style="text-align:center">静态</td>
+<td style="text-align:center">文件</td>
+<td style="text-align:center">内部</td>
+<td style="text-align:center">不在任何函数内，使用关键字static</td>
+</tr>
+</tbody>
+</table>
+<h5 id="静态持续性、外部链接性"><a href="#静态持续性、外部链接性" class="headerlink" title="静态持续性、外部链接性"></a>静态持续性、外部链接性</h5><p>链接性为外部的变量简称外部变量，它们的存储持续性为静态，作用域为整个文件</p>
+<p>“单定义规则”：变量只能有一次定义，C++提供了两种变量声明</p>
+<ul>
+<li>定义声明，它给变量分配存储空间</li>
+<li>引用声明，它不给变量分配空间，因为它引用已有的变量<ul>
+<li>引用声明使用关键字extern，且不能初始化；否则，声明为定义，分配存储空间</li>
+<li>在多个文件中使用外部变量，只需在一个文件中包含该变量的定义，但在使用改变了的其他所有文件中，都必须使用extern声明它</li>
+</ul>
+</li>
+</ul>
+<pre><code>//file01.cpp
+int dogs=20;
+
+//file02.cpp
+extern int dogs;
+</code></pre><p>C++提供了作用域解析运算符<code>::</code>，放在变量名前，表示使用变量的全局版本<code>::dogs</code></p>
+<h5 id="说明符和限定符"><a href="#说明符和限定符" class="headerlink" title="说明符和限定符"></a>说明符和限定符</h5><p>存储说明符：</p>
+<ul>
+<li>auto(在C++11中不再是说明符)</li>
+<li>register</li>
+<li>static</li>
+<li>extern</li>
+<li>thread_local(C++11新增)</li>
+<li>mutable 用它指出，即使结构(或类)变量为const，其某个成员也可以修改</li>
+</ul>
+<pre><code>struct data
+{
+    char name[30];
+    mutable int accesses;
+};
+const data veep={&quot;Clodde&quot;,0};
+strcpy(veep.name,&quot;Joye&quot;);//not allowed
+veep.accesses++;         //allowed
+</code></pre><p>cv-限定符</p>
+<ul>
+<li>const</li>
+<li>volatile 即使程序代码没有对内存单元进行修改，其值也可能发生变化(如硬件修改其中的内容)，例如，假设编译器发现，程序在几条语句中两次使用了某个变量的值，则编译器可能不是让程序查找这个值两次，而是将这个值缓存到寄存器中，将变量声明为volatile，相当于告诉编译器不要进行这种优化</li>
+</ul>
+<h5 id="函数和链接性"><a href="#函数和链接性" class="headerlink" title="函数和链接性"></a>函数和链接性</h5><ul>
+<li>可以在函数原型中使用关键字extern来指出函数是在另一个文件中定义的，不过这是可选的</li>
+<li>可以使用关键字static将函数的链接性设置为内部的，使之只能在一个文件中使用，必须同时在函数原型和函数定义中使用该关键字</li>
+</ul>
+<h5 id="语言链接性"><a href="#语言链接性" class="headerlink" title="语言链接性"></a>语言链接性</h5><p>可以使用函数原型来指出要使用的约定</p>
+<pre><code>extern &quot;C&quot; void spiff(int);   //use C protocol for name look-up
+extern void spiff(int);       //use C++ protocol for name look-up
+extern &quot;C++&quot; void spiff(int); //use C++ protocol for name look-up
+</code></pre><h5 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h5><ul>
+<li>使用new运算符分配函数，new负责在堆中找到一个能够满足要求的内存块</li>
+</ul>
+<pre><code>void * operator new(std::size_t);
+void operator delete(void *);
+
+void * operator new[](std::size_t);
+void operator delete[](void *);
+</code></pre><ul>
+<li>定位new运算符，能够指定要使用的位置<br>默认定位new运算符工作原理：基本上，它只是返回传递给它的地址，并将其强制转换为void*，以便能够赋给任何指针类型<pre><code>#include &lt;new&gt;
+struct chaff
+{
+  char dross[20];
+  int slag;
+};
+char buffer1[50];
+char buffer2[500];
+int main()
+{
+  chaff *p1,*p2;
+  double *p3,*p4;
+  //常规内存分配
+  p1=new chaff;
+  p3=new double[20];
+  //指定内存分配
+  p2=new (buffer1)chaff;//从buffer1中分配空间给结构chaff
+  p4=new (buffer2)double[20];//从buffer2中分配空间给一个包含20个元素的double数组
+  cout&lt;&lt;&quot;Memory address static: &quot;&lt;&lt;(void*)p4&lt;&lt;endl;//不适用(void*)将显示一个字符串
+  return 0;
+}
+</code></pre></li>
+</ul>
+<p>常规分配内存与指定内存的区别</p>
+<ul>
+<li>p2和p4的地址相同，但类型不同</li>
+<li>定位运算符使用传递给它的地址，不跟踪哪些内存单元已被使用，也不查找未使用的内存块</li>
+<li>指定内存不使用delete来释放内存，位于delete的管辖区外</li>
+<li>指定内存的另一种用法：与初始化结合，将信息放在特定的硬件地址处</li>
+</ul>
+<p>调用接收两个参数的new()函数</p>
+<pre><code>int *pi=new int;             //invokes new(sizeof(int))
+int *p2=new(buffer) int;     //invokes new(sizeof(int),buffer)
+int *p3=new(buffer) int[40]; //invokes new(40*sizeof(int),buffer)
+</code></pre><p>定位new函数不可替换，但可重载，第一个参数是std:size_t,指定了请求的字节数</p>
+<h2 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a>名称空间</h2><p>提供声明名称的区域，一个名称空间中的名称不会与另外一个名称空间的相同名称发生冲突，同时允许程序的其他部分使用该名称空间中声明的东西<br>使用关键字namespace创建名称空间</p>
+<pre><code>namespace Jack{
+    double pail;
+    void fetch();
+}
+Jack::fetch();//通过作用域解析运算符::访问给定名称空间中的名称
+</code></pre><p>using声明和using编译指令</p>
+<ul>
+<li>using声明是特定的标识符可用<pre><code>//using声明由被限定的名称和它前面的关键字using组成
+using Jill::fetch;
+</code></pre></li>
+<li>using编译指令使整个名称空间可用</li>
+<li>局部版本隐藏名称空间版本</li>
+</ul>
+<h5 id="嵌套名称空间"><a href="#嵌套名称空间" class="headerlink" title="嵌套名称空间"></a>嵌套名称空间</h5><p>using编译指令是可传递的</p>
+<pre><code>name space elements
+{
+    namespace fire
+    {
+        int flame;
+    }
+}
+
+namespace myth
+{
+    using Jill::fetch;
+    using namespace elements;
+    using std::cout;
+}
+
+std::cin&gt;&gt;myth::fetch;
+//如果没有冲突的局部变量
+using namespace myth;
+cin&gt;&gt;fetch;
+</code></pre><h5 id="未命名名称空间"><a href="#未命名名称空间" class="headerlink" title="未命名名称空间"></a>未命名名称空间</h5><pre><code>namespace 
+{
+    int ice;
+}
+</code></pre><p>该名称空间中声明的名称的潜在作用域为：从声明点到该声明区域末尾，可替代链接性为内部的静态变量</p>
+<h2 id="使用名称空间指导原则"><a href="#使用名称空间指导原则" class="headerlink" title="使用名称空间指导原则"></a>使用名称空间指导原则</h2><ul>
+<li>使用在已命名的名称空间中声明的变量，而不是使用外部全局变量或静态全局变量</li>
+<li>如果开发了一个函数库或类库，将其放在一个名称空间中</li>
+<li>仅将编译指令using作为一种将旧代码转换为使用名称空间的权益之计</li>
+<li>不要再头文件中使用using编译指令</li>
+<li>导入名称时，首先使用作用域解析运算符或using声明方法</li>
+<li>对于using声明，首先将其作用域设置为局部而不是全局</li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="styled-border">
+                    ←
+                    Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="styled-border">
+                    
+                    Handler、Looper、Message源码分析
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

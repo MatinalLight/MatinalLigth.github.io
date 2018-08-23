@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus对象和类 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="面向对象编程OOP特性：  抽象 封装和数据隐藏 多态 继承 代码的可重用性  类类规范有两个部分组成  类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 类方法定义:描述如何实现类成员函数  类的创建//stock00.h #ifndef STOCK00_H_ #define STOCKOO_H_  #include &amp;lt;string&amp;gt;  class Stock {">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus对象和类">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_10对象和类/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="面向对象编程OOP特性：  抽象 封装和数据隐藏 多态 继承 代码的可重用性  类类规范有两个部分组成  类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 类方法定义:描述如何实现类成员函数  类的创建//stock00.h #ifndef STOCK00_H_ #define STOCKOO_H_  #include &amp;lt;string&amp;gt;  class Stock {">
+<meta property="og:updated_time" content="2018-04-09T03:48:07.776Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus对象和类">
+<meta name="twitter:description" content="面向对象编程OOP特性：  抽象 封装和数据隐藏 多态 继承 代码的可重用性  类类规范有两个部分组成  类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 类方法定义:描述如何实现类成员函数  类的创建//stock00.h #ifndef STOCK00_H_ #define STOCKOO_H_  #include &amp;lt;string&amp;gt;  class Stock {">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus对象和类</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><p>OOP特性：</p>
+<ul>
+<li>抽象</li>
+<li>封装和数据隐藏</li>
+<li>多态</li>
+<li>继承</li>
+<li>代码的可重用性</li>
+</ul>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>类规范有两个部分组成</p>
+<ul>
+<li>类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口</li>
+<li>类方法定义:描述如何实现类成员函数</li>
+</ul>
+<h5 id="类的创建"><a href="#类的创建" class="headerlink" title="类的创建"></a>类的创建</h5><pre><code>//stock00.h
+#ifndef STOCK00_H_
+#define STOCKOO_H_
+
+#include &lt;string&gt;
+
+class Stock
+{    
+private://可选 默认为private
+    std::string company;
+    long shares;
+    double share_val;
+    double total_val;
+    void set_tot(){total_val=shares*share_val;}
+    // 定义位于类声明中的函数都将自动成为内联函数
+public:
+    Stock();
+    Stock(const std::string &amp; co,double pr=0.
+0);
+    ~Stock();
+    void acquire(const std::string &amp; co,long n,double pr);
+    void buy(long num,double price);
+    void sell(long num,double price);
+    void update(double price);
+    void show();
+}
+
+//set_tot()另一种写法：在类声明之外定义成员函数，并使其成为内联函数
+inline void Stock::set_tot()
+{
+    total_val=shares*share_val;
+}
+#endif
+</code></pre><p>无论类成员是数据成员还是成员函数，都可以在类的共有部分或私有部分中声明它</p>
+<p>所创建的每个新对象都有自己的存储空间，用于存储其内部变量和类成员；但同一个类的所有对象共享同一组类方法，即每种方法只有一个副本。</p>
+<p>访问控制</p>
+<ul>
+<li>private 只能通过公有成员函数(或友元函数)来访问对象的私有成员</li>
+<li>public </li>
+<li>protected</li>
+</ul>
+<h5 id="实现类成员函数"><a href="#实现类成员函数" class="headerlink" title="实现类成员函数"></a>实现类成员函数</h5><ul>
+<li>定义成员函数时，使用作用域解析运算符<code>::</code>来标识函数所属的类</li>
+<li>类方法可以访问类的private组件</li>
+</ul>
+<pre><code>void Stock::update(double price)
+{
+    share_val=price;
+    set_tot();
+}
+</code></pre><h2 id="类的构造函数和析构函数"><a href="#类的构造函数和析构函数" class="headerlink" title="类的构造函数和析构函数"></a>类的构造函数和析构函数</h2><h5 id="声明和定义构造函数"><a href="#声明和定义构造函数" class="headerlink" title="声明和定义构造函数"></a>声明和定义构造函数</h5><p>会在每次创建类的新对象时执行，构造函数的名称与类名完全相同。</p>
+<pre><code>//声明
+Stock(const string &amp; co,double pr);
+
+//定义
+Stock::Stock(const string &amp; co,double pr)
+{
+    company=co;//参数名不可以和成员名相同
+    share_val=pr;
+    set_tot();
+}
+
+//使用
+Stock food=Stock(&quot;World&quot;,1.25);
+//或
+Stock food(&quot;World&quot;,2.5);
+</code></pre><h5 id="定义默认构造函数"><a href="#定义默认构造函数" class="headerlink" title="定义默认构造函数"></a>定义默认构造函数</h5><ul>
+<li>Stock();//提供没有参数的构造函数</li>
+<li>Stock(const string &amp; co=”Error”,int n=0,double pr=0.0);//给已有构造函数的所有参数提供默认值</li>
+</ul>
+<p>通常应提供所有类成员做隐式初始化的默认构造函数。</p>
+<h5 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h5><p>对象过期时，程序将调用一个特殊的成员函数，称为析构函数。<br><code>~Stock();</code></p>
+<p>在下述情况析构函数将被调用</p>
+<ul>
+<li>如果对象是动态变量，则当执行完定义该对象的程序块时，将调用该对象的析构函数</li>
+<li>如果对象是静态变量(外部，静态，静态外部或来自名称空间)，则在程序结束时将调用对象的析构函数</li>
+<li>如果对象是用new创建的，则斤当您使用delete删除对象时，其析构函数才会被调用</li>
+</ul>
+<h5 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h5><p>保证函数不会修改调用对象</p>
+<pre><code>//原型
+void show() const;
+//定义
+void Stock::show() const{...}
+</code></pre><h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2><p>this指针指向用来调用成员函数的对象(this被作为隐藏参数传递给方法)；</p>
+<pre><code>const Stock &amp; Stock::topval(const Stock &amp; s) const
+{
+    if(s.total_val&gt;total_val)
+        return s;
+    else
+        return *this;//this是对象的地址，*this是对象本身
+}
+</code></pre><h2 id="类作用域"><a href="#类作用域" class="headerlink" title="类作用域"></a>类作用域</h2><h5 id="作用域为类的常量"><a href="#作用域为类的常量" class="headerlink" title="作用域为类的常量"></a>作用域为类的常量</h5><pre><code>class Bakery
+{
+private:
+    const int Months=12;//Fails
+    //方式一
+    enum {Months=12};
+    //方式二 该常量将与其他静态变量存储在一起，而不是存储在对象中
+    static const int Months=12;
+}
+</code></pre><h5 id="作用域内枚举"><a href="#作用域内枚举" class="headerlink" title="作用域内枚举"></a>作用域内枚举</h5><pre><code>//egg Small和t_shirt Small位于相同的作用域内，它们将发生冲突
+enum egg{Small,Medium,Large,Jumno};
+enum t_shirt{Small,Medium,Large,Xlarge};
+</code></pre><p>C++提供一种新枚举，其枚举量的作用域为类</p>
+<pre><code>enum class egg{Small,Medium,Large,Jumno};    //可以使用struct代替class
+enum class t_shirt{Small,Medium,Large,Xlarge};
+
+//需要使用枚举名来限定枚举量
+egg choice=egg::Large;
+t_shirt Floyd=t_shirt::Large;
+
+//作用域内枚举不能隐式地转换为整型
+int ring=Floyd;// not allowed
+//显示类型转换
+int ring=int(t_shirt::Large);
+</code></pre><p>C++作用域内枚举的底层类型为int</p>
+<pre><code>//:short指定底层类型为short
+enum class : short pizza{Small,Medium};
+</code></pre><h2 id="抽象数据类型ADT"><a href="#抽象数据类型ADT" class="headerlink" title="抽象数据类型ADT"></a>抽象数据类型ADT</h2><p>ADT以通用的方式描述数据类型，而没有引入语言或实现细节</p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_12类和动态内存分配/" class="styled-border">
+                    ←
+                    C++PrimerPlus类和动态内存分配
+                    
+                </a>
+            
+            
+                <a href="#"></a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

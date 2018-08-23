@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus处理数据 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="C++变量的命名规则 在名称中只能使用字母字符、数字和下划线_ 名称的第一个字符不能使数字 区分大小写字符与小写字符 不能将C++关键字用作名称 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制  整型 short,int,long,long long计算机内存">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus处理数据">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_3处理数据/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="C++变量的命名规则 在名称中只能使用字母字符、数字和下划线_ 名称的第一个字符不能使数字 区分大小写字符与小写字符 不能将C++关键字用作名称 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制  整型 short,int,long,long long计算机内存">
+<meta property="og:updated_time" content="2017-07-31T05:15:51.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus处理数据">
+<meta name="twitter:description" content="C++变量的命名规则 在名称中只能使用字母字符、数字和下划线_ 名称的第一个字符不能使数字 区分大小写字符与小写字符 不能将C++关键字用作名称 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制  整型 short,int,long,long long计算机内存">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus处理数据</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="C-变量的命名规则"><a href="#C-变量的命名规则" class="headerlink" title="C++变量的命名规则"></a>C++变量的命名规则</h2><ul>
+<li>在名称中只能使用字母字符、数字和下划线_</li>
+<li>名称的第一个字符不能使数字</li>
+<li>区分大小写字符与小写字符</li>
+<li>不能将C++关键字用作名称</li>
+<li>以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。</li>
+<li>C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制</li>
+</ul>
+<h2 id="整型-short-int-long-long-long"><a href="#整型-short-int-long-long-long" class="headerlink" title="整型 short,int,long,long long"></a>整型 short,int,long,long long</h2><p>计算机内存的基本单元是位(bit)。字节(byte)通常指的是8位的内存单元</p>
+<ul>
+<li>short至少16位</li>
+<li>int至少与short一样长</li>
+<li>long至少32位，且至少与int一样长</li>
+<li>long long至少64位，且至少与long一样长</li>
+</ul>
+<h5 id="运算符sizeof和头文件limits"><a href="#运算符sizeof和头文件limits" class="headerlink" title="运算符sizeof和头文件limits"></a>运算符sizeof和头文件limits</h5><ul>
+<li>sizeof返回单位为字节的长度，sizeof(类名/变量名)</li>
+<li>头文件limits定义了符号常量来表示类型的限制</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>符号常量</th>
+<th style="text-align:center">表  示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHAR_BIT</td>
+<td style="text-align:center">char的位数</td>
+</tr>
+<tr>
+<td>CHAR_MAX</td>
+<td style="text-align:center">char的最大值</td>
+</tr>
+<tr>
+<td>CHAR_MIN</td>
+<td style="text-align:center">char的最小值</td>
+</tr>
+<tr>
+<td>SCHAR_MAX</td>
+<td style="text-align:center">singed char的最大值</td>
+</tr>
+<tr>
+<td>SCHAR_MIN</td>
+<td style="text-align:center">singed char的最小值</td>
+</tr>
+<tr>
+<td>UCHAR_MAX</td>
+<td style="text-align:center">unsigned char的最大值</td>
+</tr>
+<tr>
+<td>SHRT_MAX</td>
+<td style="text-align:center">short的最大值</td>
+</tr>
+<tr>
+<td>SHRT_MIN</td>
+<td style="text-align:center">short的最小值</td>
+</tr>
+<tr>
+<td>USHRT_MAX</td>
+<td style="text-align:center">unsigned short的最大值</td>
+</tr>
+<tr>
+<td>INT_MAX</td>
+<td style="text-align:center">int的最大值</td>
+</tr>
+<tr>
+<td>INT_MIN</td>
+<td style="text-align:center">int的最小值</td>
+</tr>
+<tr>
+<td>UNIT_MAX</td>
+<td style="text-align:center">unsigned int的最大值</td>
+</tr>
+<tr>
+<td>LONG_MAX</td>
+<td style="text-align:center">long的最大值</td>
+</tr>
+<tr>
+<td>LONG_MIN</td>
+<td style="text-align:center">long的最小值</td>
+</tr>
+<tr>
+<td>ULONG_MAX</td>
+<td style="text-align:center">unsigned long的最大值</td>
+</tr>
+<tr>
+<td>LLONG_MAX</td>
+<td style="text-align:center">long long的最大值</td>
+</tr>
+<tr>
+<td>LLONG_MIN</td>
+<td style="text-align:center">long long的最小值</td>
+</tr>
+<tr>
+<td>ULLONG_MAX</td>
+<td style="text-align:center">unsigned long long的最大值</td>
+</tr>
+</tbody>
+</table>
+<h6 id="变量初始化"><a href="#变量初始化" class="headerlink" title="变量初始化"></a>变量初始化</h6><ul>
+<li><p>C初始化方式</p>
+<p>  <code>int uncles=5;</code><br>  <code>int aunts=uncles;</code><br>  <code>int chairs=aunts+uncles+4;</code></p>
+</li>
+<li><p>C++11初始化方式</p>
+<p>  <code>int wrens(432);</code></p>
+<ul>
+<li><p>大括号内可以不包含任何东西，变量将被初始化为0</p>
+<p>  <code>int enmus{7};</code><br>  <code>int rheas={12};</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="无符号类型"><a href="#无符号类型" class="headerlink" title="无符号类型"></a>无符号类型</h6><p>创建无符号版本的基本整型，使用关键字unsigned修饰</p>
+<pre><code>`unsigned short change;//short 表示范围-32768到+32767，无符号的表示范围为0~65535`
+</code></pre><h6 id="整型字面值"><a href="#整型字面值" class="headerlink" title="整型字面值"></a>整型字面值</h6><p>三种基数10，8，16的表示方法</p>
+<ul>
+<li>如果第一位是1~9，则基数为十进制</li>
+<li>如果第一位是0，则基数为八进制</li>
+<li>如果前两位为0x或0X，则基数为十六进制</li>
+</ul>
+<h6 id="如何确认常量类型"><a href="#如何确认常量类型" class="headerlink" title="如何确认常量类型"></a>如何确认常量类型</h6><ul>
+<li>默认是int</li>
+<li>整数后面的l或L后缀表示该整数为long</li>
+<li>u或U后缀表示unsigned int</li>
+<li>ul后缀表示unsigned long</li>
+<li>ll或LL表示long long</li>
+<li>ull、Ull、uLL、ULL表示unsigned long long</li>
+</ul>
+<h6 id="char类型"><a href="#char类型" class="headerlink" title="char类型"></a>char类型</h6><p>单个字符是字母，显示字母还是字符编码，不是char决定的而是cout和cin决定的</p>
+<ul>
+<li>字符转编码：将char转化为int</li>
+<li>编码转字符：使用cout.put()</li>
+<li>char字面值(ASCII码)： <ul>
+<li>‘A’为65；</li>
+<li>‘a’为97；</li>
+<li>‘5’为53；</li>
+<li>‘’为32；</li>
+<li>‘!’为33；   </li>
+</ul>
+</li>
+<li>wchar_t 扩展字符集,使用wcout和wcin处理</li>
+<li>C++11新增char16_t和char32_t，分别用u’C’和U’C’表示</li>
+<li>bool 字面值true和false<ul>
+<li>字面值true和false或指针值都可以通过提升转换为int类型，true被转换为1，false转换为0；</li>
+<li>任何数字值或指针值都可以被隐式转换为bool值，任何非零值都被转为true，而零被转换为false</li>
+</ul>
+</li>
+</ul>
+<h2 id="const-限定符"><a href="#const-限定符" class="headerlink" title="const 限定符"></a>const 限定符</h2><ul>
+<li><p>创建常量的通用格式：<br><code>const type name=value;</code></p>
+</li>
+<li><p>如果在声明常量时没有提供值，则该常量的值将是不确定的，且无法修改。<br><code>const int toes;toes=10;//too late</code></p>
+</li>
+</ul>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><ul>
+<li><p>浮点类型 float,double,long double，这三种类型的指数范围至少-37到37，可以从cfloa或float.h中找到系统限制</p>
+<ul>
+<li>float至少32位，通常为32位</li>
+<li>double至少48位，且不少于float，通常为64位</li>
+<li>long double至少和double一样多，通常为80，96或128位<br>*ostream方法seft()使输出使用定点表示法，防止程序把较大的值切换为E表示法。<br><code>cout.setf(ios_base::fixed,ios_base::floatfield);</code></li>
+</ul>
+</li>
+<li><p>浮点常量，float后缀f或F，long double后缀为l或L，默认为double</p>
+</li>
+</ul>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><ul>
+<li><p>以{}方式初始化时进行的转换</p>
+<ul>
+<li><p>初始化不允许缩窄，即变量的类型可能无法表示赋给它的值</p>
+<pre><code>  int x=66;
+  char c4={x};//not allowed
+</code></pre></li>
+<li>在编译器看来x是一个变量，其值可能很大，编译器不会跟踪下述阶段可能发生的情况：从x被初始化到它被用来初始化c4</li>
+</ul>
+</li>
+<li>强制转换<ul>
+<li>(typeName)value;</li>
+<li>typeName(value);</li>
+<li>static_<typename>(value);c++11新增</typename></li>
+</ul>
+</li>
+<li>auto C++11新增，让编译器能够根据初始化值得类型推断变量的类型<br>  <code>auto x=100;//n is int</code></li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_13类继承/" class="styled-border">
+                    ←
+                    C++PrimerPlus类继承
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_12类和动态内存分配/" class="styled-border">
+                    
+                    C++PrimerPlus类和动态内存分配
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

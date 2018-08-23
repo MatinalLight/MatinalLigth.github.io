@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java并发编程实战-基础知识_小结_并发技巧清单 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="并发技巧清单 可变状态是至关重要的。  所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。  尽量将域声明为final类型，除非需要它们是可变的。 不可变对象一定是线程安全的。  不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。  封装有助于管理复杂性。  在编写线程安全的程序时，虽然可以将所有数据">
+<meta name="keywords" content="Java 并发编程实战">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发编程实战-基础知识_小结_并发技巧清单">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Java并发编程实战-基础知识5_小结/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="并发技巧清单 可变状态是至关重要的。  所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。  尽量将域声明为final类型，除非需要它们是可变的。 不可变对象一定是线程安全的。  不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。  封装有助于管理复杂性。  在编写线程安全的程序时，虽然可以将所有数据">
+<meta property="og:updated_time" content="2018-03-31T15:28:39.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发编程实战-基础知识_小结_并发技巧清单">
+<meta name="twitter:description" content="并发技巧清单 可变状态是至关重要的。  所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。  尽量将域声明为final类型，除非需要它们是可变的。 不可变对象一定是线程安全的。  不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。  封装有助于管理复杂性。  在编写线程安全的程序时，虽然可以将所有数据">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Java并发编程实战-基础知识_小结_并发技巧清单</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="并发技巧清单"><a href="#并发技巧清单" class="headerlink" title="并发技巧清单"></a>并发技巧清单</h2><ul>
+<li>可变状态是至关重要的。</li>
+</ul>
+<p>所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。</p>
+<ul>
+<li>尽量将域声明为final类型，除非需要它们是可变的。</li>
+<li>不可变对象一定是线程安全的。</li>
+</ul>
+<p>不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。</p>
+<ul>
+<li>封装有助于管理复杂性。</li>
+</ul>
+<p>在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步机制封装在对象中，更易于遵循同步策略。</p>
+<ul>
+<li>用锁来保护每个可变变量。</li>
+<li>当保护同一个不可变性条件中的所有变量时，要使用同一个锁。</li>
+<li>在执行复合操作期间，要持有锁。</li>
+<li>如果从多个线程中访问同一个可变变量时没有同步机制，那么程序会出现问题。</li>
+<li>不要故作聪明地推断出不需要使用同步。</li>
+<li>在设计过程中考虑线程安全，或者在文档中明确地指出它不是线程安全的</li>
+<li>将同步策略文档化。</li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试1_避免活跃性危险/" class="styled-border">
+                    ←
+                    Java并发编程实战-活跃性、性能与测试1_避免活跃性危险
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="styled-border">
+                    
+                    Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

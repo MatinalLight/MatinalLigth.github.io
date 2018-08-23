@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Retrofit 源码分析 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="根据Retrofit使用，分析每一步相关源码  Api api = new Retrofit.Builder()     .baseUrl(BASE_URL)//配置生产或测试环境     .client(getOkHttpClient())//HTTP 请求     .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit 源码分析">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Retrofit_源码分析/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="根据Retrofit使用，分析每一步相关源码  Api api = new Retrofit.Builder()     .baseUrl(BASE_URL)//配置生产或测试环境     .client(getOkHttpClient())//HTTP 请求     .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数">
+<meta property="og:updated_time" content="2018-03-29T03:54:41.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit 源码分析">
+<meta name="twitter:description" content="根据Retrofit使用，分析每一步相关源码  Api api = new Retrofit.Builder()     .baseUrl(BASE_URL)//配置生产或测试环境     .client(getOkHttpClient())//HTTP 请求     .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Retrofit 源码分析</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p>根据<a href="https://square.github.io/retrofit/#contributing" target="_blank" rel="external">Retrofit</a>使用，分析每一步相关源码</p>
+<pre>
+Api api = new Retrofit.Builder()
+    .baseUrl(BASE_URL)//配置生产或测试环境
+    .client(getOkHttpClient())//HTTP 请求
+    .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数对象和json转换器
+    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Call转换为Rxjava的Observable
+    .build()//初始化参数，创建retrofit
+    .create(Api.class);//返回接口实现                        
+</pre>
+
+<h2 id="Builder"><a href="#Builder" class="headerlink" title="Builder()"></a>Builder()</h2><pre>
+public Builder() {
+    /*Platform->findPlatform()->return new Android();*/        
+      this(Platform.get());
+    }
+</pre>
+
+<h2 id="addConverterFactory-GsonConverterFactory-create-new-Gson"><a href="#addConverterFactory-GsonConverterFactory-create-new-Gson" class="headerlink" title="addConverterFactory(GsonConverterFactory.create(new Gson()))"></a>addConverterFactory(GsonConverterFactory.create(new Gson()))</h2><pre>
+public Builder addConverterFactory(Converter.Factory factory) {
+      converterFactories.add(checkNotNull(factory, "factory == null"));
+      return this;
+    }
+</pre>
+
+<p>默认只支持ResponseBody，可以使用下面6种方式实现对象的序列化和反序列化转换</p>
+<ul>
+<li>Gson: com.squareup.retrofit2:converter-gson</li>
+<li>Jackson: com.squareup.retrofit2:converter-jackson</li>
+<li>Moshi: com.squareup.retrofit2:converter-moshi</li>
+<li>Protobuf: com.squareup.retrofit2:converter-protobuf</li>
+<li>Wire: com.squareup.retrofit2:converter-wire</li>
+<li>Simple XML: com.squareup.retrofit2:converter-simplexml</li>
+</ul>
+<h2 id="addCallAdapterFactory-RxJava2CallAdapterFactory-create"><a href="#addCallAdapterFactory-RxJava2CallAdapterFactory-create" class="headerlink" title="addCallAdapterFactory(RxJava2CallAdapterFactory.create())"></a>addCallAdapterFactory(RxJava2CallAdapterFactory.create())</h2><p>可以将调用Api方法返回的Call转换为RxJava的Observable, Flowable, Single, Completable or Maybe</p>
+<pre>
+/**
+ * Add a call adapter factory for supporting service method return types other than {@link
+ * Call}.
+ */
+public Builder addCallAdapterFactory(CallAdapter.Factory factory) {
+      adapterFactories.add(checkNotNull(factory, "factory == null"));
+      return this;
+    }
+</pre>
+* Call->调用Retrofit方法，将请求发送到Web服务器并返回响应
+
+    <pre>
+    /*调用Retrofit方法，将请求发送到Web服务器并返回响应
+    继承Cloneable，使用相同的参数对同一个网络请求多次调用，可以用来轮询或失败重试
+    */
+    public interface Call<t> extends Cloneable {
+        Response<t> execute() throws IOException;//同步执行
+
+        void enqueue(Callback<t> callback);//异步执行
+
+        boolean isExecuted();//如果此调用执行或已排队返回true，多次调用会报错
+
+        void cancel();//不管是执行中还是在排队中，都取消此次调用的执行
+
+        boolean isCanceled();//cancel()被调用返回true
+
+        Call<t> clone();//克隆这个调用，即使调用已经结束，也可以调用或排队
+
+        Request request();//执行http请求
+    }
+    </t></t></t></t></pre>
+
+<ul>
+<li>CallAdapter-&gt;通过继承CallAdapter.Factory实现其get()方法返回将response.body()类型R转换为T的CallAdapter</li>
+</ul>
+<h2 id="build"><a href="#build" class="headerlink" title="build()"></a>build()</h2><p>检查参数，如果Null设置默认值，创建retrofit对象</p>
+<pre>
+public Retrofit build() {
+      if (baseUrl == null) {
+        throw new IllegalStateException("Base URL required.");
+      }
+
+      okhttp3.Call.Factory callFactory = this.callFactory;
+      if (callFactory == null) {
+        callFactory = new OkHttpClient();
+      }
+
+      Executor callbackExecutor = this.callbackExecutor;
+      if (callbackExecutor == null) {
+        callbackExecutor = platform.defaultCallbackExecutor();
+      }
+
+      // 添加自定义转换器(RxJava2CallAdapterFactory)和默认的转换器(Android->ExecutorCallAdapterFactory)
+      List<calladapter.factory> adapterFactories = new ArrayList<>(this.adapterFactories);
+      adapterFactories.add(platform.defaultCallAdapterFactory(callbackExecutor));
+
+      // Make a defensive copy of the converters.
+      List<converter.factory> converterFactories = new ArrayList<>(this.converterFactories);
+      //retrofit只有一个构造方法
+      return new Retrofit(callFactory, baseUrl, converterFactories, adapterFactories,
+          callbackExecutor, validateEagerly);
+    }
+</converter.factory></calladapter.factory></pre>
+只有callbackExecutor在之前没有是设置，这里调用platform.defaultCallbackExecutor();
+其实就是Android里方法,通过主线程的Handler执行网络访问
+
+ * Executor：执行提交的Runnable任务的对象。 该接口提供了一种将任务提交与每个任务如何运行的机制解耦的方式，包括线程使用，调度等细节
+<pre>
+static class Android extends Platform {
+    @Override public Executor defaultCallbackExecutor() {
+      return new MainThreadExecutor();
+    }
+
+    @Override CallAdapter.Factory defaultCallAdapterFactory(@Nullable Executor callbackExecutor) {
+      if (callbackExecutor == null) throw new AssertionError();
+      return new ExecutorCallAdapterFactory(callbackExecutor);
+    }
+
+    static class MainThreadExecutor implements Executor {
+      private final Handler handler = new Handler(Looper.getMainLooper());
+
+      @Override public void execute(Runnable r) {
+        handler.post(r);
+      }
+    }
+  }
+</pre>
+
+<h2 id="create-Api-class"><a href="#create-Api-class" class="headerlink" title="create(Api.class);"></a>create(Api.class);</h2><p>使用动态代理实现接口方法的调用</p>
+<pre>
+public <t> T create(final Class<t> service) {
+    Utils.validateServiceInterface(service);//service 必须是接口并且不能有父类
+    if (validateEagerly) {//默认false
+      eagerlyValidateMethods(service);
+    }
+    return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class<?>[] { service },
+        new InvocationHandler() {
+          private final Platform platform = Platform.get();//获得Android
+
+          @Override public Object invoke(Object proxy, Method method, @Nullable Object[] args)
+              throws Throwable {
+            // 如果是Object的方法，遵循正常调用
+            if (method.getDeclaringClass() == Object.class) {
+              return method.invoke(this, args);
+            }
+            if (platform.isDefaultMethod(method)) {//Android 未重写该方法 默认是false
+              return platform.invokeDefaultMethod(method, service, proxy, args);
+            }
+            // 下面是主要的接口方法实现 
+            ServiceMethod<object, object=""> serviceMethod =
+                (ServiceMethod<object, object="">) loadServiceMethod(method);
+            OkHttpCall<object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
+            return serviceMethod.callAdapter.adapt(okHttpCall);
+          }
+        });
+  }
+
+loadServiceMethod(method);//将method和ServiceMethod用ConcurrentHashMap缓存，提高效率
+    ->ServiceMethod<?, ?> loadServiceMethod(Method method) {
+          //serviceMethodCache = new ConcurrentHashMap<>();
+        ServiceMethod<?, ?> result = serviceMethodCache.get(method);
+        if (result != null) return result;
+
+        synchronized (serviceMethodCache) {
+          result = serviceMethodCache.get(method);
+          if (result == null) {
+            result = new ServiceMethod.Builder<>(this, method).build();
+            serviceMethodCache.put(method, result);
+          }
+        }
+        return result;
+      }
+</object></object,></object,></t></t></pre>
+
+<p><a href="https://mp.weixin.qq.com/s/1yWSfdz0j-PprGkDgOomhQ" target="_blank" rel="external">ConcurrentHashMap</a>采用分段锁，并发操作效率更高，线程安全</p>
+<h3 id="ServiceMethod"><a href="#ServiceMethod" class="headerlink" title="ServiceMethod"></a>ServiceMethod</h3><p>将接口方法的调用调整为HTTP调用。</p>
+<pre>
+//通过Build方式实例化
+Builder(Retrofit retrofit, Method method) {
+    this.retrofit = retrofit;
+    this.method = method;
+    this.methodAnnotations = method.getAnnotations();//获取方法的的注解
+    this.parameterTypes = method.getGenericParameterTypes();//获取方法注解类型
+    this.parameterAnnotationsArray = method.getParameterAnnotations();//获取方法参数注解
+}        
+</pre>
+
+<h5 id="build-初始化参数并校验"><a href="#build-初始化参数并校验" class="headerlink" title="build();初始化参数并校验"></a>build();初始化参数并校验</h5><ul>
+<li>callAdapter = createCallAdapter();</li>
+</ul>
+<p>将普通的接口方法返回类型Call转换为需要的类型<br><br>1、如果有自定义callAdapter，返回自定义callAdapter<br><br>2、如果没有就返回默认的CallAdapter(Android-&gt;ExecutorCallAdapterFactory)</p>
+<pre>
+return (CallAdapter<t, r="">) retrofit.callAdapter(returnType, annotations);
+->Retrofit->return nextCallAdapter(null, returnType, annotations);
+1、自定义转换器(RxJava2CallAdapterFactory)：返回对应的接口方法返回值类型，如Observable
+
+2、默认的转换器(Android->ExecutorCallAdapterFactory)
+->ExecutorCallAdapterFactory->get()
+->return new CallAdapter<object, call<?="">>() {
+      @Override public Type responseType() {
+        return responseType;
+      }
+
+      @Override public Call<object> adapt(Call<object> call) {
+        //serviceMethod.callAdapter.adapt(okHttpCall);最终是在这里执行
+        return new ExecutorCallbackCall<>(callbackExecutor, call);
+      }
+    };
+</object></object></object,></t,></pre>
+* responseConverter = createResponseConverter();//实现json和对象的相互转换
+<pre>
+return retrofit.responseBodyConverter(responseType, annotations);
+->Retrofit->return nextResponseBodyConverter(null, type, annotations);
+->GsonConverterFactory->return new GsonResponseBodyConverter<>(gson, adapter);
+->final class GsonResponseBodyConverter<t> implements Converter<responsebody, t=""> {
+  private final Gson gson;
+  private final TypeAdapter<t> adapter;
+
+  GsonResponseBodyConverter(Gson gson, TypeAdapter<t> adapter) {
+    this.gson = gson;
+    this.adapter = adapter;
+  }
+
+  @Override public T convert(ResponseBody value) throws IOException {
+    JsonReader jsonReader = gson.newJsonReader(value.charStream());
+    try {
+      return adapter.read(jsonReader);
+    } finally {
+      value.close();
+    }
+  }
+}
+</t></t></responsebody,></t></pre>
+
+<ul>
+<li>for (Annotation annotation : methodAnnotations) {parseMethodAnnotation(annotation);}</li>
+</ul>
+<pre>
+->parseHttpMethodAndPath()获得请求方式：POST、GET或者parseHeaders()获得请求头信息headers
+</pre>
+
+<ul>
+<li><p>parameterHandlers[p] = parseParameter(p, parameterType, parameterAnnotations);}//根据接口方法参数的注解处理响应的数据</p>
+</li>
+<li><p>return new ServiceMethod&lt;&gt;(this);实例化ServiceMethod</p>
+</li>
+</ul>
+<h3 id="OkHttpCall"><a href="#OkHttpCall" class="headerlink" title="OkHttpCall"></a>OkHttpCall</h3><p>通过RxJava2CallAdapterFactory将OkHttpCall交由Rxjava处理<br><br>OkHttpCall<object> okHttpCall = new OkHttpCall&lt;&gt;(serviceMethod, args);</object></p>
+<pre>
+->okhttp3.Call call = rawCall = rawCall = createRawCall();
+->private okhttp3.Call createRawCall() throws IOException {
+    Request request = serviceMethod.toRequest(args);
+    //这里将自定义OkhttpLCient与retrofit关联起来
+    okhttp3.Call call = serviceMethod.callFactory.newCall(request);
+    if (call == null) {
+      throw new NullPointerException("Call.Factory returned null.");
+    }
+    return call;
+  }
+</pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="styled-border">
+                    ←
+                    okhttp 源码分析
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="styled-border">
+                    
+                    RxJava2 源码分析
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

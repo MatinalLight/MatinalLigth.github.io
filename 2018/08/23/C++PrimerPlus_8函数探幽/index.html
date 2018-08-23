@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus函数探幽 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="内联函数使用方式：  在函数声明前加上关键字inline 在函数定义前加上关键字inline  使用内联函数优点  内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 与其他函数一样，可以使用所在类的保护成员及私有成员  使用内联函数的缺点  不允许过多的代码，代码过多的话会造成大">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus函数探幽">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_8函数探幽/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="内联函数使用方式：  在函数声明前加上关键字inline 在函数定义前加上关键字inline  使用内联函数优点  内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 与其他函数一样，可以使用所在类的保护成员及私有成员  使用内联函数的缺点  不允许过多的代码，代码过多的话会造成大">
+<meta property="og:updated_time" content="2018-04-09T03:13:30.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus函数探幽">
+<meta name="twitter:description" content="内联函数使用方式：  在函数声明前加上关键字inline 在函数定义前加上关键字inline  使用内联函数优点  内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 与其他函数一样，可以使用所在类的保护成员及私有成员  使用内联函数的缺点  不允许过多的代码，代码过多的话会造成大">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus函数探幽</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h2><p>使用方式：</p>
+<ul>
+<li>在函数声明前加上关键字inline</li>
+<li>在函数定义前加上关键字inline</li>
+</ul>
+<p>使用内联函数优点</p>
+<ul>
+<li>内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高</li>
+<li>编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性</li>
+<li>与其他函数一样，可以使用所在类的保护成员及私有成员</li>
+</ul>
+<p>使用内联函数的缺点</p>
+<ul>
+<li>不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内</li>
+<li>不允许有循环或者开关语句，如果有的话，执行函数代码时间比调用开销大</li>
+</ul>
+<h2 id="引用变量"><a href="#引用变量" class="headerlink" title="引用变量"></a>引用变量</h2><p>当调用函数时，有三种向函数传递参数的方式</p>
+<ol>
+<li>传值调用：该方法把参数的实际值复制给函数的形式参数，修改函数内的形式参数对实际参数没有影响</li>
+<li>指针调用：该方法把参数的地址复制给形式参数，在函数内，该地址用于访问调用中要用到的实际参数。修改形式参数会影响实际参数</li>
+<li>引用调用：该方法把参数的引用复制给形式参数，在函数内，该引用用于访问调用中要用到的实际参数。修改形式参数会影响实际参数</li>
+</ol>
+<h5 id="创建引用变量"><a href="#创建引用变量" class="headerlink" title="创建引用变量"></a>创建引用变量</h5><p>用&amp;声明引用，必须在声明引用变量时进行初始化</p>
+<pre><code>int rat;
+int &amp; rodent =rat;
+</code></pre><h5 id="将引用用作函数参数"><a href="#将引用用作函数参数" class="headerlink" title="将引用用作函数参数"></a>将引用用作函数参数</h5><pre><code>void swapr(int &amp; a,int &amp; b);
+void swapr(int &amp; a,int &amp; b)
+{
+    int temp;
+    temp = a;
+    a=b;
+    b=temp;
+};
+</code></pre><p>什么时候创建临时变量？</p>
+<ul>
+<li>实参的类型正确，但不是<a href="#lvalue">左值</a></li>
+<li>实参的类型不正确，但可以转换为正确的类型</li>
+</ul>
+<p>将引用参数声明为常量数据的引用</p>
+<ul>
+<li>使用const可以避免无意中修改数据的编译错误</li>
+<li>使用const使函数能够处理const和非const实参，否则将只能接受非const数据</li>
+<li>使用const引用使函数能够正确生成并使用临时变量</li>
+</ul>
+<h5 id="返回引用"><a href="#返回引用" class="headerlink" title="返回引用"></a>返回引用</h5><ul>
+<li>返回引用的函数实际上是被引用的变量的别名</li>
+<li>避免函数返回一个指向临时变量的引用，函数运行完毕后它将不再存在<ul>
+<li>返回一个作为参数传递给函数的引用</li>
+<li>用new来分配新的存储空间</li>
+</ul>
+</li>
+</ul>
+<pre><code>const free_throws &amp; clone(free_throws &amp; ft)
+{
+    free_throws * pt;
+    *pt=ft;
+    return *pt;
+}
+free_throws &amp; jolly=clone(three);
+</code></pre><ul>
+<li>将返回类型声明为const引用，避免出现<code>free_throws(three)=four;</code></li>
+</ul>
+<h5 id="何时使用引用参数"><a href="#何时使用引用参数" class="headerlink" title="何时使用引用参数"></a>何时使用引用参数</h5><ul>
+<li>使用引用参数的主要原因<ul>
+<li>程序员能够修改调用函数中的数据对象</li>
+<li>通过传递引用而不是整个数据对象，可以提高程序的运行速度</li>
+</ul>
+</li>
+<li>对于使用传递的值而不作修改的函数<ul>
+<li>如果数据对象很小，如内置数据类型或小型结构，则按值传递</li>
+<li>如果数据对象是数组，则使用指针，这是唯一选择，将指针声明为指向const的指针</li>
+<li>如果数据对象是较大的结构，则使用const指针或const引用，以提高程序的效率</li>
+<li>如果数据对象是类对象，则使用const引用</li>
+</ul>
+</li>
+<li>对于修改调用函数中数据的函数<ul>
+<li>如果数据对象是内置数据类型，则使用指针</li>
+<li>如果数据对象是数组，则只能使用指针</li>
+<li>如果数据对象是结构，则使用引用或指针</li>
+<li>如果数据对象是类对象，则使用引用</li>
+</ul>
+</li>
+</ul>
+<h2 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h2><p>将值赋给原型中的参数。对于带参数列表的函数，必须从右向左添加默认值。也就是说要为某个参数设置默认值，则必须为它右边的所有参数提供默认值</p>
+<pre><code>int harpo(int n,int m=4,int j=6); // VALID
+int chico(int n,int m=6,int j); // INVALID
+</code></pre><h2 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h2><p>函数重载指有多个同名函数，但函数的参数列表也称为函数特征标不同：</p>
+<ul>
+<li>函数的参数数目和类型不同</li>
+<li>同时参数的排列顺序</li>
+<li>特征标不包括函数类型<br>相同的特征标(从编译器角度)</li>
+<li>类型引用和类型本身</li>
+<li>const和非const变量</li>
+</ul>
+<p>何时使用函数重载？</p>
+<ul>
+<li>仅当函数基本上执行相同的任务，但使用不同形式的数据时，才应采用函数重载</li>
+</ul>
+<h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><p>使用泛型来定义函数称作模板，在需要多个将同一种算法用于不同类型的函数时，使用模板。</p>
+<pre><code>template &lt;typename AnType&gt;
+// template &lt;class AnType&gt;
+void Swap(AnyType &amp;a,AnType &amp;b)
+{
+    AnyType temp;
+    temp a;
+    a=b;
+    b=temp;
+};
+</code></pre><h5 id="显示具体化"><a href="#显示具体化" class="headerlink" title="显示具体化"></a>显示具体化</h5><p>具体化由于常规模板，而非模板函数优于具体化和常规模板</p>
+<pre><code>//用于交换job结构的的非模板函数
+void Swap(job &amp;,job &amp;);
+
+//函数模板
+template&lt;typename T&gt;
+void Swap(T &amp;,T &amp;);
+
+//具体化
+template &lt;&gt; void Swap&lt;job&gt;(job &amp;,job&amp;);//&lt;job&gt; 是可选的
+</code></pre><h5 id="实例化和具体化"><a href="#实例化和具体化" class="headerlink" title="实例化和具体化"></a>实例化和具体化</h5><p>编译器使用模板为特定类型生成函数定义时，得到的是模板实例。</p>
+<p><em>警告：</em>试图在同一个文件(或转换单元)中使用用一种类型的显示实例和现实具体化将出错</p>
+<ul>
+<li><p>隐式实例化：模板并非函数定义，但是用int的模板实例是函数定义，这种实例化方式被称为隐式实例化</p>
+</li>
+<li><p>显示实例化：声明所需的种类——用&lt;&gt;符号指示类型，并在声明前加上关键字template<br><code>template void Swape&lt;int&gt;(int,int);</code></p>
+<pre><code>template &lt;class T&gt;
+T Add(T a,T b)
+{
+  return a+b;
+};
+int m=6;
+double x=10.2;
+cout&lt;&lt;Add&lt;double&gt;(x,m)&lt;&lt;endl;
+//通过Add&lt;double&gt;(x,m)，可强制为double类型实例化，并将参数m强制转换为double类型
+</code></pre></li>
+<li><p>显示具体化：显示具体化声明在关键字template后包含&lt;&gt;，而显示实例化没有。<br><code>template &lt;&gt; void Swape&lt;int&gt;(int &amp;,int &amp;);//&lt;int&gt;可选</code></p>
+</li>
+</ul>
+<h5 id="编译器如何选择函数版本"><a href="#编译器如何选择函数版本" class="headerlink" title="编译器如何选择函数版本"></a>编译器如何选择函数版本</h5><p>策略：</p>
+<pre><code>1. 创建候选参数列表
+2. 使用候选函数列表创建可行函数列表
+3. 确定是否有最佳的可行函数。如果有，则使用它，否则该函数调用出错
+    1. 完全匹配，但常规函数优于模板
+    2. 提升转换(char和short自动转换为int，float自动转换为double)
+    3. 标准转换(int转换char，long转换double)
+    4. 用户定义的转换，如类声明中定义的转换
+</code></pre><p>完全匹配允许的无关紧要转换</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">从实参</th>
+<th style="text-align:left">到形参</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">Type&amp;</td>
+</tr>
+<tr>
+<td style="text-align:left">Type&amp;</td>
+<td style="text-align:left">Type</td>
+</tr>
+<tr>
+<td style="text-align:left">Type[]</td>
+<td style="text-align:left">* Type</td>
+</tr>
+<tr>
+<td style="text-align:left">Type(argument-list)</td>
+<td style="text-align:left">Type(*)(argument-list)</td>
+</tr>
+<tr>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">const Type</td>
+</tr>
+<tr>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">volatile Type</td>
+</tr>
+<tr>
+<td style="text-align:left">Type*</td>
+<td style="text-align:left">const Type</td>
+</tr>
+<tr>
+<td style="text-align:left">Type*</td>
+<td style="text-align:left">volatile Type *</td>
+</tr>
+</tbody>
+</table>
+<p>最匹配规则</p>
+<ul>
+<li>如果只存在一个，则选择它</li>
+<li>如果存在多个，非模板函数优先</li>
+<li>如果存在多个模板函数，更具体的优先</li>
+<li>同时存在多个，但没有一个函数比其他函数更具体，则函数调用将是不确定的，因此是错误的;如果不存在匹配，则也是错误的</li>
+<li>多个参数的函数，一个函数要比其他函数都适合，其所有参数的匹配程度都必须不必其他函数差，同时至少有一个参数的匹配程度比其他函数都高</li>
+</ul>
+<h5 id="关键字decltype"><a href="#关键字decltype" class="headerlink" title="关键字decltype"></a>关键字decltype</h5><pre><code>template&lt;class T1,class T2&gt;
+void ft(T1 x,T1 y)
+{
+    //？type? xpy=x+y；
+    decltype(x+y) xpy=x+y;
+};
+</code></pre><p><code>decltype(expression) var</code>为确定类型，编译器必须遍历一个核对表</p>
+<ol>
+<li>如果expression是一个没有用括号括起的标识符，则var的类型与该标识符的类型相同，包括const等限定符</li>
+<li>如果expression是一个函数调用，则var的类型与函数的返回类型相同</li>
+</ol>
+<pre><code>long indeed(int)
+decltype (indeed(3)) m;//m is type int
+// 编译器通过查看函数的原型来获得返回类型，而无需实际调用函数
+</code></pre><ol>
+<li>如果expression是一个左值，则var为指向其类型的引用,expression是使用括号括起的标识符<code>(expression)</code><br><code>double xy=4.4;decltype((xy)) r2=xx;//r2 is double &amp;</code></li>
+<li>如果前面的条件都不满足，则var的类型与expression的类型相同</li>
+</ol>
+<h5 id="模板返回值类型"><a href="#模板返回值类型" class="headerlink" title="模板返回值类型"></a>模板返回值类型</h5><pre><code>template&lt;class T2,class T2&gt;
+?type? gt(T1 x,T2 y)
+{
+    return x+y;
+}
+//结合auto h(int x,float y) -&gt; double语法
+//-&gt; double 被称为后置返回类型
+//auto是一个占位符，表示后置返回类型提供的类型
+template&lt;class T2,class T2&gt;
+auto gt(T1 x,T2 y) -&gt; decltype(x+y)
+{
+    return x+y;
+}
+</code></pre><p id="lvalue">[左值]：左值参数是可被引用的数据对象，例如，变量、数组元素、结构成员、引用和解除引用的指针都是左值。非左值包括字面常量(用引号括起的字符串除外，它们由其他地址表示)和包含多项的表达式。</p>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="styled-border">
+                    ←
+                    C++PrimerPlus函数
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="styled-border">
+                    
+                    C++PrimerPlus指针
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

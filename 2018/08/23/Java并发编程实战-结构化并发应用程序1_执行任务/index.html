@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java并发编程实战-结构化并发应用程序1_执行任务 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在线程中执行任务当围绕”任务执行”来设计应用程序结构时，第一步就是要找出清晰的任务边界。大多数服务器应用程序都提供了一种自然的任务边界选择方式：以独立的客户请求为边界。 串行地执行任务在单个线程中串行地执行各项任务。大多数GUI框架都是通过单一的线程来串行地处理任务。 显示地为任务创建线程通过为每个请求创建一个新的线程来提供服务，从而实现更高的响应性。  任务处理过程从主线程中分离出来，使得主循环">
+<meta name="keywords" content="Java 并发编程实战">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发编程实战-结构化并发应用程序1_执行任务">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Java并发编程实战-结构化并发应用程序1_执行任务/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="在线程中执行任务当围绕”任务执行”来设计应用程序结构时，第一步就是要找出清晰的任务边界。大多数服务器应用程序都提供了一种自然的任务边界选择方式：以独立的客户请求为边界。 串行地执行任务在单个线程中串行地执行各项任务。大多数GUI框架都是通过单一的线程来串行地处理任务。 显示地为任务创建线程通过为每个请求创建一个新的线程来提供服务，从而实现更高的响应性。  任务处理过程从主线程中分离出来，使得主循环">
+<meta property="og:updated_time" content="2018-04-08T08:54:31.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发编程实战-结构化并发应用程序1_执行任务">
+<meta name="twitter:description" content="在线程中执行任务当围绕”任务执行”来设计应用程序结构时，第一步就是要找出清晰的任务边界。大多数服务器应用程序都提供了一种自然的任务边界选择方式：以独立的客户请求为边界。 串行地执行任务在单个线程中串行地执行各项任务。大多数GUI框架都是通过单一的线程来串行地处理任务。 显示地为任务创建线程通过为每个请求创建一个新的线程来提供服务，从而实现更高的响应性。  任务处理过程从主线程中分离出来，使得主循环">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Java并发编程实战-结构化并发应用程序1_执行任务</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="在线程中执行任务"><a href="#在线程中执行任务" class="headerlink" title="在线程中执行任务"></a>在线程中执行任务</h2><p>当围绕”任务执行”来设计应用程序结构时，第一步就是要找出清晰的任务边界。<br><br>大多数服务器应用程序都提供了一种自然的任务边界选择方式：以独立的客户请求为边界。</p>
+<h3 id="串行地执行任务"><a href="#串行地执行任务" class="headerlink" title="串行地执行任务"></a>串行地执行任务</h3><p>在单个线程中串行地执行各项任务。大多数GUI框架都是通过单一的线程来串行地处理任务。</p>
+<h3 id="显示地为任务创建线程"><a href="#显示地为任务创建线程" class="headerlink" title="显示地为任务创建线程"></a>显示地为任务创建线程</h3><p>通过为每个请求创建一个新的线程来提供服务，从而实现更高的响应性。</p>
+<ul>
+<li>任务处理过程从主线程中分离出来，使得主循环能够更快地重新等待下一个到来的连接。<br><br>这使得程序在完成前面的请求之前可以接受新的请求，从而提高响应性。</li>
+<li>任务可以并行处理，从而能同时服务多个请求。程序的吞吐量将得到提高。</li>
+<li>任务处理代码必须是线程安全的。</li>
+</ul>
+<h3 id="无限制创建线程的不足"><a href="#无限制创建线程的不足" class="headerlink" title="无限制创建线程的不足"></a>无限制创建线程的不足</h3><ul>
+<li>线程生命周期的开销非常高。</li>
+<li>资源消耗。创建更多的线程反而降低性能。</li>
+<li>稳定性。在可创建线程的数量上存在一个限制。破坏这些限制，可能抛出OutOfMemoryError异常。</li>
+</ul>
+<h2 id="Exector框架"><a href="#Exector框架" class="headerlink" title="Exector框架"></a>Exector框架</h2><p>Executor基于生产者-消费者模式。它提供了一种标准的方法将任务的提交过程与执行过程解耦开来，并用Runnable来表示任务。</p>
+<p>Executor的实现还提供了对生命周期的支持，以及统计信息收集，应用程序管理机制和性能监视等机制。</p>
+<h3 id="示例：基于Executor的Web服务器"><a href="#示例：基于Executor的Web服务器" class="headerlink" title="示例：基于Executor的Web服务器"></a>示例：基于Executor的Web服务器</h3><pre>
+    //基于线程池的web服务器
+    class TaskExecutionWebServer{
+        private static final int NTHREADS = 100;
+        private static final Executor exec = Executors.newFixedThreadPool(NTHREADS);
+
+        public static void main(String[] main){
+            ServerSocket socket=new ServerSocket(80);
+            while (true){
+                final Socket connection =socket.accept();
+                Runnable task=new Runnable() {
+                    @Override
+                    public void run() {
+                        handleRequest(connection);
+                    }
+                };
+                exec.execute(task);
+            }
+        }
+    }
+
+    //为每个请求启动一个新线程的Executor
+    class TaskPerExecutionWebServer implements Executor{
+
+        @Override
+        public void execute(@NonNull Runnable command) {
+            new Thread(command).start();
+        }
+    }
+
+    //在调用线程中以同步方式执行所有任务的Executor
+    class WithTaskExecutionWebServer implements Executor{
+
+        @Override
+        public void execute(@NonNull Runnable command) {
+            command.run();    
+        }
+    }
+</pre>
+
+<h2 id="执行策略"><a href="#执行策略" class="headerlink" title="执行策略"></a>执行策略</h2><p>在执行策略中定义了任务执行的”What、Where、When、How”等方面，包括：</p>
+<ul>
+<li>在什么(What)线程中执行任务？</li>
+<li>任务按照什么(What)顺序执行(FIFO,LIFO,优先级)?</li>
+<li>有多少个(How Many)任务能并发执行？</li>
+<li>在队列中有多少个(How Many)任务在等待执行？</li>
+<li>如果系统由过载而需要拒绝一个任务，那么应该选择哪一个(Which)任务？另外，如何(How)通知应用程序有任务被拒绝？</li>
+</ul>
+<p><em>每当看到下面这种形式的代码时：<br><br>new Thread(runnable).start();<br><br>并且你希望获得一种更灵活的执行策略时，请考虑使用Executor来代替Thread。</em></p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>指管理一组同构工作线程的资源池。可以通过Executors中的静态工厂方法之一来创建线程池：</p>
+<ul>
+<li>newFixedThreadPool。<br><br>长度固定的线程池，每当提交一个任务时就创建一个线程，直到达到线程池的最大数量(如果某个线程由于Exception结束，线程池会补充一个新的线程)</li>
+<li>newCachedThreadPool。<br><br>可缓存的线程池，有空闲的线程会使用空闲的线程，没有就增加。</li>
+<li>newSingleThreadExecutor。<br><br>一个单线程的Executor。确保依照任务在队列中的顺序来串行执行(例如FIFO、LIFO、优先级)。</li>
+<li>newScheduledThreadPool。<br><br>创建一个固定长度的线程池，以延时或定时的方式执行任务。</li>
+</ul>
+<h3 id="Executor的生命周期"><a href="#Executor的生命周期" class="headerlink" title="Executor的生命周期"></a>Executor的生命周期</h3><p>Executor扩展了ExecutorService接口，添加了用于生命周期管理的方法。</p>
+<ul>
+<li>运行。<br></li>
+<li>在初始创建时处于运行状态</li>
+<li>关闭。<br><ul>
+<li>shutdown方法将执行平缓的关闭过程：不再接受新的任务，同时等待已经提交的任务执行完成(包括还未开始的任务)</li>
+<li>shutdownNow方法将执行粗暴的关闭过程：尝试取消所有运行中的任务，并且不在启动队列中尚未开始执行的任务。</li>
+<li>关闭后提交任务会抛弃任务或抛出RejectedExecutionException。</li>
+</ul>
+</li>
+<li>已终止。<br><ul>
+<li>awaitTermination。等待到达终止状态。</li>
+<li>isTerminated。轮询是否终止。</li>
+<li>通常在调用awqitTermination之后会立即调用shutdown,从而产生同步地关闭ExecutorService的效果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="延迟任务与周期任务"><a href="#延迟任务与周期任务" class="headerlink" title="延迟任务与周期任务"></a>延迟任务与周期任务</h3><p>使用ScheduledThreadPool代替Timer</p>
+<ul>
+<li>Timer基于绝对时间而ScheduledThreadPool基于相对时间。</li>
+<li>Timer在执行所有定时任务时只会创建一个线程，如果某个任务执行时间过长，将破坏其他TimeTask的定时精确性。</li>
+<li>Timer不捕获异常，抛出异常时，将终止定时线程，产生”线程泄漏”(被调度但尚未执行的TimerTask将不会再执行，新的任务也不能被调度。)。</li>
+</ul>
+<p>使用DelayQueue构建自定义调度服务，它实现了BlockingQueue，并为ScheduledThreadPool提供调度功能。<br><br>DelayQueue管理着一组Delayed对象。每一个Delayed对象都有一个相应的延迟时间：只有某个元素逾期后，才能从DelayQueue中执行take操作。返回的对象根据它们的延时时间进行排序。</p>
+<h2 id="找出可利用的并行性"><a href="#找出可利用的并行性" class="headerlink" title="找出可利用的并行性"></a>找出可利用的并行性</h2><p>不明显的任务边界(如服务器应用程序中，在单个客户请求中仍可能纯在可发掘的并行性，例如数据库服务)。</p>
+<h3 id="示例：串行的页面渲染器"><a href="#示例：串行的页面渲染器" class="headerlink" title="示例：串行的页面渲染器"></a>示例：串行的页面渲染器</h3><p>先绘制文本元素，同时为图像预留出矩形的占位空间，在处理完第一遍文本后，再开始下载图像，并将它们绘制到相应的占位空间中。</p>
+<h3 id="携带结果的任务Callable和Future"><a href="#携带结果的任务Callable和Future" class="headerlink" title="携带结果的任务Callable和Future"></a>携带结果的任务Callable和Future</h3><p>Runnable不能返回一个值或抛出一个受检查的异常。<br></p>
+<ul>
+<li>Runnable和Callable描述的都是抽象的计算任务。这些任务通常是有范围的，即都有一个明确的起始点，并且最终会结束。Executor将Runnable或Callable从提交线程安全的发布到最终执行任务的线程。</li>
+<li>Future表示一个任务的生命周期，并提供了相应的方法来判断是否已经完成或取消，以及获取任务的结果和取消任务等。任务的周期只能前进，不能后退。将结果从计算它的线程安全的发布到任何通过get获得它的线程。</li>
+</ul>
+<h3 id="在异构任务并行化中存在的局限"><a href="#在异构任务并行化中存在的局限" class="headerlink" title="在异构任务并行化中存在的局限"></a>在异构任务并行化中存在的局限</h3><p>洗碗工作,分配工人清洗和烘干：</p>
+<ol>
+<li>分配不同类型的任务并不容易。</li>
+<li>任务大小(耗时)可能不同。</li>
+<li>分解任务时，需要的任务协调开销：不能高于并行性实现的提升。</li>
+</ol>
+<p>只有当大量相互独立且同构的任务可以并发进行处理时，才能体现出将程序的工作负载分配到多个任务中带来的真正性能提升。</p>
+<h3 id="CompletionService-Executor与BlockingQueue"><a href="#CompletionService-Executor与BlockingQueue" class="headerlink" title="CompletionService:Executor与BlockingQueue"></a>CompletionService:Executor与BlockingQueue</h3><p>CompletionService将Executor和BlockingQueue的功能融合再一起。将Callable任务提交给它来执行，然后使用类似于队列操作的take和poll等方法来获得已完成的结果，这些结果完成时将被封装为Future。</p>
+<p>ExecutorCompletionService实现了CompletionService，并将计算部分委托给一个Executor。在构造函数中创建一个BlockingQueue来保存计算完成的结果。当计算完成时，调用Future-Task中的done方法。当提交某个任务时，该任务将首先包装为一个QueueingFuture，这是FutureTask的一个子类，然后再改写子类的done方法，并将结果放入BlockingQueue中。</p>
+<p>多个ExecutorCompletionService可以共享一个Executor。</p>
+<h3 id="示例：使用CompletionService实现页面渲染器"><a href="#示例：使用CompletionService实现页面渲染器" class="headerlink" title="示例：使用CompletionService实现页面渲染器"></a>示例：使用CompletionService实现页面渲染器</h3><pre>
+    public class Renderer{
+        private final ExecutorService executor;
+
+        Renderer(ExecutorService executor){this.executor=executor}
+
+        void renderPage(CharSequence source){
+            List&lt;ImageInfo&gt; info=scanForImageInfo(source);
+            CompletionService&lt;ImageData&gt; completionService
+                    =new ExecutorCompletionService&lt;ImageData&gt;(executor);
+            for (final ImageInfo imageInfo : info) {
+                //为每幅图的下载创建一个独立任务，并在线程池中执行。减少下载所有图像的总时间。
+                completionService.submit(new Callable&lt;ImageData&gt;() {
+                    @Override
+                    public ImageData call() throws Exception {
+                        return imageInfo.downloadImage();
+                    }
+                });
+            }
+
+            renderText(source);
+
+            try {
+                for (int i = 0; i < info.size(); i++) {
+                    //通过从CompletionService中获取结果以及使图片下载完成后立即显示出来，提高响应。
+                    Future&lt;ImageData&gt; f=completionService.take();
+                    ImageData imageData=f.get();
+                    renderImage(imageData);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+</pre>
+
+<h3 id="为任务设置时限"><a href="#为任务设置时限" class="headerlink" title="为任务设置时限"></a>为任务设置时限</h3><p>如果某个任务无法在指定时间内完成，那么将不在需要它的结果。</p>
+<p>在支持时间限制的Future.get中支持这种需求：当结果可用时，它将立即返回，如果在指定时限内没有计算出结果，那么将抛出TimeoutExeception，并通过Future来取消任务释放资源。</p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试3_并发程序的测试/" class="styled-border">
+                    ←
+                    Java并发编程实战-活跃性、性能与测试3_并发程序的测试
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-结构化并发应用程序2_取消与关闭/" class="styled-border">
+                    
+                    Java并发编程实战-结构化并发应用程序2_取消与关闭
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

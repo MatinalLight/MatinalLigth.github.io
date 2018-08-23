@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus类的使用 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="运算符重载 友元函数 运算符重载重载运算符格式：operator 可重载运算符(argument-list) class Time { private:     int hours; public:     Time operator+(const Time &amp;amp; t) const; }  Time Time::operator+(const Time &amp;amp; t) cosnt {">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus类的使用">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_11类的使用/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="运算符重载 友元函数 运算符重载重载运算符格式：operator 可重载运算符(argument-list) class Time { private:     int hours; public:     Time operator+(const Time &amp;amp; t) const; }  Time Time::operator+(const Time &amp;amp; t) cosnt {">
+<meta property="og:image" content="https://matinallight.github.io/myblog/images/overloadedoperators.png">
+<meta property="og:updated_time" content="2018-04-09T05:44:39.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus类的使用">
+<meta name="twitter:description" content="运算符重载 友元函数 运算符重载重载运算符格式：operator 可重载运算符(argument-list) class Time { private:     int hours; public:     Time operator+(const Time &amp;amp; t) const; }  Time Time::operator+(const Time &amp;amp; t) cosnt {">
+<meta name="twitter:image" content="https://matinallight.github.io/myblog/images/overloadedoperators.png">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus类的使用</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p>运算符重载 友元函数</p>
+<h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p>重载运算符格式：<br><code>operator 可重载运算符(argument-list)</code></p>
+<pre><code>class Time
+{
+private:
+    int hours;
+public:
+    Time operator+(const Time &amp; t) const;
+}
+
+Time Time::operator+(const Time &amp; t) cosnt
+{
+    Time sum;
+    sum.hours=hours+t.hours;
+    return sum;    
+}
+//Time A,B,C,D;
+A=B+2.75;
+//将转换为
+A=B.operator+(2.75);
+
+A=B+C+D;
+//先转换为
+A=B.operator+(C+D);
+//在转换为
+A=B.operator+(C.operator+(D));
+//所以operator+()函数要返回符合格式的类型
+</code></pre><p>可重载的运算符<br><img src="\myblog\images\overloadedoperators.png" alt=""></p>
+<p>重载限制</p>
+<ol>
+<li>重载后的运算符必须至少有一个操作数是用户定义的类型，这将防止用户为标准类型重载运算符</li>
+<li>使用运算符时不能违反运算符原来的语法规则</li>
+<li>不能创建新运算符</li>
+<li>表中的大多数运算符都可以通过成员或非成员函数进行重载，但下面的运算符只能通过成员函数重载</li>
+</ol>
+<ul>
+<li>= </li>
+<li>()</li>
+<li>[]</li>
+<li>-&gt;</li>
+</ul>
+<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元是除了共有类方法外，另一种可以访问类对象私有部分的形式。友元有3种：</p>
+<ul>
+<li>友元函数</li>
+<li>友元类</li>
+<li>友元成员函数</li>
+</ul>
+<h5 id="创建友元"><a href="#创建友元" class="headerlink" title="创建友元"></a>创建友元</h5><p>使用关键字friend<br><code>friend Time operator*(double m,const Time &amp; t);</code></p>
+<ul>
+<li>虽然<code>operator*()</code>函数是在类声明中声明的，但它不是成员函数，因此不能使用成员运算符来调用</li>
+<li>虽然<code>operator*()</code>函数不是成员函数，但它与成员函数的访问权限相同</li>
+</ul>
+<pre><code>//函数定义，不要使用Time::限定符和firend关键字
+Time operator*(double m,const Time &amp; t)
+{
+    Time result;
+    result.hours=t.hours+m
+    return result;
+}
+
+//Time A,B;
+A=2.75+*B;
+//将转换为
+A=operator*(2.75,B);
+</code></pre><p>友元是否有悖于OOP？</p>
+<ul>
+<li>应将友元函数看作类的扩展接口的组成部分</li>
+<li>只有类声明可以决定哪一个函数是友元</li>
+<li>类方法和友元只是表达类接口的两种不同机制</li>
+</ul>
+<h5 id="重载运算符：作为成员函数还是为非成员函数"><a href="#重载运算符：作为成员函数还是为非成员函数" class="headerlink" title="重载运算符：作为成员函数还是为非成员函数"></a>重载运算符：作为成员函数还是为非成员函数</h5><ul>
+<li>非成员版本的重载运算符函数所需的形参数目与运算符使用的操作数目相同</li>
+<li>成员版本所需的参数数目少一个，其中一个操作数是被隐式地传递的调用对象</li>
+</ul>
+<pre><code>//同时使用两种方式的重载运算符
+T1=T2+T3;
+//将转换为
+T1=T2.operator+(T3);
+T1=operator+(T2+T2);
+//将被视为二义性，导致编译错误
+</code></pre><h2 id="类的自动转换和强制类型转换"><a href="#类的自动转换和强制类型转换" class="headerlink" title="类的自动转换和强制类型转换"></a>类的自动转换和强制类型转换</h2><pre><code>Stonewt(double lbs);
+Stonewt myCat;
+myCat=19.6;//隐式转换
+
+Stonewt(int stn,double lbs=1);
+Stonewt myCat;
+myCat=19;//自动类型转换
+</code></pre><p>C++新增了关键字<code>explicit</code>用于关闭这种自动特性</p>
+<pre><code>explicit Stonewt(double lbs);//关闭隐式转换，允许显示转换
+
+Stoewt myCat;
+myCat=19.6;          // not valid
+myCat=Stonewt(19.6); // ok
+myCat=(Stonewt)19.6; // ok
+</code></pre><p>什么情况下会发生隐式转换</p>
+<ul>
+<li>将Stonewt对象初始化为double值时</li>
+<li>将double值赋给Stonewt对象时</li>
+<li>将double值传递给接受Stonewt参数的函数时</li>
+<li>返回值被声明为Stonewt的函数试图返回double值时</li>
+<li>在上述任意一种情况下，使用可转换为double类型的内置类型时</li>
+</ul>
+<pre><code>Stonewt Jumbo;
+Jumbo=7000;//int先转换为double
+
+Stonewt(long l);
+Jumbo=7000;// fail int可以转换为double或long，存在二义性
+</code></pre><h5 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h5><pre><code>Stonewt wolfe(28.7);
+double host=wolfe;//?? possible ??
+//使用转换函数
+double host=double(wolfe);
+double host=(double)wolfe;
+</code></pre><p>如何创建转换函数？</p>
+<ul>
+<li>转换函数必须是类方法</li>
+<li>转换函数不能指定返回类型</li>
+<li>转换函数不能有参数<br><code>operator double();</code></li>
+</ul>
+<p>自动应用类型转换</p>
+<pre><code>Stonewt wells(20,3);
+double star =wells;//编译器会查找与此匹配的转换函数
+</code></pre><p>如何关闭自动应用类型转换？</p>
+<ul>
+<li>C++11使<code>explicit</code>可用于转换函数</li>
+</ul>
+<pre><code>class Stonewt
+{
+    Explicit operator int() const;
+}
+</code></pre><ul>
+<li>提供功能相同的非转换函数</li>
+</ul>
+<p><code>Stonewt::operator int(){return int(pounds+0.5);}</code><br>替换为<br><code>int Stonewt::Stone_to_int(){return int(pounds+0.5);}</code></p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="styled-border">
+                    ←
+                    Java并发编程实战-基础知识_对象的组合
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="styled-border">
+                    
+                    C++PrimerPlus函数
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

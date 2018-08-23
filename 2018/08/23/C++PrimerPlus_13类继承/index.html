@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus类继承 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="基类和派生类从一个类派生出另一个类时，原始类称为基类，继承类称为派生类 派生类class RatedPlayer : public TableTennisPlayer {     ... } :指出RatedPlayer类的基类是TableTennisPlayer类 ReatedPlayer对象具有以下特征  派生类对象存储了基类的数据成员(派生类继承了基类的实现) 派生类对象可以使用基类的方法(">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus类继承">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_13类继承/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="基类和派生类从一个类派生出另一个类时，原始类称为基类，继承类称为派生类 派生类class RatedPlayer : public TableTennisPlayer {     ... } :指出RatedPlayer类的基类是TableTennisPlayer类 ReatedPlayer对象具有以下特征  派生类对象存储了基类的数据成员(派生类继承了基类的实现) 派生类对象可以使用基类的方法(">
+<meta property="og:updated_time" content="2018-04-09T06:18:48.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus类继承">
+<meta name="twitter:description" content="基类和派生类从一个类派生出另一个类时，原始类称为基类，继承类称为派生类 派生类class RatedPlayer : public TableTennisPlayer {     ... } :指出RatedPlayer类的基类是TableTennisPlayer类 ReatedPlayer对象具有以下特征  派生类对象存储了基类的数据成员(派生类继承了基类的实现) 派生类对象可以使用基类的方法(">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus类继承</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="基类和派生类"><a href="#基类和派生类" class="headerlink" title="基类和派生类"></a>基类和派生类</h2><p>从一个类派生出另一个类时，原始类称为基类，继承类称为派生类</p>
+<h5 id="派生类"><a href="#派生类" class="headerlink" title="派生类"></a>派生类</h5><pre><code>class RatedPlayer : public TableTennisPlayer
+{
+    ...
+}
+</code></pre><p><code>:</code>指出RatedPlayer类的基类是TableTennisPlayer类</p>
+<p>ReatedPlayer对象具有以下特征</p>
+<ul>
+<li>派生类对象存储了基类的数据成员(派生类继承了基类的实现)</li>
+<li>派生类对象可以使用基类的方法(派生类继承了基类的接口)</li>
+</ul>
+<p>什么不能被继承？</p>
+<ul>
+<li>构造函数</li>
+<li>析构函数</li>
+<li>赋值运算符</li>
+</ul>
+<h5 id="派生类构造函数"><a href="#派生类构造函数" class="headerlink" title="派生类构造函数"></a>派生类构造函数</h5><ul>
+<li>首先创建基类对象</li>
+<li>派生类构造函数应通过成员初始化列表将基类信息传递给基类构造函数</li>
+<li>派生类构造函数应初始化派生类新增的数据成员</li>
+<li>没有提供基类显示构造函数，将使用隐式构造函数</li>
+<li>派生对象过期时，程序将首先调用派生类析构函数，然后在调用基类析构函数</li>
+</ul>
+<pre><code>//TableTennisPlayer(r,fn)是基类构造函数
+//rating是派生类的数据成员
+class RatedPlayer(unsigned int r,const string &amp; fn):TableTennisPlayer(r,fn),rating(r)
+{
+    ...
+}
+</code></pre><p>以公有方式派生的类的对象可以通过多种方式来使用基类的方法</p>
+<ul>
+<li>派生类对象自动使用继承而来的基类方法，如果派生类没有重新定义该方法</li>
+<li>派生类的构造函数自动调用基类的构造函数</li>
+<li>派生类的构造函数自动调用基类的默认构造函数，如果没有在成员初始化列表中指定其他构造函数</li>
+<li>派生类构造函数显示的调用成员初始化列表中指定的基类构造函数</li>
+<li>派生类方法可以使用作用域解析运算符来调用公有的和受保护的基类方法</li>
+<li>派生类的友元函数可以通过强制类型转换，将派生类引用或指针转换为基类引用或指针，然后使用该引用或指针来调用基类的友元函数</li>
+</ul>
+<h2 id="继承-is-a关系"><a href="#继承-is-a关系" class="headerlink" title="继承 is-a关系"></a>继承 is-a关系</h2><p>C++有3种继承方式:公有继承、保护继承、私有继承<br>公有继承建立一种is-a关系，即派生类对象也是一个基类对象，可以对基类对象执行任何操作，也可以对派生类对象执行</p>
+<h2 id="多态公有继承"><a href="#多态公有继承" class="headerlink" title="多态公有继承"></a>多态公有继承</h2><p>一个方法在派生类和基类中的行为是不同的，这种复杂的行为称为多态</p>
+<p>实现多态的方式：</p>
+<ul>
+<li>在派生类中重新定义基类的方法(需要在派生类中添加该方法的原型)</li>
+<li>使用虚方法<br>关键字<code>virtual</code>，程序将根据引用或指针指向的对象的类型来选择方法。<pre><code>Brass dom();
+BrassPlus dot();
+Brass &amp; b1_ref=dom;
+Brass &amp; b2_ref=dot;
+//没有virtual
+b1_ref.ViewAcct();//use Brass::ViewAcct();
+b2_ref.ViewAcct();//use Brass::ViewAcct();
+//有vitual
+b1_ref.ViewAcct();//use Brass::ViewAcct();
+b2_ref.ViewAcct();//use BrassPlus::ViewAcct();
+</code></pre>方法在基类中被声明为虚的后，它在派生类中将自动成为虚方法。<br>如果要在派生类中重新定义基类的方法，通常应将基类方法声明为虚的</li>
+</ul>
+<p>为何需要虚析构函数？<br>使用析构函数可以确保正确的析构函数序列被调用</p>
+<h2 id="静态联编和动态联编"><a href="#静态联编和动态联编" class="headerlink" title="静态联编和动态联编"></a>静态联编和动态联编</h2><p>将源代码中的函数调用解释为指向特定的函数代码块被称为函数联编。</p>
+<ul>
+<li>在编译过程中进行联编称为静态联编</li>
+<li>在运行过程中进行联编称为动态联编</li>
+</ul>
+<p>向上强制转换：将派生类引用或指针转换为基类引用或指针<br>向下强制转换：将基类指针或引用转换为派生类指针或引用</p>
+<p>使用虚函数的缺点：</p>
+<ul>
+<li>每个对象都将增大，增大量为存储地址的空间</li>
+<li>对于每个类，编译器都创建一个虚函数地址表(数组)</li>
+<li>对于每个函数调用，都需要执行到表中查找地址的操作</li>
+</ul>
+<p>何时使用虚</p>
+<ul>
+<li>如果要在派生类中重新定义基类的方法，则将它设置为虚方法</li>
+<li>应给基类提供一个虚析构函数，即使它并不需要析构函数</li>
+<li>只有成员才能是虚函数，友元不能是虚函数，友元不是类成员</li>
+</ul>
+<h2 id="访问控制-protected"><a href="#访问控制-protected" class="headerlink" title="访问控制 protected"></a>访问控制 protected</h2><p>派生类的成员可以直接访问基类的保护成员，但不能直接访问基类的私有成员</p>
+<h2 id="抽象基类"><a href="#抽象基类" class="headerlink" title="抽象基类"></a>抽象基类</h2><p>C++通过使用纯虚函数提供未实现的函数，纯虚函数声明的结尾处为<code>=0</code><br><code>virtual double Area() const;</code><br>当类中包含纯虚函数时，则不能创建该类的对象，C++允许纯虚函数没有定义</p>
+<h2 id="各种继承方式"><a href="#各种继承方式" class="headerlink" title="各种继承方式"></a>各种继承方式</h2><table>
+<thead>
+<tr>
+<th>特征</th>
+<th style="text-align:center">共有继承</th>
+<th style="text-align:center">保护继承</th>
+<th style="text-align:center">私有继承</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公有成员变成</td>
+<td style="text-align:center">派生类的公有成员</td>
+<td style="text-align:center">派生类的保护成员</td>
+<td style="text-align:center">派生类的私有成员</td>
+</tr>
+<tr>
+<td>保护成员变成</td>
+<td style="text-align:center">派生类的保护成员</td>
+<td style="text-align:center">派生类的保护成员</td>
+<td style="text-align:center">派生类的私有成员</td>
+</tr>
+<tr>
+<td>私有成员变成</td>
+<td style="text-align:center">只能通过基类接口访问</td>
+<td style="text-align:center">只能通过基类接口访问</td>
+<td style="text-align:center">只能通过基类接口访问</td>
+</tr>
+<tr>
+<td>能否隐式向上转换</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是(但只能在派生类中)</td>
+<td style="text-align:center">否</td>
+</tr>
+</tbody>
+</table>
+<h2 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h2><h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><p>虚基类使得从多个类(它们的基类相同)派生出的对象只继承一个基类对象<br>如果类有间接虚基类，则除非只需使用该基类的默认构造函数，否则必须显式地调用该虚基类的某个构造函数</p>
+<pre><code>class Worker
+{
+private:
+    std::string fullname;
+    long id;
+public:
+    Worker();
+    Worker(const std::string &amp; s,long n)::fullname(s),id(n){}
+    virtual ~Worker()=0;
+}
+
+class Waiter : public Worker
+{
+private:
+    int panache;
+public:
+    Waiter():Worker(),panache(0){}
+    Waiter(const Worker &amp; wk,int p=0):Worker(wk),panache(p){}
+}
+
+class Singer : public Singer
+{
+protected:
+    enum{other,alto};
+private:
+    int voice;
+public:
+    Singer();
+    Singer(const Worker &amp; wk,int v=other):Worker(wk),voice(p){}
+}
+//对于虚基类，必须这样做，但对于非虚基类，则是非法的
+SingingWaiter(const Worker &amp; wk,int p=0,int v=Singer::other):Worker(wk),waiter(wk,p),Singer(wk,v){}
+</code></pre><h5 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h5><p>同名函数的二义性：</p>
+<ul>
+<li>在派生类中重新定义该同名函数</li>
+<li>将所有的数据组件都设置为保护的，更严格的控制对数据的的访问</li>
+<li>派生类中的名称优先于直接或间接祖先类中的相同名称</li>
+</ul>
+<h2 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h2><h5 id="定义类模板"><a href="#定义类模板" class="headerlink" title="定义类模板"></a>定义类模板</h5><pre><code>template &lt;class Type&gt;
+class Stack
+{
+private:
+    enum{Max=0};
+    Type items[Max];
+    int top;
+public:
+    Stack();
+    bool isempty();
+}
+
+template&lt;class Type&gt;
+Stack&lt;Type&gt;::Stack()
+{
+    top=0;
+}
+
+template&lt;class Type&gt;
+bool Stack&lt;Type&gt;::isempty()
+{
+    return top==0;
+}
+</code></pre><p>正确使用指针栈</p>
+<ul>
+<li>让调用程序提供一个指针数组，其中每个指针都指向不同的字符串</li>
+</ul>
+<p>模板类的友元分3类</p>
+<ul>
+<li>非模板友元<br><code>firend void counts();</code></li>
+<li>约束模板友元，即友元的类型取决于类被实例化时的类型</li>
+</ul>
+<pre><code>template&lt;typename TT&gt;
+class HasFriendT
+{
+    friend void void counts&lt;TT&gt;();
+    friend void report&lt;&gt;(HasFriendT&lt;TT&gt; &amp;);
+}
+</code></pre><ul>
+<li>非约束模板友元，即友元的所有具体化都是类的每一个具体化的友元<pre><code>template &lt;typename T&gt;
+class ManyFriend
+{
+  template &lt;typpename C,typpename D&gt; frient void show2(C &amp;,D &amp;);
+}
+</code></pre></li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="styled-border">
+                    ←
+                    C++PrimerPlus复合类型
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="styled-border">
+                    
+                    C++PrimerPlus处理数据
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

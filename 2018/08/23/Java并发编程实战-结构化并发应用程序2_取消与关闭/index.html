@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java并发编程实战-结构化并发应用程序2_取消与关闭 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java没有提供任何机制来安全地终止线程。 任务取消取消某个操作的原因？  用户请求取消 有时间限制的操作 应用程序事件 取消 关闭  一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些">
+<meta name="keywords" content="Java 并发编程实战">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发编程实战-结构化并发应用程序2_取消与关闭">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Java并发编程实战-结构化并发应用程序2_取消与关闭/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="Java没有提供任何机制来安全地终止线程。 任务取消取消某个操作的原因？  用户请求取消 有时间限制的操作 应用程序事件 取消 关闭  一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些">
+<meta property="og:updated_time" content="2018-04-08T08:52:18.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发编程实战-结构化并发应用程序2_取消与关闭">
+<meta name="twitter:description" content="Java没有提供任何机制来安全地终止线程。 任务取消取消某个操作的原因？  用户请求取消 有时间限制的操作 应用程序事件 取消 关闭  一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Java并发编程实战-结构化并发应用程序2_取消与关闭</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p>Java没有提供任何机制来安全地终止线程。</p>
+<h2 id="任务取消"><a href="#任务取消" class="headerlink" title="任务取消"></a>任务取消</h2><p>取消某个操作的原因？</p>
+<ul>
+<li>用户请求取消</li>
+<li>有时间限制的操作</li>
+<li>应用程序事件</li>
+<li>取消</li>
+<li>关闭</li>
+</ul>
+<p>一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些(What)操作。</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><pre>
+    public class Thread{
+        //设置中断状态为true
+        public void interrupt(){ ... }
+        //返回目标线程的中断状态
+        public boolean isInterrupted(){ ... }
+        //清除当前线程的中断状态，并返回它之前的值，这也是清除中断状态的唯一方法
+        public static boolean interrupted(){ ... }
+        ...
+    }
+</pre>
+
+<p>阻塞库方法(如wait、sleep、join)接收到中断请求或在开始执行前检查中断状态，响应中断时执行的操作包括：清除中断状态，抛出InterruptedException，表示阻塞操作由于中断而提前结束。</p>
+<p><em>调用interrupt并不意味着立即停止目标线程正在进行的工作，而只是传递了请求中断的消息。</em><br><br><em>通常，中断是实现取消的最合理方式。</em></p>
+<h3 id="中断策略"><a href="#中断策略" class="headerlink" title="中断策略"></a>中断策略</h3><p>为什么大多数阻塞库抛出InterruptedException作为中断响应？<br><br>尽快退出执行流程，并把中断信息传递给调用者，从而使调用栈中的上层代码可以采取进一步的操作。</p>
+<p>如果将InterruptedException传递给调用者外还需要执行其他操作，那么应该在捕获InterruptedException之后恢复中断状态：</p>
+<pre>
+    Thread.currentThread().interrupt();
+</pre>
+
+<p><em>由于每个线程拥有各自的中断策咯，因此除非你直到中断对该线程的含义，否则不应该中断这个线程。</em></p>
+<h3 id="响应中断"><a href="#响应中断" class="headerlink" title="响应中断"></a>响应中断</h3><p>处理InterruptedException的策咯?</p>
+<ul>
+<li>传递异常(可能在执行某个特定于任务的清除操作之后)，从而使你的方法为成为可中断的阻塞方法。</li>
+<li>恢复中断状态，从而使调用栈中的上层代码能够对其进行处理。</li>
+</ul>
+<p><em>只有实现了线程中断策咯的代码才可以屏蔽中断请求。在常规的任务和库代码中都不应该屏蔽中断请求。</em></p>
+<p>对于一些不支持取消但仍可以调用可中断阻塞的方法的操作，它们必须在循环中调用这些方法，并在发现中断后重新尝试，在这种情况下，它们应该在本地保存中断状态。</p>
+<pre>
+    public Task getNextTask(BlockingQueue&lt;Task&gt; queue){
+        boolean interrupted=false;
+        try{
+            while(true){
+                try{
+                    return queue.take();
+                }catch(InterruptedException e){
+                    interrupted = true;
+                    //重新尝试
+                }
+            }finally{
+                if (interrupted){
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+    }
+</pre>
+
+<h3 id="通过Future来实现取消"><a href="#通过Future来实现取消" class="headerlink" title="通过Future来实现取消"></a>通过Future来实现取消</h3><p>ExcutorService.submit将返回一个Future来描述任务。Future拥有一个cancel方法，该方法带有一个boolean类型的参数mayInterruptIfRunning,表示取消操作是否成功。(这只是表示任务是否能够接收中断，而不是表示任务是否能检测并处理中断。)mayInterruptIfRunning？</p>
+<ul>
+<li>true：任务当前正在正在某个线程中运行，那么这个线程能被中断。不知道当中断请求到达时正在运行什么任务——只能通过任务的Future来实现取消。</li>
+<li>false：若任务还没启动，就不要运行它。应该用于那些不处理中断的任务中。</li>
+</ul>
+<pre>
+    public static void timedRun(Runnable r,long timeout,TimeUnit unit) throws InterruptedException{
+        Future&lt;?&gt; task=taskExec.submit(r);
+        try {
+            task.get(timeout,unit);
+        }catch (TimeoutException e){
+            //接下来任务将被取消
+        }catch (ExecutionException e){
+            //如果在任务中抛出异常，那么重新抛出该异常
+            throw launderThrowable(e.getCause());
+        }finally {
+            //如果任务已经结束，那么执行取消操作也不会带来任何影响
+            task.cancel(true);//如果任务正在运行，那么将被中断
+        }
+    }
+</pre>
+
+<p><em>当Future.get抛出InterruptedException或TimeoutException时，如果你知道不再需要结果，那么就可以调用Future.cancel来取消任务。</em></p>
+<h3 id="处理不可中断任务"><a href="#处理不可中断任务" class="headerlink" title="处理不可中断任务"></a>处理不可中断任务</h3><ul>
+<li><strong>Java.io包中的同步SocketI/O.</strong>通过socket.close()；来停止这些线程，抛出一个SocketException</li>
+<li><strong>Java.io包中的同步I/O</strong><ul>
+<li>中断一个正在InterruptibleChannel上等待的线程时，将抛出CloseByInterruptException并关闭链路(这还会使得其他在这条链路上阻塞的线程同样抛出CloseByInterruptException) 。</li>
+<li>当关闭一个InterruptibleChannel时，将导致所有在链路操作上阻塞的线程都抛出AsynchronousCloseException。</li>
+</ul>
+</li>
+<li><strong>Selector的异步I/O.</strong>如果一个线程在调用Selector.select方法(在java.nio.channels中)时阻塞了，那么调用close或wakeup方法会使线程抛出ClosedSelectorException并提前返回。</li>
+<li><strong>获取某个锁.</strong>如果一个线程由于等待某个内置锁而阻塞，那么将无法响应中断，因为线程任务它肯定会获得锁，所有将不会理会中断请求。但是，在Lock类中提供了lockInterruptibly方法，该方法允许在等待一个锁的同时仍能响应中断。</li>
+</ul>
+<pre>
+    //既能处理标准的中断，也能关闭底层的套接字。
+    public void interrupt(){
+        try{
+            socket.cloase();
+        }catch (IOException e){
+
+        }finally {
+            super.interrupt();
+        }
+    }
+</pre>
+
+<h3 id="采用newTaskFor来封装非标准的取消"><a href="#采用newTaskFor来封装非标准的取消" class="headerlink" title="采用newTaskFor来封装非标准的取消"></a>采用newTaskFor来封装非标准的取消</h3><pre>
+    public interface CancellableTask&lt;T> extends Callable<t> {
+        void cancel();
+
+        RunnableFuture&lt;T> newTask();
+    }
+
+    @ThreadSafe
+    public class CancellingExecutor extends ThreadPoolExecutor {
+        ...
+        //创建Future来代表任务，RunnableFuture扩展了Future和Runnable(并由FutureTask实现)     
+        protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable) {
+            if (callable instanceof CancellableTask) {
+                return ((CancellableTask&lt;T&gt;) callable).newTask();
+            } else {
+                return super.newTaskFor(callable);
+            }
+        }
+    }
+
+    public abstract class SocketUsingTask&lt;T&gt; implements CancellableTask&lt;T&gt; {
+        @GuardedBy("this")
+        private Socket socket;
+
+        protected synchronized void setSocket(Socket s) {
+            socket = s;
+        }
+
+        public synchronized void cancel() {
+            try {
+                if (socket != null) socket.close();
+            } catch (IOException e) {
+            }
+        }
+
+        @Override
+        public RunnableFuture&lt;T&gt; newTask() {
+            return new FutureTask&lt;T&gt;(this) {
+                @Override
+                public boolean cancel(boolean mayInterruptIfRunning) {
+                    try {
+                        SocketUsingTask.this.call();
+                    } finally {
+                        return super.cancel(mayInterruptIfRunning);
+                    }
+                }
+            };
+        }
+    }
+</t></pre>
+
+<p>SocketUsingTask实现了CancellableTask，并定义了Future。cancel来关闭套接字和调用super.cancel。如果SocketUsingTask通过其自己的Future来取消，那么底层的套接字将被关闭并且线程将被中断。因此它提高了任务对取消操作的响应性：不仅能够在调用可中断方法的同时确保响应取消操作，而且还能调用可阻调的套接字I/O方法。</p>
+<h2 id="停止基于线程的服务"><a href="#停止基于线程的服务" class="headerlink" title="停止基于线程的服务"></a>停止基于线程的服务</h2><p><em>对于持有线程的服务，只要服务的存在时间大于创建线程的方法的存在时间，那么就应该提供生命周期方法。</em></p>
+<h3 id="示例：日志服务"><a href="#示例：日志服务" class="headerlink" title="示例：日志服务"></a>示例：日志服务</h3><pre>
+    public class LogService{
+        private final BlockingQueue&lt;String&gt; queue;
+        private final LoggerThread loggerThread;
+        private final PrintWriter writer;
+        @GuardedBy("this") private boolean isShutdown;
+        @GuardedBy("this") private int reservations;
+
+        public void start(){loggerThread.start();}
+        public void stop(){
+            synchronized (this) {isShutdown=true;}
+            loggerThread.interrupt();
+        }
+
+        /*以原子方式来检查关闭请求，并且有条件地递增一个计数器来"保持"提交消息的权利。
+        代替会产生竞态条件的标志位，因为需要锁log方法*/
+        public void log(String msg)throws InterruptedException{
+            synchronized (this){
+                if (isShutdown){
+                    throw new IllegalStateException(...);
+                    ++reservations;
+                }
+            }
+            queue.put(mag);
+        }
+
+        private class LoggerThread extends Thread{
+            public void run(){
+                try{
+                    while (true){
+                        try{
+                            synchronized (LogService.this){
+                                if (isShutdown&&reservations==0)
+                                    break;
+                            }
+                            String msg=queue.take();
+                            synchronized (LogService.this){--reservations;}
+                            writer.println(msg);
+                        }catch (InterruptedException e){/* retry */}
+                    }
+                }finally {
+                    writer.close();
+                }
+            }
+        }
+    }
+</pre>
+
+<h3 id="关闭ExecutorService"><a href="#关闭ExecutorService" class="headerlink" title="关闭ExecutorService"></a>关闭ExecutorService</h3><ul>
+<li>shutdown正常关闭：速度慢，更安全，一直等到队列中所有任务都执行完成后才关闭。</li>
+<li>shutdownNow强制关闭：速度快，不安全，任务可能在执行到一半时被结束。</li>
+</ul>
+<h4 id="解决shutdownNow局限性？"><a href="#解决shutdownNow局限性？" class="headerlink" title="解决shutdownNow局限性？"></a>解决shutdownNow局限性？</h4><pre>
+    public class TrackingExecutor extends AbstractExecutorService {
+        private final ExecutorService exec;
+        private final Set&lt;Runnable&gt; tasksCancelledAtShutdown
+                = Collections.synchronizedSet(new HashSet&lt;Runnable&gt;());
+        ...
+        public List&lt;Runnable&gt; getCancelledTask(){
+            if (!exec.isTerminated())
+                throw new IllegalStateException(...);
+                return new ArrayList&lt;&gt;(tasksCancelledAtShutdown);
+        }
+
+        public void execute(final Runnable runnable){
+            exec.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try{
+                        runnable.run();
+                    }finally {
+                        /*记录哪些任务是在关闭后取消的。
+                         这里存在竞态条件，如果执行2次和执行一次该任务的结果是一致的
+                         ，不会存在问题，否则必须考虑这种风险，并对"误报"问题做好准备.*/
+                        if (isShutdown()&&Thread.currentThread().isInterrupted())
+                            tasksCancelledAtShutdown.add(runnable);
+                    }
+                }
+            });
+        }
+    }
+
+</pre>
+
+<h3 id="“毒丸”对象"><a href="#“毒丸”对象" class="headerlink" title="“毒丸”对象"></a>“毒丸”对象</h3><p>指一个放在队列上的对象，其含义是”当得到这个对象时，立即停止”。只有在生产者和消费者的数量都已知的情况下，才可以使用。只有在无界队列中，”毒丸”对象才能可靠地工作。(界队列满了，线程池执行了拒绝操作)</p>
+<h2 id="处理非正常的线程终止"><a href="#处理非正常的线程终止" class="headerlink" title="处理非正常的线程终止"></a>处理非正常的线程终止</h2><h3 id="未捕获异常的处理"><a href="#未捕获异常的处理" class="headerlink" title="未捕获异常的处理"></a>未捕获异常的处理</h3><p>UncaughtExceptionHandler能检测出某个线程由于未捕获的异常而终止的情况</p>
+<pre>
+    public interface UncaughtExceptionHandler {
+
+        //将异常写入日志
+        void uncaughtException(Thread t, Throwable e);
+    }
+</pre>
+
+<p><em>在运行时间较长的应用程序中,通常会为所有线程的未捕获异常指定同一个异常处理器,并且该处理器至少会将异常信息记录到日志中.</em></p>
+<p>只有通过execute提交的任务,才能被异常处理器捕获,submit提交的任务,无论是抛出未检查异常还是已检查异常,都将被认为是任务返回状态的一部分.</p>
+<h2 id="JVM关闭"><a href="#JVM关闭" class="headerlink" title="JVM关闭"></a>JVM关闭</h2><h3 id="关闭钩子"><a href="#关闭钩子" class="headerlink" title="关闭钩子"></a>关闭钩子</h3><p>在正常关闭中，JVM首先调用所有已注册的关闭钩子(Shutdown Hook)。关闭钩子是指通过Runnitme.addShoutdownHook注册的但尚未开始的线程。JVM并不能保证关闭钩子的调用顺序。在关闭应用程序时，如果有(守护或非守护)线程仍在运行，那么这些线程接下来将与关闭进程并发执行。当所有的关闭钩子都执行结束时，如果runFinalizersOnExit为ture，那么JVM将运行终结器，然后再停止。 JVM并不会停止或中断任何在关闭时仍然运行的应用程序线程。当JVM最终结束时，这些线程将被强行结束。如果关闭钩子或终结器没有执行完成，那么正常关闭进程”挂起”并且JVM必须被强行关闭，当被强行关闭时，只是关闭JVM，而不会运行关闭钩子。</p>
+<ul>
+<li>关闭钩子应该是线程安全的。</li>
+<li>关闭钩子不应该对应用程序的状态(如其它服务是否关闭)或者JVM的关闭原因做出任何假设。</li>
+<li>关闭钩子必须尽快退出。</li>
+</ul>
+<p>关闭钩子不应该依赖哪些可能被应用程序或其他关闭钩子关闭的服务。(对所有服务使用同一个关闭钩子，并且在该关闭钩子中执行一系列的关闭操作。避免死锁。)</p>
+<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><p>在JVM启动时创建的所有线程中，除了主线程，其他的线程都是守护线程。新线程将继承创建它的线程的守护状态，因此默认情况下，主线程创建的所有线程都是普通线程。</p>
+<p>#####普通线程和守护线程的区别？</p>
+<p>当一个线程退出时，JVM会检查其他正在运行的线程，如果是守护线程，JVM会正常退出操作。当JVM停止时，所有仍然存在的守护线程都将被抛弃——即不会执行finally代码块，也不会执行回卷栈，而JVM只是直接退出。</p>
+<p><em>守护线程通常不能用来代替应用程序管理程序中各个服务的生命周期。</em></p>
+<h3 id="终结器"><a href="#终结器" class="headerlink" title="终结器"></a>终结器</h3><p>垃圾回收器对那些定义了finalize方法的对象会进行特殊处理：在回收器释放它们后，调用它们的finalize方法，从而保证一些持久化的资源被释放。</p>
+<p><em>避免使用finalize。唯一例外：当需要管理对象，并且该对象持有的资源是通过本地方法获得的。</em></p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-结构化并发应用程序1_执行任务/" class="styled-border">
+                    ←
+                    Java并发编程实战-结构化并发应用程序1_执行任务
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-线程简介/" class="styled-border">
+                    
+                    Java并发编程实战-线程简介
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="学习笔记">
+<meta property="og:url" content="https://matinallight.github.io/page/3/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习笔记">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts narrow container" style=" padding-left: 25px; ">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts narrow container relaxed stackable grid" id="big-bang-title" style=" padding-left: 35px; ">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<!-- main section -->
+<div class="ts narrow container relaxed stackable grid">
+        <!-- left section -->
+        <div class="eleven wide column" style=" padding: 35px; ">
+            <!-- Articles -->
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="title-link" style="color: #3498db;">Handler、Looper、Message源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 
+    class LooperThread extends Thread {
+      public Handler mHandler;
+
+      public void run() {
+          Looper.prepare();
+
+          mHandler = new Handler() {
+              public void handleMessage(Message msg) {
+                  // process incoming messages here
+              }
+          };
+
+          Looper.loop();
+      }
+  }
+ 
+
+ &lt;a href=&quot;#Looper&quot; class=&quot;headerl...</p>
+                <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的共享</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
+   失效数据  get和set在没有同步的情况下访问value 
+ 
+@NotThreadSafe
+public class MutableInteger{
+    private int value;
+
+   ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
+ 不在线程之间共享该状态变量 
+ 将状态变量修改为不可变的变量 
+&lt;l...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+ 
+ 找出构成对象状态的所有变量。 
+ 找出约束状态变量的不变性条件。 
+ 简历对象状态的并发访问管理策略 
+ 
+   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
+ &lt;a href=&quot;#...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="title-link" style="color: #3498db;">C++PrimerPlus类的使用</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 运算符重载 友元函数 
+   运算符重载  重载运算符格式：  operator 可重载运算符(argument-list)  
+  class Time
+{
+private:
+    int hours;
+public:
+    Time operator+(const Time &amp;amp; t) const;
+}
+
+Time Time::operator+(const Time &amp;amp; t) cosnt
+{
+    Time sum;
+    sum.hours=hours+t.hours;
+    return sum;    
+}
+//Time A,B,C,D;
+A=B+2...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="title-link" style="color: #3498db;">C++PrimerPlus函数</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   函数  如何使用函数 
+ 
+ 提供函数定义 
+ 提供函数原型 
+ 调用函数 
+ 
+ 函数定义 
+ 
+  无返回值 
+  void functionName(parameterList)
+{
+  statement(s)
+  return; //optional
+}
+   
+  有返回值 
+  typeName functionName(parameterList)
+{
+  statements
+  return value;//value is type cast to type typ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   内联函数  使用方式： 
+ 
+ 在函数声明前加上关键字inline 
+ 在函数定义前加上关键字inline 
+ 
+ 使用内联函数优点 
+ 
+ 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
+ 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
+ 与其他函数一样，可以使用所在类的保护成员及私有成员 
+ 
+ 使用内联函数的缺点 
+ 
+ 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
+ 不允许有循环或者开关语句，如...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   指针  指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 
+   声明和初始化指针  
+ 指针声明必须指定指针指向的数据的类型  typename * name; name是指针(地址)，*name是typename而不是指针 
+ *运算符两边的空格是可选的 
+  int * p1,p2 创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="title-link" style="color: #3498db;">C++PrimerPlus复合类型</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>  数组    字符串    string    结构    共同体    枚举  
+      
+   数组    数组声明  数组的声明应指出一下三点： 
+ 
+ 存储在每个元素中的值的类型 
+ 数组名&lt;/li...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_13类继承/" class="title-link" style="color: #3498db;">C++PrimerPlus类继承</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   基类和派生类  从一个类派生出另一个类时，原始类称为基类，继承类称为派生类 
+   派生类   class RatedPlayer : public TableTennisPlayer
+{
+    ...
+}
+    : 指出RatedPlayer类的基类是TableTennisPlayer类 
+ ReatedPlayer对象具有以下特征 
+ 
+ 派生类对象存储了基类的数据成员(派生类继承了基类的实现) ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_13类继承/" class="ts circular button">Read More</a>
+            </div>
+            
+            <!-- / the end of articles -->
+
+            <!-- page number -->
+             
+            <div class="ts basic horizontally fitted padded segment">
+                <div class="ts pagination menu">
+                    <a class="extend prev" rel="prev" href="/myblog/page/2/">&laquo; Prev</a><a class="page-number" href="/myblog/">1</a><a class="page-number" href="/myblog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/myblog/page/4/">4</a><a class="extend next" rel="next" href="/myblog/page/4/">Next &raquo;</a>
+                </div>
+            </div>
+            
+            <!-- / the end of page number -->
+        </div>
+        <!-- / left section -->
+
+        <!-- whitespace -->
+        <div class="one wide column"></div>
+
+        <!-- right section -->
+        <div class="four wide column" style=" padding-top: 35px; ">
+
+            
+            <!-- About Me Section -->
+            <div class="ts flatted secondary segment">
+                <h3>fun</h3>
+                <p>Talk is cheap. Show me the code.</p>
+            </div>
+            <!-- the end of about me -->
+            
+
+            <!-- Archive -->
+            <div class="ts basic segment">
+                <h3>Archives</h3>
+                <div class="ts relaxed link list">
+                    <ul class="unstyled -list"><li class="unstyled -list-item"><a class="unstyled -list-link" href="/myblog/archives/2018/08/">August 2018</a></li></ul>
+                </div>
+            </div>
+            <!-- the end of  Archive -->
+
+            <!-- Side Section -->
+            <div class="ts basic segment" style=" margin-bottom: 25px; ">
+                <h3>Tags</h3>
+                <div class="ts relaxed link list before-tags-widget">
+                    <ul class="unstyled tags-list-widget -list"><li class="unstyled tags-list-widget -list-item"><a class="unstyled tags-list-widget -list-link" href="/myblog/tags/Android/">Android</a></li><li class="unstyled tags-list-widget -list-item"><a class="unstyled tags-list-widget -list-link" href="/myblog/tags/C-11/">C++11</a></li><li class="unstyled tags-list-widget -list-item"><a class="unstyled tags-list-widget -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li><li class="unstyled tags-list-widget -list-item"><a class="unstyled tags-list-widget -list-link" href="/myblog/tags/转载/">转载</a></li></ul>
+                </div>
+            </div>
+            <!-- the end of side section -->
+        </div>
+        <!-- the end of right section -->
+</div>
+<!-- the end of main section -->
+
+<!-- footer -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            
+                Powered by <a href="https://hexo.io">&nbsp;Hexo</a>, Theme designs by <a href="https://github.com/hpcslag">&nbsp;@hpcslag</a>.
+            
+            <div class="smaller sub header">
+            
+                Style-Framework <a href="https://tocas-ui.com">&nbsp;Tocas-UI</a> designs by <a href="https://github.com/YamiOdymel">&nbsp;@YamiOldmel</a>
+            
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- the end of footer -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

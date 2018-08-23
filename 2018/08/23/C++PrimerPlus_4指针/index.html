@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus指针 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="指针指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 声明和初始化指针 指针声明必须指定指针指向的数据的类型typename * name;name是指针(地址)，*name是typename而不是指针 *运算符两边的空格是可选的 int * p1,p2创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* int*是一种复合类型，是指向">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus指针">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_4指针/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="指针指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 声明和初始化指针 指针声明必须指定指针指向的数据的类型typename * name;name是指针(地址)，*name是typename而不是指针 *运算符两边的空格是可选的 int * p1,p2创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* int*是一种复合类型，是指向">
+<meta property="og:updated_time" content="2018-04-09T02:30:16.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus指针">
+<meta name="twitter:description" content="指针指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 声明和初始化指针 指针声明必须指定指针指向的数据的类型typename * name;name是指针(地址)，*name是typename而不是指针 *运算符两边的空格是可选的 int * p1,p2创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* int*是一种复合类型，是指向">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus指针</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;name获取变量地址。</p>
+<h5 id="声明和初始化指针"><a href="#声明和初始化指针" class="headerlink" title="声明和初始化指针"></a>声明和初始化指针</h5><ul>
+<li>指针声明必须指定指针指向的数据的类型<br><code>typename * name;</code>name是指针(地址)，*name是typename而不是指针</li>
+<li>*运算符两边的空格是可选的</li>
+<li><code>int * p1,p2</code>创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个*</li>
+<li><code>int*</code>是一种复合类型，是指向int的指针</li>
+<li>一定要在对指针应用解除引用运算符*之前，将指针初始化为一个确定的、适当的地址</li>
+<li>要将数字值作为地址来用，应通过强制类型转换将数字转换为适当的地址类型<br><code>int * pt;pt=(int*)0xB8000000;</code>pt是int值的地址并不意味着pt本身的类型是int</li>
+</ul>
+<h5 id="使用new来分配内存"><a href="#使用new来分配内存" class="headerlink" title="使用new来分配内存"></a>使用new来分配内存</h5><ul>
+<li>为一个数据对象获得并指定分配内存的通用格式：<br><code>typeName * pointer_name=new typeName;</code></li>
+<li>常规变量的值都存在栈(stack)，new存在堆(heap)或自由存储区(free store)</li>
+<li>C++提供了检测并处理内存分配失败的工具</li>
+</ul>
+<h5 id="使用delete释放内存"><a href="#使用delete释放内存" class="headerlink" title="使用delete释放内存"></a>使用delete释放内存</h5><ul>
+<li><code>int * ps =new int;delete ps;</code>这将释放ps指向的内存，但不会删除ps本</li>
+<li>一定要配对的使用new和delete，否则将发生内存泄漏，使用new和delete的规则：<ul>
+<li>不要使用delete来释放不是new分配的内存</li>
+<li>不要使用delete释放同一个内存块两次</li>
+<li>如果使用new[]为数组分配内存，则应使用delete[]来释放</li>
+<li>如果使用new为一个实体分配内存，则应使用delete来释放</li>
+<li>对空指针应用delete是安全的</li>
+</ul>
+</li>
+</ul>
+<h5 id="使用new创建动态数组"><a href="#使用new创建动态数组" class="headerlink" title="使用new创建动态数组"></a>使用new创建动态数组</h5><ul>
+<li>在编译时给数组分配内存称为静态联编(static bingding)</li>
+<li>在运行时使用new给数组分配内存称为动态联编(dynamic binding)</li>
+<li>为数组分配内存的通用格式如下：<br><code>type_name * pointer_name = new type_name [num_elements];</code></li>
+<li>new 运算符返回第一个元素的地址</li>
+<li>可以通过<code>pointer_name[num]</code>访问元素</li>
+</ul>
+<h5 id="指针、数组和指针算术"><a href="#指针、数组和指针算术" class="headerlink" title="指针、数组和指针算术"></a>指针、数组和指针算术</h5><pre><code>double wages[3]={1000.0,2000.0,3000,0};
+double * pw =wages;
+</code></pre><ul>
+<li><p>和所有数组一样，wages也存在下面的等式：<br><code>wages=&amp;wages[0]=address of first element of array</code></p>
+</li>
+<li><p>将指针变量加1后，其增加的值等于指向的类型占用的字节数<br><code>*(pw+1)</code>和<code>pw[1]</code>是等价的</p>
+</li>
+<li>数组地址<code>short tell[10];</code><ul>
+<li>&amp;tell[0]即tell使一个2字节内存块的地址，tell+1将地址值+2</li>
+<li>&amp;tell是一个20字节内存块的地址，&amp;tell+2将地址值+20，&amp;tell是指向包含20个元素的short数组<code>short(*)[20]</code></li>
+<li>short (*pas)[20]=&tell;</li>
+</ul>
+</li>
+<li><code>*pw</code>和<code>wages[i]</code>的区别<ul>
+<li>可以修改指针的值，而数组名是常量<br><code>pw=pw+1;</code><br><code>wages=wages+1;//not allowed</code></li>
+<li>sizeof(数组名)得到的的是数组的长度</li>
+<li>sizeof(指针)即使指针指向的是一个数组，得到的是指针的长度</li>
+<li><code>&amp;wages</code>得到是整个数组的地址</li>
+</ul>
+</li>
+</ul>
+<h5 id="指针和字符串"><a href="#指针和字符串" class="headerlink" title="指针和字符串"></a>指针和字符串</h5><ul>
+<li>在cout和多数C++表达式中，char数组名、char指针以及用引号括起的字符串常量都被解释为字符串第一个字符的地址</li>
+<li>不要使用字符串常量或未被初始化的指针来接收输入，应使用已分配的内存地址，该地址可以是数组名，也可以是使用new初始化过的指针</li>
+<li>应使用strcpy()或strncpy()，而不是赋值运算符来将字符串赋给数组<ul>
+<li>strcpy()函数接受2个参数，第一个是目标地址，第二个是要复制的字符串的地址，如果地址内存比字符串小，函数将字符串中剩余的部分复制到数组后面的内存字节中，这可能会覆盖程序正在使用的其他内存 </li>
+<li>strncpy()函数接受的第三个参数——要复制的最大字符数，如果该函数在到达字符串结尾之前，目标内存已经用完，则它将不会添加空字符串,需要手动赋值<pre><code>char food[20]=&quot;carrots&quot;;
+strncpy(food,&quot;a picnic basket filled with many goodies&quot;,19);
+food[19]=&quot;\0&quot;;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h5 id="使用new创建动态结构"><a href="#使用new创建动态结构" class="headerlink" title="使用new创建动态结构"></a>使用new创建动态结构</h5><ul>
+<li>访问成员：如果结构标识符是结构名，则使用句点运算符<code>.</code>；如果标识符是指向结构的指针，则使用箭头运算符<code>-&gt;</code></li>
+</ul>
+<pre><code>struct inflatable
+{
+    float volume;
+    double price;
+};
+
+inflatable * ps = new inflatable;
+//通过ps-&gt;price或(*ps).price访问结构成员 
+delete ps;
+</code></pre><h2 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h2><pre><code>struct antarctica
+{
+    int year;
+};
+</code></pre><p>创建类型变量<br><code>antarctica s01,s02,s03;</code><br>创建结构指针<br><code>antarctica * pa = &amp;s01;</code><br>创建指针数组<br><code>const antarctica * arp[3]={&amp;s01,&amp;s02,&amp;s03};</code><br>创建指向指针数组的指针<br><code>const antarctica ** ppa = arp;</code>=<code>auto ppb = arp;</code><br>通过<code>(*(ppa+i))-&gt;year</code>访问结构中的元素</p>
+<h2 id="数组的替代品vector和array"><a href="#数组的替代品vector和array" class="headerlink" title="数组的替代品vector和array"></a>数组的替代品vector和array</h2><ul>
+<li>vector<br><code>vector&lt;typeName&gt; name(size);</code></li>
+<li>array<br><code>array&lt;typeName,size&gt; arr;</code></li>
+<li>vector和array的区别<ul>
+<li>都可以使用标准数组表示法访问元素</li>
+<li>array对象和数组存储在栈中，vector对象存储在自由存储区中</li>
+<li>都可以将一个对象赋给另一个对象</li>
+<li>初始化方式不同<ul>
+<li>array <code>array&lt;int,3&gt; arr={1,2,3};</code></li>
+<li>vector <code>vector&lt;int&gt; vec={1,2,3};</code></li>
+<li>vector <code>vector&lt;int&gt; vec(3);//需要分别赋值</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="指针和const"><a href="#指针和const" class="headerlink" title="指针和const"></a>指针和const</h2><ul>
+<li><p>让指针指向一个常量对象，防止使用该指针来修改所指向的值</p>
+<ul>
+<li>如果数据类型本身不是指针，可以将const数据或非const数据的地址赋给指向const的指针</li>
+<li>只能将非const数据的地址赋给非const指针<pre><code>int age =39;
+const int * pt =&amp;age;
+*pt=20;//INVALID
+age=20;//VALID
+//可以直接通过age变量来修改age的值，但不能使用pt指针来修改它
+</code></pre></li>
+</ul>
+</li>
+<li><p>将指针本身声明为常量，防止改变指针指向的位置</p>
+</li>
+</ul>
+<pre><code>int sloth=3;
+const int * ps = &amp;sloth;
+int * const finger = &amp;sloth；
+// finger和*ps都是const，而*finger和ps不是
+</code></pre><ul>
+<li>还可以声明指向cosnt对象的cosnt指针</li>
+</ul>
+<pre><code>double trouble = 2.0E30;
+const double * const stick = &amp;trouble;
+//stick和*stick都是const
+</code></pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="styled-border">
+                    ←
+                    C++PrimerPlus函数探幽
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="styled-border">
+                    
+                    C++PrimerPlus复合类型
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

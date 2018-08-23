@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>国际化适配笔记 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="resource 是否支持rtl 从右到左布局方式  在清单文件中配置 设置组件xml属性android:layoutDirection=”ltr”强制设置布局方法 在api17以上使用带有end或start的属性替换带有left或reght的属性 例：android:layout_marginEnd=&amp;quot;15dp&amp;quot; 使用vector 根据布局方向自动改方向&amp;lt;vector">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="国际化适配笔记">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/国际化笔记/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="resource 是否支持rtl 从右到左布局方式  在清单文件中配置 设置组件xml属性android:layoutDirection=”ltr”强制设置布局方法 在api17以上使用带有end或start的属性替换带有left或reght的属性 例：android:layout_marginEnd=&amp;quot;15dp&amp;quot; 使用vector 根据布局方向自动改方向&amp;lt;vector">
+<meta property="og:updated_time" content="2017-06-22T15:10:48.244Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="国际化适配笔记">
+<meta name="twitter:description" content="resource 是否支持rtl 从右到左布局方式  在清单文件中配置 设置组件xml属性android:layoutDirection=”ltr”强制设置布局方法 在api17以上使用带有end或start的属性替换带有left或reght的属性 例：android:layout_marginEnd=&amp;quot;15dp&amp;quot; 使用vector 根据布局方向自动改方向&amp;lt;vector">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">国际化适配笔记</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="resource"><a href="#resource" class="headerlink" title="resource"></a>resource</h2><ul>
+<li>是否支持rtl 从右到左布局方式<br>  在清单文件中配置<application android:supportsrtl="true"></application></li>
+<li>设置组件xml属性<br>android:layoutDirection=”ltr”强制设置布局方法</li>
+<li>在api17以上使用带有end或start的属性替换带有left或reght的属性 例：<code>android:layout_marginEnd=&quot;15dp&quot;</code></li>
+<li>使用vector 根据布局方向自动改方向<br><code>&lt;vector android:autoMirrored=&quot;true&quot;&gt;</code></li>
+<li>使用不同的限定符名称，提供不同的资源文件<br>配置限定符<a href="https://developer.android.com/guide/topics/resources/providing-resources.html" target="_blank" rel="external">完整列表</a>（需要科学上网）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MCC和MNC</td>
+<td style="text-align:center">mcc310</td>
+<td style="text-align:center">移动国家代码</td>
+</tr>
+<tr>
+<td>语言和区域</td>
+<td style="text-align:center">en</td>
+<td style="text-align:center">语言通过由两个字母组成的<a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank" rel="external">ISO 639-1</a>语言代码定义</td>
+</tr>
+<tr>
+<td>布局方向</td>
+<td style="text-align:center">ldrtl<br>ldltr</td>
+<td style="text-align:center">ldltr是默认值，要为应用启用从右到左的布局功能，必须将 supportsRtl 设置为 “true”，并将 targetSdkVersion 设置为 17 或更高版本</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>命名规则<br><ul>
+<li>您可以为单组资源指定多个限定符，并使用短划线分隔。例如，drawable-en-rUS-land 适用于横排美国英语设备。</li>
+<li>限定符出现的顺序必须遵循表中列出的顺序</li>
+<li>不能嵌套备用资源目录。例如，您不能拥有 res/drawable/drawable-en/</li>
+<li>值不区分大小写</li>
+<li>对于每种限定符类型，仅支持一个值</li>
+</ul>
+</li>
+<li>快捷方式<br><br>  res 文件右键 -&gt; new -&gt; Android resource file根据需要选择限定符</li>
+</ul>
+<h2 id="处理配置变更"><a href="#处理配置变更" class="headerlink" title="处理配置变更"></a>处理配置变更</h2><ul>
+<li>当配置变更时会调用这个方法 onConfigurationChanged(Configuration newConfig)<br><br>  通过newConfig.getLayoutDirection()获取布局方向:<br><pre>public int getLayoutDirection() {
+    return (screenLayout&SCREENLAYOUT_LAYOUTDIR_MASK) == SCREENLAYOUT_LAYOUTDIR_RTL
+            ? View.LAYOUT_DIRECTION_RTL : View.LAYOUT_DIRECTION_LTR;
+}</pre></li>
+<li><p>强制设置配置</p>
+<pre>
+private void resetLocal() {
+    Configuration config = getResources().getConfiguration();
+    Locale locale = App.appLocale();
+    Locale.setDefault(locale);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        config.setLocale(locale);
+        config.setLayoutDirection(locale);
+    } else {
+        config.locale = locale;
+    }
+    getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+}
+</pre>
+getResources().updateConfiguration()方法在17版本以后过时,替换为下面的方法
+<pre>
+ContextWrapper public Context createConfigurationContext (Configuration overrideConfiguration
+</pre>
+
+</li>
+</ul>
+<h2 id="关于时区"><a href="#关于时区" class="headerlink" title="关于时区"></a>关于时区</h2><ul>
+<li>获取当地时间 Locale.CHINA表示使用地区文字样式，setTimeZone获取哪个时区的时间  <pre>public static String timeFormat(long time, String locale) {
+    DateFormat dateFormat1 = new SimpleDateFormat("HH:mm dd-MM-yyyy", Locale.CHINA);
+    dateFormat1.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+    //dateFormat.setTimeZone(TimeZone.getTimeZone(locale));
+    return dateFormat1.format(time);
+}
+</pre>
+
+</li>
+</ul>
+<h2 id="关于字符串的格式化"><a href="#关于字符串的格式化" class="headerlink" title="关于字符串的格式化"></a>关于字符串的格式化</h2><ul>
+<li><p>字符串的格式化，可以使用有两个参数的format方法</p>
+<pre>
+public static String format(Locale l, String format, Object... args) {
+    return new Formatter(l).format(format, args).toString();
+}
+</pre>
+</li>
+<li><p>TextView中设置显示的语言 防止例如在阿拉伯语环境下，数字会以阿拉伯语的方式展示</p>
+  <pre>
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                textView.setTextLocale(Locale.ENGLISH);
+            }
+</pre></li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/程序员誓言/" class="styled-border">
+                    ←
+                    The Programmer&#39;s Oath
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="styled-border">
+                    
+                    okhttp 源码分析
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

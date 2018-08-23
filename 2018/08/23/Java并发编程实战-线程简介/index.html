@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java并发编程实战-线程简介 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="进程：每一个程序都在单独的进程中运行线程：线程允许在同一个进程中同时存在多个控制流，会共享进程范围内的资源，是基本的调度单位 线程的优势？ 发挥多处理器的强大能力 建模的简单性：执行同一种类型的任务，如Servlet 异步事件的简单化处理，如异步I/O 响应更灵敏的用户界面，如将长时间允许的任务放在一个单独的线程中运行，那么事件线程就能及时处理界面事件  线程带来的风险？ 安全性：永远不发生糟糕的">
+<meta name="keywords" content="Java 并发编程实战">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发编程实战-线程简介">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Java并发编程实战-线程简介/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="进程：每一个程序都在单独的进程中运行线程：线程允许在同一个进程中同时存在多个控制流，会共享进程范围内的资源，是基本的调度单位 线程的优势？ 发挥多处理器的强大能力 建模的简单性：执行同一种类型的任务，如Servlet 异步事件的简单化处理，如异步I/O 响应更灵敏的用户界面，如将长时间允许的任务放在一个单独的线程中运行，那么事件线程就能及时处理界面事件  线程带来的风险？ 安全性：永远不发生糟糕的">
+<meta property="og:updated_time" content="2018-05-22T07:19:56.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发编程实战-线程简介">
+<meta name="twitter:description" content="进程：每一个程序都在单独的进程中运行线程：线程允许在同一个进程中同时存在多个控制流，会共享进程范围内的资源，是基本的调度单位 线程的优势？ 发挥多处理器的强大能力 建模的简单性：执行同一种类型的任务，如Servlet 异步事件的简单化处理，如异步I/O 响应更灵敏的用户界面，如将长时间允许的任务放在一个单独的线程中运行，那么事件线程就能及时处理界面事件  线程带来的风险？ 安全性：永远不发生糟糕的">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Java并发编程实战-线程简介</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <p>进程：每一个程序都在单独的进程中运行<br>线程：线程允许在同一个进程中同时存在多个控制流，会共享进程范围内的资源，是基本的调度单位</p>
+<h5 id="线程的优势？"><a href="#线程的优势？" class="headerlink" title="线程的优势？"></a>线程的优势？</h5><ul>
+<li>发挥多处理器的强大能力</li>
+<li>建模的简单性：执行同一种类型的任务，如Servlet</li>
+<li>异步事件的简单化处理，如异步I/O</li>
+<li>响应更灵敏的用户界面，如将长时间允许的任务放在一个单独的线程中运行，那么事件线程就能及时处理界面事件</li>
+</ul>
+<h5 id="线程带来的风险？"><a href="#线程带来的风险？" class="headerlink" title="线程带来的风险？"></a>线程带来的风险？</h5><ul>
+<li>安全性：永远不发生糟糕的事情，如产生竞态条件</li>
+<li>活跃性：某件正确的事情最终会发生，如死锁、饥饿、活锁</li>
+<li>性能：某件正确的事情最终会发生，但却不够好，如服务时间过长，上下文切换</li>
+</ul>
+<h5 id="远程方法调用RMI"><a href="#远程方法调用RMI" class="headerlink" title="远程方法调用RMI"></a>远程方法调用RMI</h5><p>RMI使代码能够调用在其他JVM中运行的对象，一个远程对象上的远程方法会在多个RMI线程中被同时调用</p>
+<h5 id="远程对象必须注意两个安全问题？"><a href="#远程对象必须注意两个安全问题？" class="headerlink" title="远程对象必须注意两个安全问题？"></a>远程对象必须注意两个安全问题？</h5><ol>
+<li>正确地协同在多个对象中共享的状态</li>
+<li>以及对远程对象本身状态的访问，同一个对象可能会在多个线程中被同时访问</li>
+</ol>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-结构化并发应用程序2_取消与关闭/" class="styled-border">
+                    ←
+                    Java并发编程实战-结构化并发应用程序2_取消与关闭
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题1_显示锁/" class="styled-border">
+                    
+                    Java并发编程实战-高级主题_显示锁
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

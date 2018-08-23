@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++PrimerPlus函数 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="函数如何使用函数  提供函数定义 提供函数原型 调用函数  函数定义  无返回值 void functionName(parameterList) {   statement(s)   return; //optional }  有返回值 typeName functionName(parameterList) {   statements   return value;//value is ty">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++PrimerPlus函数">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/C++PrimerPlus_7函数/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="函数如何使用函数  提供函数定义 提供函数原型 调用函数  函数定义  无返回值 void functionName(parameterList) {   statement(s)   return; //optional }  有返回值 typeName functionName(parameterList) {   statements   return value;//value is ty">
+<meta property="og:updated_time" content="2017-06-23T10:14:49.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++PrimerPlus函数">
+<meta name="twitter:description" content="函数如何使用函数  提供函数定义 提供函数原型 调用函数  函数定义  无返回值 void functionName(parameterList) {   statement(s)   return; //optional }  有返回值 typeName functionName(parameterList) {   statements   return value;//value is ty">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">C++PrimerPlus函数</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>如何使用函数</p>
+<ol>
+<li>提供函数定义</li>
+<li>提供函数原型</li>
+<li>调用函数</li>
+</ol>
+<p>函数定义</p>
+<ul>
+<li><p>无返回值</p>
+<pre><code>void functionName(parameterList)
+{
+  statement(s)
+  return; //optional
+}
+</code></pre></li>
+<li><p>有返回值</p>
+<pre><code>typeName functionName(parameterList)
+{
+  statements
+  return value;//value is type cast to type typeName
+}
+</code></pre></li>
+</ul>
+<p>函数原型语法</p>
+<ul>
+<li>复制函数定义中的函数头</li>
+<li>原型的参数列表中，可以包括变量名，也可以不包括</li>
+</ul>
+<pre><code>double cube(double x，double y);
+void cheer(int,int);
+</code></pre><p>函数原型作用</p>
+<ul>
+<li>编译器正确处理函数返回值</li>
+<li>编译器检查使用的参数数目是否正确</li>
+<li>编译器检查使用的参数类型是否正确</li>
+</ul>
+<h2 id="参数是数组"><a href="#参数是数组" class="headerlink" title="参数是数组"></a>参数是数组</h2><pre><code>int sum_arr(int arr[],int n);
+int sum_arr(int arr[],int n)
+{
+    for(int i=0;i&lt;n;i++)
+    {
+        toral=total+arr[i];
+    }
+    return total;
+}
+</code></pre><p>因为c++将数组名解释为其第一个元素的地址，因此需要提供数组的长度n；也可以使用指针替代数组名<br><code>int sum_arr(int * arr,int n);</code></p>
+<h5 id="用const保护数组"><a href="#用const保护数组" class="headerlink" title="用const保护数组"></a>用const保护数组</h5><p>为防止函数无意中修改数组的内容，可在声明参数时使用关键字const<br><code>int sum_arr(const int arr * ,int n);</code></p>
+<h5 id="使用数组区间的函数"><a href="#使用数组区间的函数" class="headerlink" title="使用数组区间的函数"></a>使用数组区间的函数</h5><p>指定元素区间，通过传递两个指针完成，一个指针标识数组的开头，另一个指针标识数组的尾部</p>
+<pre><code>int sum_arr(const int*begin,const int*end);
+int sum_arr(const int*begin,const int*end)
+{
+    const int*pt;
+    int total=0;
+    for(pt=begin;pt!=end;pt++)
+    {
+        total=total+*pt;
+    }
+    return total;
+}
+</code></pre><h2 id="参数是二维数组"><a href="#参数是二维数组" class="headerlink" title="参数是二维数组"></a>参数是二维数组</h2><pre><code>int data[3][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+int sum(int (*ar2)[4],int size);
+//或
+int sum(int ar2[][4],int size);
+int sum(int ar2[][4],int size)
+{
+    int total=0;
+    for(int x=0;x&lt;size;x++)
+    {
+        for(int y=0;y&lt;4;y++)
+        {
+            total += ar2[x][y];
+        }
+    }
+    return total; 
+};
+//ar2[x][y]==*(*(ar2+x)+y)
+</code></pre><h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><ul>
+<li>获取函数的地址：函数名即是函数的地址</li>
+<li>声明一个函数指针:函数名替换为(*name)</li>
+</ul>
+<pre><code>double pan(int);
+// 指针类型声明
+double (*pf)(int)
+</code></pre><ul>
+<li>使用函数指针来调用函数<br><code>double x=(*pf)(4);</code></li>
+</ul>
+<h5 id="函数指针数组"><a href="#函数指针数组" class="headerlink" title="函数指针数组"></a>函数指针数组</h5><pre><code>const double * f1(const double ar[],int n);
+const double * f2(const double [],int);
+const double * f2(const double *,int);
+</code></pre><p>在声明时进行初始化<br><code>const double * (*p1)(const double *,int)=f1;</code><br>或<br><code>auto p2 = f2; //auto 自动类型推断功能</code></p>
+<p>包含三个函数指针的数组<br><code>const double * (*pa[3])(const double *,int)={f1,f2,f3};</code><br><code>**&amp;pa == *pa == pa[0]</code></p>
+<p>pd是一个指针，指向一个包含三个元素的数组<br><code>const double *(*(*pd)[3])(const double *,int)=&amp;pa;</code></p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="styled-border">
+                    ←
+                    C++PrimerPlus类的使用
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="styled-border">
+                    
+                    C++PrimerPlus函数探幽
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

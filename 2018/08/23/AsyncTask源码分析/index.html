@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AsyncTask源码分析 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AsyncTask源码分析">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/23/AsyncTask源码分析/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
+<meta property="og:updated_time" content="2018-08-23T10:58:29.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AsyncTask源码分析">
+<meta name="twitter:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">AsyncTask源码分析</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="AsyncTask源码分析"><a href="#AsyncTask源码分析" class="headerlink" title="AsyncTask源码分析"></a>AsyncTask源码分析</h2><h3 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h3><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><pre>
+
+ private class DownloadFilesTask extends AsyncTask<url, integer,="" long=""> {
+     protected Long doInBackground(URL... urls) {
+         int count = urls.length;
+         long totalSize = 0;
+         for (int i = 0; i < count; i++) {
+             totalSize += Downloader.downloadFile(urls[i]);
+             publishProgress((int) ((i / (float) count) * 100));
+             // Escape early if cancel() is called
+             if (isCancelled()) break;
+         }
+         return totalSize;
+     }
+
+     protected void onProgressUpdate(Integer... progress) {
+         setProgressPercent(progress[0]);
+     }
+
+     protected void onPostExecute(Long result) {
+         showDialog("Downloaded " + result + " bytes");
+     }
+ }
+
+  new DownloadFilesTask().execute(url1, url2, url3);
+
+</url,></pre>
+
+<h4 id="AsyncTask的泛型类型"><a href="#AsyncTask的泛型类型" class="headerlink" title="AsyncTask的泛型类型"></a>AsyncTask的泛型类型</h4><ol>
+<li>Params，执行时发送给任务的参数类型。</li>
+<li>Progress，后台计算期间发布的进度单元的类型。</li>
+<li>Result，背景计算结果的类型。</li>
+<li>要将类型标记为未使用，只需使用以下类型Void：<pre>
+private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
+</void,></pre>
+
+</li>
+</ol>
+<h4 id="4个重要方法"><a href="#4个重要方法" class="headerlink" title="4个重要方法"></a>4个重要方法</h4><ol>
+<li><strong>onPreExecute()</strong>，在执行任务之前在UI线程上调用。此步骤通常用于设置任务，例如通过在用户界面中显示进度条。</li>
+<li><strong>doInBackground(Params…)</strong>，在onPreExecute()完成执行后立即在后台线程上调用。此步骤用于执行可能需要很长时间的后台计算。异步任务的参数将传递给此步骤。计算结果必须由此步骤返回，并将传递回最后一步。此步骤还可用于publishProgress(Progress…)发布一个或多个进度单位。这些值在onProgressUpdate(Progress…)步骤中发布在UI线程上 。</li>
+<li><strong>onProgressUpdate(Progress…)</strong>，在调用后在UI线程上调用publishProgress(Progress…)。执行的时间是不确定的。此方法用于在后台计算仍在执行时显示用户界面中的任何形式的进度。例如，它可用于为进度条设置动画或在文本字段中显示日志。</li>
+<li><strong>onPostExecute(Result)</strong>，在后台计算完成后在UI线程上调用。背景计算的结果作为参数传递给该步骤。</li>
+</ol>
+<h4 id="取消任务"><a href="#取消任务" class="headerlink" title="取消任务"></a>取消任务</h4><p>可以随时通过调用取消任务cancel(boolean)。调用此方法将导致后续调用isCancelled()返回true。在调用此方法之后onCancelled(Object)，而不是 onPostExecute(Object)在doInBackground(Object[]) 返回后调用。为确保尽快取消任务，应始终检查isCancelled()周期性 的返回值（doInBackground(Object[])如果可能）（例如在循环内）。</p>
+<h4 id="线程规则"><a href="#线程规则" class="headerlink" title="线程规则"></a>线程规则</h4><p>此类必须遵循一些线程规则才能正常工作：</p>
+<ul>
+<li>必须在UI线程上加载AsyncTask类。这是自动完成的Build.VERSION_CODES.JELLY_BEAN。</li>
+<li>必须在UI线程上创建任务实例。<br>execute(Params…) 必须在UI线程上调用。</li>
+<li>不要叫onPreExecute()，onPostExecute(Result)， doInBackground(Params…)，onProgressUpdate(Progress…)手动。</li>
+<li>该任务只能执行一次（如果尝试第二次执行，则会抛出异常。） </li>
+</ul>
+<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><p>首次引入时，AsyncTasks在单个后台线程上串行执行。从开始Build.VERSION_CODES.DONUT(Android 1.6)，这被改为一个线程池，允许多个任务并行运行。从开始 Build.VERSION_CODES.HONEYCOMB(Android 3.0)，任务在单个线程上执行，以避免由并行执行引起的常见应用程序错误。</p>
+<p>如果您真的想要并行执行，可以 executeOnExecutor(java.util.concurrent.Executor, Object[])使用 THREAD_POOL_EXECUTOR。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><h4 id="静态初始化的类"><a href="#静态初始化的类" class="headerlink" title="静态初始化的类"></a>静态初始化的类</h4><p><strong>创建一个核心线程数为2~4，最大线程数为CPU个数*2+1，存活时间为30秒，容量为128的LinkedBlockingQueue(更高的吞吐量，较低的可预测性)的线程池。</strong></p>
+<pre>
+ //获得Java虚拟机可用的处理器数。
+ private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+ // 核心线程池数为最小2、3或最大4
+ private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
+ // 最大线程池数为 可用处理器数*2+1
+ private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
+ private static final int KEEP_ALIVE_SECONDS = 30;
+ //根据计数记录Thread
+ private static final ThreadFactory sThreadFactory = new ThreadFactory() {
+     private final AtomicInteger mCount = new AtomicInteger(1);
+
+     public Thread newThread(Runnable r) {
+         return new Thread(r, "AsyncTask #" + mCount.getAndIncrement());
+     }
+ };
+
+ private static final BlockingQueue<runnable> sPoolWorkQueue = new LinkedBlockingQueue<runnable>(128);
+
+ /**
+  * An {@link Executor} that can be used to execute tasks in parallel.
+  */
+ public static final Executor THREAD_POOL_EXECUTOR;
+
+ static {
+     ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+             CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,
+             sPoolWorkQueue, sThreadFactory);
+     threadPoolExecutor.allowCoreThreadTimeOut(true);
+     THREAD_POOL_EXECUTOR = threadPoolExecutor;
+ }
+
+</runnable></runnable></pre>
+
+<h4 id="new-DownloadFilesTask"><a href="#new-DownloadFilesTask" class="headerlink" title="new DownloadFilesTask()"></a>new DownloadFilesTask()</h4><p><strong></strong></p>
+<ol>
+<li>mHandler 返回进度或结果 </li>
+<li>mWorker 执行异步任务</li>
+<li>mFuture 结果返回主线程</li>
+</ol>
+<p></p>
+<pre>
+
+ private static InternalHandler sHandler;
+
+ private final WorkerRunnable<params, result=""> mWorker;
+ private final FutureTask<result> mFuture;
+
+ // 构造函数必须在UI线程调用
+ public AsyncTask() {
+     this((Looper) null);
+ }
+
+ public AsyncTask(@Nullable Looper callbackLooper) {
+     mHandler = callbackLooper == null || callbackLooper == Looper.getMainLooper()
+            ? getMainHandler()
+            : new Handler(callbackLooper);
+
+     mWorker = new WorkerRunnable<params, result="">() {
+         public Result call() throws Exception {
+             mTaskInvoked.set(true);
+             Result result = null;
+             try {
+                 Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                 //noinspection unchecked
+                 result = doInBackground(mParams);
+                 Binder.flushPendingCommands();
+             } catch (Throwable tr) {
+                 mCancelled.set(true);
+                 throw tr;
+             } finally {
+                 postResult(result);
+             }
+             return result;
+         }
+     };
+
+     mFuture = new FutureTask<result>(mWorker) {
+         @Override
+         protected void done() {
+             try {
+                 postResultIfNotInvoked(get());
+             } catch (InterruptedException e) {
+                 android.util.Log.w(LOG_TAG, e);
+             } catch (ExecutionException e) {
+                 throw new RuntimeException("An error occurred while executing doInBackground()",
+                         e.getCause());
+             } catch (CancellationException e) {
+                 postResultIfNotInvoked(null);
+             }
+         }
+     };
+ }
+
+</result></params,></result></params,></pre>
+
+<p><strong><br>通过ArrayDeque(线程不安全，当用作堆栈时，此类可能比Stack快，并且在用作队列时比LinkedList更快)缓存任务，如果执行任务失败调用scheduleNext();执行下一个任务，如果下一个任务为空，继续执行下一个任务<br></strong></p>
+<pre>
+
+ private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
+ public static final Executor SERIAL_EXECUTOR = new SerialExecutor();
+
+ private static class SerialExecutor implements Executor {
+     final ArrayDeque<runnable> mTasks = new ArrayDeque<runnable>();
+     Runnable mActive;
+
+     public synchronized void execute(final Runnable r) {
+         mTasks.offer(new Runnable() {
+             public void run() {
+                 try {
+                     r.run();
+                 } finally {
+                     scheduleNext();
+                 }
+             }
+         });
+         if (mActive == null) {
+             scheduleNext();
+         }
+     }
+
+     protected synchronized void scheduleNext() {
+         if ((mActive = mTasks.poll()) != null) {
+             THREAD_POOL_EXECUTOR.execute(mActive);
+         }
+     }
+ }
+
+</runnable></runnable></pre>
+
+<h5 id="getMainHandler-创建主线程handler"><a href="#getMainHandler-创建主线程handler" class="headerlink" title="getMainHandler() 创建主线程handler"></a>getMainHandler() 创建主线程handler</h5><pre>
+
+ private static Handler getMainHandler() {
+   synchronized (AsyncTask.class) {
+       if (sHandler == null) {
+           sHandler = new InternalHandler(Looper.getMainLooper());
+       }
+       return sHandler;
+   }
+ }
+
+ private static class InternalHandler extends Handler {
+     public InternalHandler(Looper looper) {
+         super(looper);
+     }
+
+     @SuppressWarnings({"unchecked", "RawUseOfParameterizedType"})
+     @Override
+     public void handleMessage(Message msg) {
+         AsyncTaskResult<?> result = (AsyncTaskResult<?>) msg.obj;
+         switch (msg.what) {
+             case MESSAGE_POST_RESULT:
+                 // There is only one result
+                 result.mTask.finish(result.mData[0]);
+                 break;
+             case MESSAGE_POST_PROGRESS:
+                 result.mTask.onProgressUpdate(result.mData);
+                 break;
+         }
+     }
+ }
+
+</pre>
+
+<h4 id="execute-Params…-params"><a href="#execute-Params…-params" class="headerlink" title="execute(Params… params)"></a>execute(Params… params)</h4><p><strong><br>exec.execute(mFuture);<br><br>-&gt; postResultIfNotInvoked(get());<br></strong></p>
+<ul>
+<li>发送进度</li>
+</ul>
+<p>-&gt; 调用 publishProgress(Progress… values);进度发送到mHandler<br>-&gt; onProgressUpdate(Progress… values);</p>
+<ul>
+<li>发送结果</li>
+</ul>
+<p>-&gt; postResult(result);结果发送到mHandler<br><br>-&gt; finish(Result result);<br><br>-&gt; onPostExecute(result);<br></p>
+<pre>
+
+ public final AsyncTask<params, progress,="" result=""> execute(Params... params) {
+     return executeOnExecutor(sDefaultExecutor, params);
+ }
+
+ @MainThread
+ public final AsyncTask<params, progress,="" result=""> executeOnExecutor(Executor exec,
+         Params... params) {
+     if (mStatus != Status.PENDING) {
+         switch (mStatus) {
+             case RUNNING:
+                 throw new IllegalStateException("Cannot execute task:"
+                         + " the task is already running.");
+             case FINISHED:
+                 throw new IllegalStateException("Cannot execute task:"
+                         + " the task has already been executed "
+                         + "(a task can be executed only once)");
+         }
+     }
+
+     mStatus = Status.RUNNING;
+
+     onPreExecute();
+
+     mWorker.mParams = params;
+     exec.execute(mFuture);
+
+     return this;
+ }
+
+   private Result postResult(Result result) {
+     @SuppressWarnings("unchecked")
+     Message message = getHandler().obtainMessage(MESSAGE_POST_RESULT,
+             new AsyncTaskResult<result>(this, result));
+     message.sendToTarget();
+     return result;
+ }
+
+</result></params,></params,></pre>
+
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="#"></a>
+            
+            
+                <a href="/myblog/2018/08/23/程序员誓言/" class="styled-border">
+                    
+                    The Programmer&#39;s Oath
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>
