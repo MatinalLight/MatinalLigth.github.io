@@ -88,7 +88,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="title-link" style="color: #3498db;">C++PrimerPlus处理数据</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="title-link" style="color: #3498db;">C++PrimerPlus类的使用</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -98,16 +98,25 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   C++变量的命名规则  
- 在名称中只能使用字母字符、数字和下划线_ 
- 名称的第一个字符不能使数字 
- 区分大小写字符与小写字符 
- 不能将C++关键字用作名称 
- 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 
- C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制 
- 
- &lt;a href=&quot;#整型-short-int-long-long-long&quot; class=...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="ts circular button">Read More</a>
+                <p> 运算符重载 友元函数 
+   运算符重载  重载运算符格式：  operator 可重载运算符(argument-list)  
+  class Time
+{
+private:
+    int hours;
+public:
+    Time operator+(const Time &amp;amp; t) const;
+}
+
+Time Time::operator+(const Time &amp;amp; t) cosnt
+{
+    Time sum;
+    sum.hours=hours+t.hours;
+    return sum;    
+}
+//Time A,B,C,D;
+A=B+2...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -140,7 +149,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="title-link" style="color: #3498db;">C++PrimerPlus对象和类</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="title-link" style="color: #3498db;">C++PrimerPlus复合类型</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -150,21 +159,13 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   面向对象编程  OOP特性： 
+                <p>  数组    字符串    string    结构    共同体    枚举  
+      
+   数组    数组声明  数组的声明应指出一下三点： 
  
- 抽象 
- 封装和数据隐藏 
- 多态 
- 继承 
- 代码的可重用性 
- 
-   类  类规范有两个部分组成 
- 
- 类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 
- 类方法定义:描述如何实现类成员函数 
- 
- &lt;a href=&quot;#类的创建&quot; class=&quot;headerlink&quot; title=&quot;类的创建...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="ts circular button">Read More</a>
+ 存储在每个元素中的值的类型 
+ 数组名&lt;/li...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->

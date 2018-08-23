@@ -88,36 +88,46 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="title-link" style="color: #3498db;">Handler、Looper、Message源码分析</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性</a>
                     <div class="sub header">
                         2018-7-23
                         ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
                         
                     </div>
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 
-    class LooperThread extends Thread {
-      public Handler mHandler;
-
-      public void run() {
-          Looper.prepare();
-
-          mHandler = new Handler() {
-              public void handleMessage(Message msg) {
-                  // process incoming messages here
-              }
-          };
-
-          Looper.loop();
-      }
-  }
+                <p> 线程最主要的目的就是提高程序的运行性能。 
+   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
+ 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
+ 要想通过并发来获得更好的性能，需要努力做好两件事情： 
  
+ 更有效地利用现有处理资源 
+ 在出现新的处理资源时使程序尽可能地利用这些资源。 
+ 
+ &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
 
- &lt;a href=&quot;#Looper&quot; class=&quot;headerl...</p>
-                <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="ts circular button">Read More</a>
+                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
+ 不在线程之间共享该状态变量 
+ 将状态变量修改为不可变的变量 
+&lt;l...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -147,7 +157,7 @@ public class MutableInteger{
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识5_小结/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_小结_并发技巧清单</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -157,41 +167,26 @@ public class MutableInteger{
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
- 不在线程之间共享该状态变量 
- 将状态变量修改为不可变的变量 
-&lt;l...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
+                <p>   并发技巧清单  
+ 可变状态是至关重要的。 
+ 
+ 所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。 
+ 
+ 尽量将域声明为final类型，除非需要它们是可变的。 
+ 不可变对象一定是线程安全的。 
+ 
+ 不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。 
+ 
+ 封装有助于管理复杂性。 
+ 
+ 在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识5_小结/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
- 
- 找出构成对象状态的所有变量。 
- 找出约束状态变量的不变性条件。 
- 简历对象状态的并发访问管理策略 
- 
-   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
- &lt;a href=&quot;#...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="title-link" style="color: #3498db;">C++PrimerPlus类的使用</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -201,25 +196,73 @@ public class MutableInteger{
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 运算符重载 友元函数 
-   运算符重载  重载运算符格式：  operator 可重载运算符(argument-list)  
-  class Time
-{
-private:
-    int hours;
-public:
-    Time operator+(const Time &amp;amp; t) const;
-}
+                <p>   指针  指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 
+   声明和初始化指针  
+ 指针声明必须指定指针指向的数据的类型  typename * name; name是指针(地址)，*name是typename而不是指针 
+ *运算符两边的空格是可选的 
+  int * p1,p2 创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="title-link" style="color: #3498db;">C++PrimerPlus对象和类</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
 
-Time Time::operator+(const Time &amp;amp; t) cosnt
-{
-    Time sum;
-    sum.hours=hours+t.hours;
-    return sum;    
-}
-//Time A,B,C,D;
-A=B+2...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="ts circular button">Read More</a>
+                <p>   面向对象编程  OOP特性： 
+ 
+ 抽象 
+ 封装和数据隐藏 
+ 多态 
+ 继承 
+ 代码的可重用性 
+ 
+   类  类规范有两个部分组成 
+ 
+ 类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 
+ 类方法定义:描述如何实现类成员函数 
+ 
+ &lt;a href=&quot;#类的创建&quot; class=&quot;headerlink&quot; title=&quot;类的创建...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   内联函数  使用方式： 
+ 
+ 在函数声明前加上关键字inline 
+ 在函数定义前加上关键字inline 
+ 
+ 使用内联函数优点 
+ 
+ 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
+ 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
+ 与其他函数一样，可以使用所在类的保护成员及私有成员 
+ 
+ 使用内联函数的缺点 
+ 
+ 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
+ 不允许有循环或者开关语句，如...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -261,7 +304,7 @@ A=B+2...</p>
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="title-link" style="color: #3498db;">C++PrimerPlus处理数据</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -271,65 +314,16 @@ A=B+2...</p>
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   内联函数  使用方式： 
+                <p>   C++变量的命名规则  
+ 在名称中只能使用字母字符、数字和下划线_ 
+ 名称的第一个字符不能使数字 
+ 区分大小写字符与小写字符 
+ 不能将C++关键字用作名称 
+ 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 
+ C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制 
  
- 在函数声明前加上关键字inline 
- 在函数定义前加上关键字inline 
- 
- 使用内联函数优点 
- 
- 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
- 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
- 与其他函数一样，可以使用所在类的保护成员及私有成员 
- 
- 使用内联函数的缺点 
- 
- 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
- 不允许有循环或者开关语句，如...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   指针  指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 
-   声明和初始化指针  
- 指针声明必须指定指针指向的数据的类型  typename * name; name是指针(地址)，*name是typename而不是指针 
- *运算符两边的空格是可选的 
-  int * p1,p2 创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* ...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="title-link" style="color: #3498db;">C++PrimerPlus复合类型</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>  数组    字符串    string    结构    共同体    枚举  
-      
-   数组    数组声明  数组的声明应指出一下三点： 
- 
- 存储在每个元素中的值的类型 
- 数组名&lt;/li...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="ts circular button">Read More</a>
+ &lt;a href=&quot;#整型-short-int-long-long-long&quot; class=...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
