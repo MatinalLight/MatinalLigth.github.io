@@ -88,42 +88,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="title-link" style="color: #3498db;">Handler、Looper、Message源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 
-    class LooperThread extends Thread {
-      public Handler mHandler;
-
-      public void run() {
-          Looper.prepare();
-
-          mHandler = new Handler() {
-              public void handleMessage(Message msg) {
-                  // process incoming messages here
-              }
-          };
-
-          Looper.loop();
-      }
-  }
- 
-
- &lt;a href=&quot;#Looper&quot; class=&quot;headerl...</p>
-                <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -133,15 +98,57 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
+ 不在线程之间共享该状态变量 
+ 将状态变量修改为不可变的变量 
+&lt;l...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识4_基础构建模块/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识4_基础构建模块</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 委托是创建线程安全类的一个最有效的策略：只需让现有的线程安全类管理所有的状态即可。 
+   同步容器类  实现线程安全的方式：将它们的状态封装起来，并对每个公有方法都进行同步，使得每次只有一个线程能访问容器的状态。 
+   同步容器类的问题  在同步容器类中，这些复合操作(迭代，跳转，以及条件运算)在没有客户端加锁的情况下仍然是线程安全的，但其他线程并发地修改容器时，它们可能会表现出意外的行为。 
  
- 找出构成对象状态的所有变量。 
- 找出约束状态变量的不变性条件。 
- 简历对象状态的并发访问管理策略 
+    //在客户端加锁的Vector上的复合操作
+  ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识4_基础构建模块/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试1_避免活跃性危险/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试1_避免活跃性危险</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   死锁    锁顺序死锁  A-&amp;gt;锁住Left-&amp;gt;尝试锁住Right-&amp;gt;永久等待  B—&amp;gt;锁住Right-&amp;gt;尝试锁住Left-&amp;gt;永久等待 
  
-   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
- &lt;a href=&quot;#...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
+    //注意：容易发生死锁
+    public class LeftRightDeadLock{
+        private final Object left=new Object();
+        private final Object right=new Object();
+
+        publ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试1_避免活跃性危险/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -200,29 +207,7 @@ public class MutableInteger{
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识4_基础构建模块/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识4_基础构建模块</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 委托是创建线程安全类的一个最有效的策略：只需让现有的线程安全类管理所有的状态即可。 
-   同步容器类  实现线程安全的方式：将它们的状态封装起来，并对每个公有方法都进行同步，使得每次只有一个线程能访问容器的状态。 
-   同步容器类的问题  在同步容器类中，这些复合操作(迭代，跳转，以及条件运算)在没有客户端加锁的情况下仍然是线程安全的，但其他线程并发地修改容器时，它们可能会表现出意外的行为。 
- 
-    //在客户端加锁的Vector上的复合操作
-  ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识4_基础构建模块/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="title-link" style="color: #3498db;">C++PrimerPlus对象和类</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -232,21 +217,56 @@ public class MutableInteger{
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   面向对象编程  OOP特性： 
+                <p>   内联函数  使用方式： 
  
- 抽象 
- 封装和数据隐藏 
- 多态 
- 继承 
- 代码的可重用性 
+ 在函数声明前加上关键字inline 
+ 在函数定义前加上关键字inline 
  
-   类  类规范有两个部分组成 
+ 使用内联函数优点 
  
- 类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 
- 类方法定义:描述如何实现类成员函数 
+ 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
+ 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
+ 与其他函数一样，可以使用所在类的保护成员及私有成员 
  
- &lt;a href=&quot;#类的创建&quot; class=&quot;headerlink&quot; title=&quot;类的创建...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="ts circular button">Read More</a>
+ 使用内联函数的缺点 
+ 
+ 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
+ 不允许有循环或者开关语句，如...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="title-link" style="color: #3498db;">C++PrimerPlus类的使用</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 运算符重载 友元函数 
+   运算符重载  重载运算符格式：  operator 可重载运算符(argument-list)  
+  class Time
+{
+private:
+    int hours;
+public:
+    Time operator+(const Time &amp;amp; t) const;
+}
+
+Time Time::operator+(const Time &amp;amp; t) cosnt
+{
+    Time sum;
+    sum.hours=hours+t.hours;
+    return sum;    
+}
+//Time A,B,C,D;
+A=B+2...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -288,37 +308,6 @@ public class MutableInteger{
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   内联函数  使用方式： 
- 
- 在函数声明前加上关键字inline 
- 在函数定义前加上关键字inline 
- 
- 使用内联函数优点 
- 
- 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
- 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
- 与其他函数一样，可以使用所在类的保护成员及私有成员 
- 
- 使用内联函数的缺点 
- 
- 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
- 不允许有循环或者开关语句，如...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
                     <div class="sub header">
                         2018-7-23
@@ -340,7 +329,7 @@ public class MutableInteger{
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="title-link" style="color: #3498db;">C++PrimerPlus复合类型</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="title-link" style="color: #3498db;">C++PrimerPlus对象和类</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -350,13 +339,21 @@ public class MutableInteger{
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>  数组    字符串    string    结构    共同体    枚举  
-      
-   数组    数组声明  数组的声明应指出一下三点： 
+                <p>   面向对象编程  OOP特性： 
  
- 存储在每个元素中的值的类型 
- 数组名&lt;/li...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="ts circular button">Read More</a>
+ 抽象 
+ 封装和数据隐藏 
+ 多态 
+ 继承 
+ 代码的可重用性 
+ 
+   类  类规范有两个部分组成 
+ 
+ 类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 
+ 类方法定义:描述如何实现类成员函数 
+ 
+ &lt;a href=&quot;#类的创建&quot; class=&quot;headerlink&quot; title=&quot;类的创建...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->

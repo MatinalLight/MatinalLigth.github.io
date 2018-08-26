@@ -131,24 +131,6 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
-   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
-                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
                     <div class="sub header">
                         2018-7-23
@@ -188,6 +170,24 @@ OkHttpClient client = builder
  在api17以上使用带有end或start的属性替换带有left或reght的属性 例： android:layout_marginEnd=&amp;quot;15dp&amp;quot;  
  使用vector 根据布局方向自动改方向  &amp;lt;vect...</p>
                 <a href="/myblog/2018/08/23/国际化笔记/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
+   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
+                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -234,7 +234,7 @@ Api api = new Retrofit.Builder()
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-结构化并发应用程序3_线程池的使用/" class="title-link" style="color: #3498db;">Java并发编程实战-结构化并发应用程序3_线程池的使用</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-线程简介/" class="title-link" style="color: #3498db;">Java并发编程实战-线程简介</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -244,17 +244,15 @@ Api api = new Retrofit.Builder()
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   在任务与执行策咯之间的隐性耦合  需要明确指定执行策咯的任务： 
+                <p> 进程：每一个程序都在单独的进程中运行 线程：线程允许在同一个进程中同时存在多个控制流，会共享进程范围内的资源，是基本的调度单位 
+   线程的优势？  
+ 发挥多处理器的强大能力 
+ 建模的简单性：执行同一种类型的任务，如Servlet 
+ 异步事件的简单化处理，如异步I/O 
+ 响应更灵敏的用户界面，如将长时间允许的任务放在一个单独的线程中运行，那么事件线程就能及时处理界面事件 
  
-  依赖性任务 
-    大多数行为正确的任务都是独立的：它们不依赖于其他任务的执行时序、执行结果或其他效果.  
- 
-  使用线程封闭机制的任务 
-    单线程的Executor能确保任务不会并发地执行,使你能够放宽代码对线程安全的要求.  
- 
-  对响应时间敏感的任务 
-    如果将一个运行时间较长的任务提交到单线程的Executor中,或者将多个运行时...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-结构化并发应用程序3_线程池的使用/" class="ts circular button">Read More</a>
+   线程带来的风险？&lt;/...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-线程简介/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -278,7 +276,7 @@ Api api = new Retrofit.Builder()
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-高级主题2_构建自定义的同步工具/" class="title-link" style="color: #3498db;">Java并发编程实战-高级主题2_构建自定义的同步工具</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-高级主题3_原子变量与非阻塞同步机制/" class="title-link" style="color: #3498db;">Java并发编程实战-高级主题3_原子变量与非阻塞同步机制</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -288,11 +286,13 @@ Api api = new Retrofit.Builder()
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   状态依赖性的管理  在并发程序中，基于状态的条件可能会由于其他线程的操作而改变：一个资源池可能在几条指令之前还是空的，但现在却变为非空的，因为另一个线程可能会返回一个元素到资源池。依赖状态的操作可以一直阻塞直到可以继续执行，这比使它们先失败再实现起来要更为方便且更不易出错。 
- 有界缓存提供的put和take操作中都包含有一个前提条件：不能从空缓存中获取元素，也不能将元素放入已满的缓存中。当前提条件未满足时，依赖状态的操作可以抛出一个异常或返回一个错误状态(使其成为调用者的一个问题)，也可以保持阻塞直到对象进入正确的状态。 
-  有界缓存的几种实现:  
- 每种实现...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题2_构建自定义的同步工具/" class="ts circular button">Read More</a>
+                <p>   锁的劣势  
+  如果在基于锁的类中包含有细粒度的操作(例如同步容器类，在其大多数方法中只包含了少量操作)，那么在当锁上存在着激烈的竞争时，调度开销与工作开销的比值会非常高。 
+ 
+  当一个线程正在等待锁时，它不能做任何其他事情。如果被阻塞线程的优先级较高，而持有锁的线程优先级较低，就会产生 “优先级反转” 。即使高优先级的线程可以抢先执行，但仍然需要等待锁被释放，从而导致它的优先级会将至低优先级线程的级别。 
+ 
+  与锁相比，volatile变量是一种更轻量级的同步机制，因为在使用这些变量时不会发生上下文切换货线程调度等操作。然而，volatile变量同...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题3_原子变量与非阻塞同步机制/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
