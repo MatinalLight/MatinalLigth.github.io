@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://matinallight.github.io/2018/08/23/AsyncTask源码分析/index.html">
 <meta property="og:site_name" content="学习笔记">
 <meta property="og:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
-<meta property="og:updated_time" content="2018-08-23T10:58:29.384Z">
+<meta property="og:updated_time" content="2018-08-23T13:47:21.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AsyncTask源码分析">
 <meta name="twitter:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
@@ -133,7 +133,7 @@
 <li>Params，执行时发送给任务的参数类型。</li>
 <li>Progress，后台计算期间发布的进度单元的类型。</li>
 <li>Result，背景计算结果的类型。</li>
-<li>要将类型标记为未使用，只需使用以下类型Void：<pre>
+<li>要将类型标记为未使用，只需使用以下类型Void：<br><pre>
 private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
 </void,></pre>
 
@@ -150,7 +150,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
 <ul>
 <li>必须在UI线程上加载AsyncTask类。这是自动完成的Build.VERSION_CODES.JELLY_BEAN。</li>
 <li>必须在UI线程上创建任务实例。<br>execute(Params…) 必须在UI线程上调用。</li>
-<li>不要叫onPreExecute()，onPostExecute(Result)， doInBackground(Params…)，onProgressUpdate(Progress…)手动。</li>
+<li>不要手动调用onPreExecute()，onPostExecute(Result)， doInBackground(Params…)，onProgressUpdate(Progress…)。</li>
 <li>该任务只能执行一次（如果尝试第二次执行，则会抛出异常。） </li>
 </ul>
 <h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><p>首次引入时，AsyncTasks在单个后台线程上串行执行。从开始Build.VERSION_CODES.DONUT(Android 1.6)，这被改为一个线程池，允许多个任务并行运行。从开始 Build.VERSION_CODES.HONEYCOMB(Android 3.0)，任务在单个线程上执行，以避免由并行执行引起的常见应用程序错误。</p>
@@ -403,12 +403,16 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
         <hr/>
         <div class="next-prev-post-section">
             
-                <a href="#"></a>
-            
-            
-                <a href="/myblog/2018/08/23/程序员誓言/" class="styled-border">
+                <a href="/myblog/2018/08/25/Java容器类/" class="styled-border">
+                    ←
+                    Java容器类
                     
-                    The Programmer&#39;s Oath
+                </a>
+            
+            
+                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="styled-border">
+                    
+                    RxJava2 源码分析
                     →
                 </a>
             
