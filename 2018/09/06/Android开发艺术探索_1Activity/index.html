@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://matinallight.github.io/2018/09/06/Android开发艺术探索_1Activity/index.html">
 <meta property="og:site_name" content="学习笔记">
 <meta property="og:description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
-<meta property="og:updated_time" content="2018-09-06T16:19:58.601Z">
+<meta property="og:updated_time" content="2018-09-06T16:24:33.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android开发艺术探索_1Activity">
 <meta name="twitter:description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
@@ -141,10 +141,14 @@
 <li>singleInstance:单独创建一个新的栈，不论启动几次都只有一个实例。</li>
 </ul>
 <h4 id="指定启动模式的方式"><a href="#指定启动模式的方式" class="headerlink" title="指定启动模式的方式"></a>指定启动模式的方式</h4><ul>
-<li><p>AndroidMenifest<br><br>这种方式无法直接为Actvitiy设定FLAG_ACTIVITY_CLEAR_TOP表示。<br><pre><br>&lt;activity</pre></p>
-<pre><code>  android:name=&quot;.MainActivity&quot;
-  android:launchMode=&quot;singleTask&quot; /&amp;gt;
-</code></pre><p></p>
+<li><p>AndroidMenifest<br><br>这种方式无法直接为Actvitiy设定FLAG_ACTIVITY_CLEAR_TOP表示。<br></p>
+<pre>
+&lt;activity
+  android:name=".MainActivity"
+  android:launchMode="singleTask" /&gt;
+</pre>
+</li>
+<li><p>Intent中设置标志位<br><br>这种方式无法为Activity指定singleInstance模式。</p>
 <ul>
 <li>FLAG_ACTIVITY_NEW_TASK：相当于standard</li>
 <li>FLAG_ACTIVITY_SINGLE_TOP：相当于singleTop</li>
@@ -152,9 +156,7 @@
 <li>FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS：Acticity不会出现在栈列表里，等同于在XML中指定Activity的属性android:excludeFromRecents=”true”。</li>
 </ul>
 </li>
-<li>Intent中设置标志位<br></li>
 </ul>
-<p>这种方式无法为Activity指定singleInstance模式。</p>
 <pre><code>
  Intent intent=new Intent();
  intent.setClass(Main1Activity.class,SecondActivity.class);
