@@ -88,31 +88,6 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 线程最主要的目的就是提高程序的运行性能。 
-   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
- 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
- 要想通过并发来获得更好的性能，需要努力做好两件事情： 
- 
- 更有效地利用现有处理资源 
- 在出现新的处理资源时使程序尽可能地利用这些资源。 
- 
- &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试1_避免活跃性危险/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试1_避免活跃性危险</a>
                     <div class="sub header">
                         2018-7-23
@@ -132,6 +107,138 @@
 
         publ...</p>
                 <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试1_避免活跃性危险/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="title-link" style="color: #3498db;">Handler、Looper、Message源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 
+    class LooperThread extends Thread {
+      public Handler mHandler;
+
+      public void run() {
+          Looper.prepare();
+
+          mHandler = new Handler() {
+              public void handleMessage(Message msg) {
+                  // process incoming messages here
+              }
+          };
+
+          Looper.loop();
+      }
+  }
+ 
+
+ &lt;a href=&quot;#Looper&quot; class=&quot;headerl...</p>
+                <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
+ 不在线程之间共享该状态变量 
+ 将状态变量修改为不可变的变量 
+&lt;l...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识5_小结/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_小结_并发技巧清单</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   并发技巧清单  
+ 可变状态是至关重要的。 
+ 
+ 所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。 
+ 
+ 尽量将域声明为final类型，除非需要它们是可变的。 
+ 不可变对象一定是线程安全的。 
+ 
+ 不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。 
+ 
+ 封装有助于管理复杂性。 
+ 
+ 在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识5_小结/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+ 
+ 找出构成对象状态的所有变量。 
+ 找出约束状态变量的不变性条件。 
+ 简历对象状态的并发访问管理策略 
+ 
+   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
+ &lt;a href=&quot;#...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识2_对象的共享</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
+   失效数据  get和set在没有同步的情况下访问value 
+ 
+@NotThreadSafe
+public class MutableInteger{
+    private int value;
+
+   ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -168,97 +275,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
- 不在线程之间共享该状态变量 
- 将状态变量修改为不可变的变量 
-&lt;l...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识4_基础构建模块/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识4_基础构建模块</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 委托是创建线程安全类的一个最有效的策略：只需让现有的线程安全类管理所有的状态即可。 
-   同步容器类  实现线程安全的方式：将它们的状态封装起来，并对每个公有方法都进行同步，使得每次只有一个线程能访问容器的状态。 
-   同步容器类的问题  在同步容器类中，这些复合操作(迭代，跳转，以及条件运算)在没有客户端加锁的情况下仍然是线程安全的，但其他线程并发地修改容器时，它们可能会表现出意外的行为。 
- 
-    //在客户端加锁的Vector上的复合操作
-  ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识4_基础构建模块/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识2_对象的共享</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
-   失效数据  get和set在没有同步的情况下访问value 
- 
-@NotThreadSafe
-public class MutableInteger{
-    private int value;
-
-   ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
- 
- 找出构成对象状态的所有变量。 
- 找出约束状态变量的不变性条件。 
- 简历对象状态的并发访问管理策略 
- 
-   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
- &lt;a href=&quot;#...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="title-link" style="color: #3498db;">C++PrimerPlus函数</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -268,12 +285,27 @@ public class MutableInteger{
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   指针  指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 
-   声明和初始化指针  
- 指针声明必须指定指针指向的数据的类型  typename * name; name是指针(地址)，*name是typename而不是指针 
- *运算符两边的空格是可选的 
-  int * p1,p2 创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* ...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="ts circular button">Read More</a>
+                <p>   函数  如何使用函数 
+ 
+ 提供函数定义 
+ 提供函数原型 
+ 调用函数 
+ 
+ 函数定义 
+ 
+  无返回值 
+  void functionName(parameterList)
+{
+  statement(s)
+  return; //optional
+}
+   
+  有返回值 
+  typeName functionName(parameterList)
+{
+  statements
+  return value;//value is type cast to type typ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
