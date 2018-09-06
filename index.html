@@ -173,7 +173,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/国际化笔记/" class="title-link" style="color: #3498db;">国际化适配笔记</a>
+                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -183,12 +183,14 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   resource  
- 是否支持rtl 从右到左布局方式   在清单文件中配置   
- 设置组件xml属性 android:layoutDirection=”ltr”强制设置布局方法 
- 在api17以上使用带有end或start的属性替换带有left或reght的属性 例： android:layout_marginEnd=&amp;quot;15dp&amp;quot;  
- 使用vector 根据布局方向自动改方向  &amp;lt;vect...</p>
-                <a href="/myblog/2018/08/23/国际化笔记/" class="ts circular button">Read More</a>
+                <p> 根据 okhttp 使用，分析每一步相关源码 
+ 
+OkHttpClient.Builder builder = new OkHttpClient.Builder();
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+OkHttpClient client = builder
+    .addNetworkInterceptor(ne...</p>
+                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -235,6 +237,27 @@ Api api = new Retrofit.Builder()
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/国际化笔记/" class="title-link" style="color: #3498db;">国际化适配笔记</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   resource  
+ 是否支持rtl 从右到左布局方式   在清单文件中配置   
+ 设置组件xml属性 android:layoutDirection=”ltr”强制设置布局方法 
+ 在api17以上使用带有end或start的属性替换带有left或reght的属性 例： android:layout_marginEnd=&amp;quot;15dp&amp;quot;  
+ 使用vector 根据布局方向自动改方向  &amp;lt;vect...</p>
+                <a href="/myblog/2018/08/23/国际化笔记/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
                     <div class="sub header">
                         2018-7-23
@@ -253,30 +276,7 @@ Api api = new Retrofit.Builder()
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 根据 okhttp 使用，分析每一步相关源码 
- 
-OkHttpClient.Builder builder = new OkHttpClient.Builder();
-HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-OkHttpClient client = builder
-    .addNetworkInterceptor(ne...</p>
-                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-高级主题4_Java内存模型/" class="title-link" style="color: #3498db;">Java并发编程实战-高级主题4_Java内存模型</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试3_并发程序的测试/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试3_并发程序的测试</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -286,9 +286,23 @@ OkHttpClient client = builder
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   什么是内存模型，为什么需要它    平台的内存模型  为了使Java开发人员无须关系不同架构上内存模型之间的差异，Java还提供了自己的内存模型，并且JVM通过在适当的位置上插入内存栅栏来屏蔽JMM与底层平台内存模型之间的差异。 
-   重排序  如果没有同步，那么推断处执行顺序将是非常困难的，而要确保在...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题4_Java内存模型/" class="ts circular button">Read More</a>
+                <p> 并发测试大致分飞两类： 
+ 
+ 安全性测试： 不发生任何错误的行为  
+ 活跃性测试： 某个良好的行为终究会发生  
+ 进展测试 
+ 无进展测试 
+ 
+ 
+ 
+ 性能通过多个方面来衡量： 
+ 
+ 吞吐量：指一组并发任务中已经完成任务所占的比例。 
+ 响应性：指请求从发出到完成之间的时间(也称为延迟)。 
+ 可伸缩性：指在增加更多资源的情况下(通常指CPU)，吞吐量(或者缓解短缺)的提升情况。 
+ 
+   正确性测试  在为某个并发类设计单元测试时...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试3_并发程序的测试/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
