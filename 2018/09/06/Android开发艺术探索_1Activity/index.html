@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://matinallight.github.io/2018/09/06/Android开发艺术探索_1Activity/index.html">
 <meta property="og:site_name" content="学习笔记">
 <meta property="og:description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
-<meta property="og:updated_time" content="2018-09-06T16:10:42.147Z">
+<meta property="og:updated_time" content="2018-09-06T16:19:58.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android开发艺术探索_1Activity">
 <meta name="twitter:description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
@@ -141,18 +141,17 @@
 <li>singleInstance:单独创建一个新的栈，不论启动几次都只有一个实例。</li>
 </ul>
 <h4 id="指定启动模式的方式"><a href="#指定启动模式的方式" class="headerlink" title="指定启动模式的方式"></a>指定启动模式的方式</h4><ul>
-<li>AndroidMenifest<br></li>
+<li><p>AndroidMenifest<br><br>这种方式无法直接为Actvitiy设定FLAG_ACTIVITY_CLEAR_TOP表示。<br><pre><br>&lt;activity</pre></p>
+<pre><code>  android:name=&quot;.MainActivity&quot;
+  android:launchMode=&quot;singleTask&quot; /&amp;gt;
+</code></pre><p></p>
+<ul>
+<li>FLAG_ACTIVITY_NEW_TASK：相当于standard</li>
+<li>FLAG_ACTIVITY_SINGLE_TOP：相当于singleTop</li>
+<li>FLAG_ACTIVITY_CLEAR_TOP：相当于singleTask</li>
+<li>FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS：Acticity不会出现在栈列表里，等同于在XML中指定Activity的属性android:excludeFromRecents=”true”。</li>
 </ul>
-<p>这种方式无法直接为Actvitiy设定FLAG_ACTIVITY_CLEAR_TOP表示。</p>
-<pre><code>
- <activity android:name=".MainActivity" android:launchmode="singleTask">
-</activity></code></pre>
-
-<pre><code>* FLAG_ACTIVITY_NEW_TASK：相当于standard
-* FLAG_ACTIVITY_SINGLE_TOP：相当于singleTop
-* FLAG_ACTIVITY_CLEAR_TOP：相当于singleTask
-* FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS：Acticity不会出现在栈列表里，等同于在XML中指定Activity的属性android:excludeFromRecents=&quot;true&quot;。
-</code></pre><ul>
+</li>
 <li>Intent中设置标志位<br></li>
 </ul>
 <p>这种方式无法为Activity指定singleInstance模式。</p>
@@ -182,7 +181,7 @@
 </ul>
 <p>Intent中的action必须能够和过滤规则中的action匹配(字符串值完全一样)，如果一个过滤规则中有多个action，那么只要Intent中的action能够匹配过滤规则中的任意一个action即可。</p>
 <ul>
-<li><p>category的匹配规则：使用 Android:category 属性用来指定在什么样的环境下动作才被响应。<br></p>
+<li><p>category的匹配规则：使用 Android:category 属性用来指定在什么样的环境下动作才被响应。<br><br>Intent中如果含有category，那么所有的category都必须和过滤规则中的其中一个categroy相同。</p>
 <ul>
 <li><p>ALTERNATIVE<br>你将在这章的后面所看到的，一个 Intent Filter 的用途是使用动作来帮忙填入上下文菜单。 ALTERNATIVE 种类指定，在某种数据类型的项目上可以替代默认执行的动作。例如，一个联系人的默认动作时浏览它，替代的可能是去编辑或删除它。</p>
 </li>
@@ -201,8 +200,6 @@
 </ul>
 </li>
 </ul>
-<p>作者：柒黍<br>链接：<a href="https://www.jianshu.com/p/44d7bbe33efc" target="_blank" rel="external">https://www.jianshu.com/p/44d7bbe33efc</a><br>來源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
-<p>Intent中如果含有category，那么所有的category都必须和过滤规则中的其中一个categroy相同。</p>
 <ul>
 <li><p>data的匹配规则<br></p>
 <ul>

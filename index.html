@@ -173,27 +173,6 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/国际化笔记/" class="title-link" style="color: #3498db;">国际化适配笔记</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   resource  
- 是否支持rtl 从右到左布局方式   在清单文件中配置   
- 设置组件xml属性 android:layoutDirection=”ltr”强制设置布局方法 
- 在api17以上使用带有end或start的属性替换带有left或reght的属性 例： android:layout_marginEnd=&amp;quot;15dp&amp;quot;  
- 使用vector 根据布局方向自动改方向  &amp;lt;vect...</p>
-                <a href="/myblog/2018/08/23/国际化笔记/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
                     <div class="sub header">
                         2018-7-23
@@ -212,7 +191,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="title-link" style="color: #3498db;">Retrofit 源码分析</a>
+                    <a href="/myblog/2018/08/23/国际化笔记/" class="title-link" style="color: #3498db;">国际化适配笔记</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -222,14 +201,12 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 根据 Retrofit 使用，分析每一步相关源码 
- 
-Api api = new Retrofit.Builder()
-    .baseUrl(BASE_URL)//配置生产或测试环境
-    .client(getOkHttpClient())//HTTP 请求
-    .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数对象和json转换器
-    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Call转换为Rxjava的Observ...</p>
-                <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="ts circular button">Read More</a>
+                <p>   resource  
+ 是否支持rtl 从右到左布局方式   在清单文件中配置   
+ 设置组件xml属性 android:layoutDirection=”ltr”强制设置布局方法 
+ 在api17以上使用带有end或start的属性替换带有left或reght的属性 例： android:layout_marginEnd=&amp;quot;15dp&amp;quot;  
+ 使用vector 根据布局方向自动改方向  &amp;lt;vect...</p>
+                <a href="/myblog/2018/08/23/国际化笔记/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -276,7 +253,30 @@ OkHttpClient client = builder
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-高级主题4_Java内存模型/" class="title-link" style="color: #3498db;">Java并发编程实战-高级主题4_Java内存模型</a>
+                    <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="title-link" style="color: #3498db;">Retrofit 源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 根据 Retrofit 使用，分析每一步相关源码 
+ 
+Api api = new Retrofit.Builder()
+    .baseUrl(BASE_URL)//配置生产或测试环境
+    .client(getOkHttpClient())//HTTP 请求
+    .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数对象和json转换器
+    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Call转换为Rxjava的Observ...</p>
+                <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-高级主题2_构建自定义的同步工具/" class="title-link" style="color: #3498db;">Java并发编程实战-高级主题2_构建自定义的同步工具</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -286,9 +286,11 @@ OkHttpClient client = builder
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   什么是内存模型，为什么需要它    平台的内存模型  为了使Java开发人员无须关系不同架构上内存模型之间的差异，Java还提供了自己的内存模型，并且JVM通过在适当的位置上插入内存栅栏来屏蔽JMM与底层平台内存模型之间的差异。 
-   重排序  如果没有同步，那么推断处执行顺序将是非常困难的，而要确保在...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题4_Java内存模型/" class="ts circular button">Read More</a>
+                <p>   状态依赖性的管理  在并发程序中，基于状态的条件可能会由于其他线程的操作而改变：一个资源池可能在几条指令之前还是空的，但现在却变为非空的，因为另一个线程可能会返回一个元素到资源池。依赖状态的操作可以一直阻塞直到可以继续执行，这比使它们先失败再实现起来要更为方便且更不易出错。 
+ 有界缓存提供的put和take操作中都包含有一个前提条件：不能从空缓存中获取元素，也不能将元素放入已满的缓存中。当前提条件未满足时，依赖状态的操作可以抛出一个异常或返回一个错误状态(使其成为调用者的一个问题)，也可以保持阻塞直到对象进入正确的状态。 
+  有界缓存的几种实现:  
+ 每种实现...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-高级主题2_构建自定义的同步工具/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
