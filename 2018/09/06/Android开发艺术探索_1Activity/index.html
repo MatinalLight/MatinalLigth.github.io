@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android开发艺术探索_1Activity | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发艺术探索_1Activity">
+<meta property="og:url" content="https://matinallight.github.io/2018/09/06/Android开发艺术探索_1Activity/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
+<meta property="og:updated_time" content="2018-09-06T16:10:42.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发艺术探索_1Activity">
+<meta name="twitter:description" content="Activity的是生命周期和启动模式生命周期正常情况的执行顺序 onCreate:表示Activity正在被创建，这是生命周期的第一个方法。 onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。 onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。 onR">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Android开发艺术探索_1Activity</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/8/6 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="Activity的是生命周期和启动模式"><a href="#Activity的是生命周期和启动模式" class="headerlink" title="Activity的是生命周期和启动模式"></a>Activity的是生命周期和启动模式</h2><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="正常情况的执行顺序"><a href="#正常情况的执行顺序" class="headerlink" title="正常情况的执行顺序"></a>正常情况的执行顺序</h4><ol>
+<li>onCreate:表示Activity正在被创建，这是生命周期的第一个方法。</li>
+<li>onRestart:表示Activity正在重新启动。一般情况下，当当前Activity从不可见重新变为可见状态时，就会被调用。</li>
+<li>onStart:表示Activity正在被启动，这时Activity已经可见了，但是还没有出现在前台，无法和用户交互。</li>
+<li>onResume:表示Activity已经可见了，并且出现在前台并开始活动。</li>
+<li>onPause:表示activity正在停止，正常情况下，紧接着onStop就会被调用。在特殊情况下，如果这个时候快速地再回到当前Activity，那么onResume会被调用。</li>
+<li>onStop:表示Activity即将停止。</li>
+<li>onDestory:表示Activity即将被销毁。</li>
+</ol>
+<h4 id="出现不同执行顺序得情况"><a href="#出现不同执行顺序得情况" class="headerlink" title="出现不同执行顺序得情况"></a>出现不同执行顺序得情况</h4><ul>
+<li>第一次启动：onCreate-&gt;onStart-&gt;onResume。</li>
+<li>当用户打开新得Activity或着切换到桌面得时候，回调如下:onPause-&gt;onStop。如果Activity采用了透明主题，那么当前Activity不会回调onStop。</li>
+<li>当前用户再次回到原Activity时，回调如下:onRestart-&gt;onStart-&gt;onResume。</li>
+<li>当用户按back键回退时，回调如下:onPause-&gt;onStop-&gt;onDestory。</li>
+<li>当前Activity为A，如果这时用户打开一个新Activity B，先执行A得onPause再启动B。</li>
+</ul>
+<h4 id="异常情况的执行顺序"><a href="#异常情况的执行顺序" class="headerlink" title="异常情况的执行顺序"></a>异常情况的执行顺序</h4><ul>
+<li>资源相关的系统配置发生改变导致Activity被杀死并重新创建。<br><ul>
+<li>onSaveInstanceState会在onStop之前，可能在onPause之前也可能在onPause之后调用。</li>
+<li>当activity恢复时，会调用onCreate和onRestoreInstanceState，当onRestoreInstanceState被调用时，其参数savedInstanceState一定是有值的，onCreate如果是正常启动的话，其参数savedInstanceState为null，所以用来恢复数据时需要加非空判断。<b>建议使用onRestoreInstanceState恢复数据</b>。</li>
+<li>如果系统配置发生改变时，不影响Activity，可以给Activity制定configChanges属性。<br><pre>android:configChanges="orientation|keyboardHidden"</pre></li>
+</ul>
+</li>
+<li>资源不足导致低优先级的Activity被杀死。<br><ul>
+<li>前台Activity————正在与用户交互的Activity，优先级最高。</li>
+<li>可见但非前台的Activity————如Activity中弹出一个对话框。</li>
+<li>后台Activity————已经暂停的Activity，如执行了onStop，优先级最低。</li>
+</ul>
+</li>
+</ul>
+<h3 id="启动模式"><a href="#启动模式" class="headerlink" title="启动模式"></a>启动模式</h3><ul>
+<li>standard:标准模式，也是系统默认模式。依次加入栈顶。<ul>
+<li>如果用ApplicationContext启动standard模式的Activity，需要为待启动的Activity指定FLAG_ACTIVITY_NEW_TASK标记位，这样会创建一个个新的任务栈，实际上是以singleTask模式启动的。 </li>
+</ul>
+</li>
+<li>singleTop:栈顶复用模式。栈ABCD，A位于栈底，D位于栈顶，再次启动D时，D被复用不会调用onCreate，而是调用onNewIntent，栈仍然时ABCD。</li>
+<li>singleTask:栈内复用模式。这是一种单实例模式，只要Activity再一个栈中存在，那么再次启动时会清空栈内这个Actviity上面所有Activity，并调用onNewIntent。</li>
+<li>singleInstance:单独创建一个新的栈，不论启动几次都只有一个实例。</li>
+</ul>
+<h4 id="指定启动模式的方式"><a href="#指定启动模式的方式" class="headerlink" title="指定启动模式的方式"></a>指定启动模式的方式</h4><ul>
+<li>AndroidMenifest<br></li>
+</ul>
+<p>这种方式无法直接为Actvitiy设定FLAG_ACTIVITY_CLEAR_TOP表示。</p>
+<pre><code>
+ <activity android:name=".MainActivity" android:launchmode="singleTask">
+</activity></code></pre>
+
+<pre><code>* FLAG_ACTIVITY_NEW_TASK：相当于standard
+* FLAG_ACTIVITY_SINGLE_TOP：相当于singleTop
+* FLAG_ACTIVITY_CLEAR_TOP：相当于singleTask
+* FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS：Acticity不会出现在栈列表里，等同于在XML中指定Activity的属性android:excludeFromRecents=&quot;true&quot;。
+</code></pre><ul>
+<li>Intent中设置标志位<br></li>
+</ul>
+<p>这种方式无法为Activity指定singleInstance模式。</p>
+<pre><code>
+ Intent intent=new Intent();
+ intent.setClass(Main1Activity.class,SecondActivity.class);
+ intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+ startActivity(intent);
+</code></pre>
+
+<h3 id="IntentFilter的匹配规则"><a href="#IntentFilter的匹配规则" class="headerlink" title="IntentFilter的匹配规则"></a>IntentFilter的匹配规则</h3><pre><code>
+ &lt;activity
+    android:name=".ui.LoginActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:screenOrientation="portrait"
+    android:theme="@style/AppTheme.Transparent"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.MAIN" /&gt;
+        &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+        &lt;data android:mimeType="text/plain"/&gt;
+    &lt;/intent-filter&gt;
+ &lt;/activity&gt;
+</code></pre>
+
+<ul>
+<li>action的匹配规则：使用 android:name 特性来指定对响应的动作名。<br></li>
+</ul>
+<p>Intent中的action必须能够和过滤规则中的action匹配(字符串值完全一样)，如果一个过滤规则中有多个action，那么只要Intent中的action能够匹配过滤规则中的任意一个action即可。</p>
+<ul>
+<li><p>category的匹配规则：使用 Android:category 属性用来指定在什么样的环境下动作才被响应。<br></p>
+<ul>
+<li><p>ALTERNATIVE<br>你将在这章的后面所看到的，一个 Intent Filter 的用途是使用动作来帮忙填入上下文菜单。 ALTERNATIVE 种类指定，在某种数据类型的项目上可以替代默认执行的动作。例如，一个联系人的默认动作时浏览它，替代的可能是去编辑或删除它。</p>
+</li>
+<li><p>SELECTED_ALTERNATIVE<br>与 ALTERNATIVE 类似，但 ALTERNATIVE 总是使用下面所述的 Intent 解析来指向单一的动作。SELECTED_ALTERNATIVE在需要一个可能性列表时使用。</p>
+</li>
+<li><p>BROWSABLE<br>指定在浏览器中的动作。当 Intent 在浏览器中被引发，都会被指定成 BROWSABLE 种类。</p>
+</li>
+<li><p>DEFAULT<br>设置这个种类来让组件成为 Intent Filter 中定义的 data 的默认动作。这对使用显式 Intent 启动的 Activity 来说也是必要的。</p>
+</li>
+<li><p>GADGET<br>通过设置 GADGET 种类，你可以指定这个 Activity 可以嵌入到其他的 Activity 来允许。</p>
+</li>
+<li><p>HOME<br>HOME Activity 是设备启动（登陆屏幕）时显示的第一个 Activity 。通过指定 Intent Filter 为 HOME 种类而不指定动作的话，你正在将其设为本地 home 画面的替代。</p>
+</li>
+<li><p>LAUNCHER<br>使用这个种类来让一个 Activity 作为应用程序的启动项。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>作者：柒黍<br>链接：<a href="https://www.jianshu.com/p/44d7bbe33efc" target="_blank" rel="external">https://www.jianshu.com/p/44d7bbe33efc</a><br>來源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+<p>Intent中如果含有category，那么所有的category都必须和过滤规则中的其中一个categroy相同。</p>
+<ul>
+<li><p>data的匹配规则<br></p>
+<ul>
+<li>scheme: URI的模式,如http、file、content。</li>
+<li>host:URI的主机名,如www.baidu.com。</li>
+<li>port:URI的端口号。</li>
+<li>path、pathPattern、pathPrefix:路径信息。</li>
+<li>mimeType:媒体类型，如image/ipeg。</li>
+</ul>
+</li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="#"></a>
+            
+            
+                <a href="/myblog/2018/08/29/ButterKnife源码分析/" class="styled-border">
+                    
+                    ButterKnife源码分析
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

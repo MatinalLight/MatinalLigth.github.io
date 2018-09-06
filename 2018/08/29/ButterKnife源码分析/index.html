@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ButterKnife源码分析 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ButterKnife源码分析使用规则用法  /**   * 关于我们   */  public class AboutUsActivity extends SwipeBackActivity {     @BindView(R.id.toolbar_title)     TextView toolbarTitle;     @BindView(R.id.aau_version_tv)     T">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ButterKnife源码分析">
+<meta property="og:url" content="https://matinallight.github.io/2018/08/29/ButterKnife源码分析/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="ButterKnife源码分析使用规则用法  /**   * 关于我们   */  public class AboutUsActivity extends SwipeBackActivity {     @BindView(R.id.toolbar_title)     TextView toolbarTitle;     @BindView(R.id.aau_version_tv)     T">
+<meta property="og:updated_time" content="2018-09-01T04:40:49.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ButterKnife源码分析">
+<meta name="twitter:description" content="ButterKnife源码分析使用规则用法  /**   * 关于我们   */  public class AboutUsActivity extends SwipeBackActivity {     @BindView(R.id.toolbar_title)     TextView toolbarTitle;     @BindView(R.id.aau_version_tv)     T">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">ButterKnife源码分析</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/7/29 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="ButterKnife源码分析"><a href="#ButterKnife源码分析" class="headerlink" title="ButterKnife源码分析"></a>ButterKnife源码分析</h2><h3 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h3><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><pre><code>
+ /**
+  * 关于我们
+  */
+ public class AboutUsActivity extends SwipeBackActivity {
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.aau_version_tv)
+    TextView aauVersionTv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_about_us);
+        ButterKnife.bind(this);
+        MobclickAgent.onEvent(this, "aboutUsActivity");
+        toolbarTitle.setText(getResources().getString(R.string.about_us));
+        aauVersionTv.setText(String.format("V:%s", AppUtils.getVersionName(this)));
+    }
+
+    @OnClick(R.id.toolbar_left)
+    public void onViewClicked() {
+        onBackPressed();
+    }
+ }
+
+</code></pre>
+
+<h3 id="ButterKnife-bind-this"><a href="#ButterKnife-bind-this" class="headerlink" title="ButterKnife.bind(this);"></a>ButterKnife.bind(this);</h3><ul>
+<li>调用createBinding(Object target, View source)</li>
+<li>再通过findBindingConstructorForClass(target.getClass())查找调用bind()方法的类名_ViewBinding的类的构造器对象</li>
+<li>初始化_ViewBinding类</li>
+</ul>
+<pre><code>
+  @NonNull @UiThread
+  public static Unbinder bind(@NonNull Activity target) {
+    View sourceView = target.getWindow().getDecorView();
+    return createBinding(target, sourceView);
+  }
+
+  private static Unbinder createBinding(@NonNull Object target, @NonNull View source) {
+    Class<?> targetClass = target.getClass();
+    ...
+    Constructor<? extends Unbinder> constructor = findBindingConstructorForClass(targetClass);
+    ...
+    return constructor.newInstance(target, source);
+    ...
+  }
+
+  @Nullable @CheckResult @UiThread
+  private static Constructor<? extends Unbinder> findBindingConstructorForClass(Class<?> cls) {
+    Constructor<? extends Unbinder> bindingCtor = BINDINGS.get(cls);
+    if (bindingCtor != null) {
+      return bindingCtor;
+    }
+    String clsName = cls.getName();
+    ...
+      Class<?> bindingClass = cls.getClassLoader().loadClass(clsName + "_ViewBinding");
+      //noinspection unchecked
+      bindingCtor = (Constructor<? extends Unbinder>)bindingClass.getConstructor(cls, View.class);
+      ...
+    BINDINGS.put(cls, bindingCtor);
+    return bindingCtor;
+  }
+</code></pre>
+
+<h3 id="AboutUsActivity-ViewBinding"><a href="#AboutUsActivity-ViewBinding" class="headerlink" title="AboutUsActivity_ViewBinding"></a>AboutUsActivity_ViewBinding</h3><p>通过Utils.findRequiredViewAsType(View source,int id,String who,Class<t> cls)给传入的target对象中@BindView的属性赋值，通过Utils.findRequiredView(View source,int id, String who)设置OnClickListener。</t></p>
+<pre><code>
+ public class AboutUsActivity_ViewBinding implements Unbinder {
+   private AboutUsActivity target;
+
+   private View view2131296856;
+
+   @UiThread
+   public AboutUsActivity_ViewBinding(AboutUsActivity target) {
+     this(target, target.getWindow().getDecorView());
+   }
+
+   @UiThread
+   public AboutUsActivity_ViewBinding(final AboutUsActivity target, View  source) {
+     this.target = target;
+
+     View view;
+     target.toolbarTitle = Utils.findRequiredViewAsType(source,  R.id.toolbar_title, "field 'toolbarTitle'", TextView.class);
+     target.aauVersionTv = Utils.findRequiredViewAsType(source, R.id.aau_version_tv, "field 'aauVersionTv'", TextView.class);
+     view = Utils.findRequiredView(source, R.id.toolbar_left, "method 'onViewClicked'");
+     view2131296856 = view;
+     view.setOnClickListener(new DebouncingOnClickListener() {
+       @Override
+       public void doClick(View p0) {
+         target.onViewClicked();
+       }
+     });
+   }
+
+   @Override
+   @CallSuper
+   public void unbind() {
+     AboutUsActivity target = this.target;
+     if (target == null) throw new IllegalStateException("Bindings  already cleared.");
+     this.target = null;
+
+     target.toolbarTitle = null;
+     target.aauVersionTv = null;
+
+     view2131296856.setOnClickListener(null);
+     view2131296856 = null;
+   }
+ }
+
+</code></pre>
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/09/06/Android开发艺术探索_1Activity/" class="styled-border">
+                    ←
+                    Android开发艺术探索_1Activity
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/08/25/Java容器类/" class="styled-border">
+                    
+                    Java容器类
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>
