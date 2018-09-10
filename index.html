@@ -88,6 +88,30 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/09/10/Android开发艺术探索_2单例模式/" class="title-link" style="color: #3498db;">Android开发艺术探索_2单例模式</a>
+                    <div class="sub header">
+                        2018-8-10
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   定义  确保某一个类只有一个实例，二期自行实例化并向整个系统提供这个实例。 
+   实现单例模式的几个关键点  
+ 构造函数不对外开放，一般为Private。 
+ 通过一个静态方法或者枚举返回单例类对象。 
+ 确保单例类的对象有且只有一个，尤其是在多线程环境下。 
+ 确保单例类对象在反序列化时不会重新构建对象。 
+ 
+ &lt;a href=&quot;#饿汉式&quot; class=&quot;headerlink...</p>
+                <a href="/myblog/2018/09/10/Android开发艺术探索_2单例模式/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/09/09/Android源码设计模式_1面向对象的六大原则/" class="title-link" style="color: #3498db;">Android源码设计模式_1面向对象的六大原则</a>
                     <div class="sub header">
                         2018-8-9
@@ -99,7 +123,7 @@
                 <!-- / the end of title bar -->
 
                 <p>   单一职责原则SRP   单一职责原则的定义：就一个类而言，应该仅有一个引起它变化的原因。  
-   开闭原则OCP   开闭原则的定义是：软件中的对象(类、模块、函数等)应该对于扩展是开放的，但是对于修改时封闭的。   实力：对于CustomImageLoader,存储方式是变化的(缓存、本地存储、缓存+本地)，提供一个ImageCache接口，通过扩展ImageCache注入不同的缓存实现。 
+   开闭原则OCP   开闭原则的定义是：软件中的对象(类、模块、函数等)应该对于扩展是开放的，但是对于修改是封闭的。   实力：对于CustomImageLoader,存储方式是变化的(缓存、本地存储、缓存+本地)，提供一个ImageCache接口，通过扩展ImageCache注入不同的缓存实现。 
 &lt;h2 id=&quot;里氏替代原...</p>
                 <a href="/myblog/2018/09/09/Android源码设计模式_1面向对象的六大原则/" class="ts circular button">Read More</a>
             </div>
@@ -183,10 +207,28 @@
 
                 <p>   AsyncTask源码分析    使用规则    用法  
 
- private class DownloadFilesTask extends AsyncTask  {
+ private class DownloadFilesTask extends AsyncTask&amp;lt;URL, Integer, Long&amp;gt; {
      protected Long doInBackground(URL... urls) {
          in...</p>
                 <a href="/myblog/2018/08/23/AsyncTask源码分析/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/转载/">转载</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   The Programmer’s Oath  转自 The Programmer’s Oath  
+ &lt;a href=&quot;#In-ord...</p>
+                <a href="/myblog/2018/08/23/程序员誓言/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -254,42 +296,6 @@ logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLogg
 OkHttpClient client = builder
     .addNetworkInterceptor(ne...</p>
                 <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/转载/">转载</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   The Programmer’s Oath  转自 The Programmer’s Oath  
- &lt;a href=&quot;#In-ord...</p>
-                <a href="/myblog/2018/08/23/程序员誓言/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
-   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
-                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->

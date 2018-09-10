@@ -5,17 +5,17 @@
   
   <title>AsyncTask源码分析 | 学习笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
+  <meta name="description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask&amp;lt;URL, Integer, Long&amp;gt; {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long to">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AsyncTask源码分析">
 <meta property="og:url" content="https://matinallight.github.io/2018/08/23/AsyncTask源码分析/index.html">
 <meta property="og:site_name" content="学习笔记">
-<meta property="og:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
-<meta property="og:updated_time" content="2018-08-23T13:47:21.901Z">
+<meta property="og:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask&amp;lt;URL, Integer, Long&amp;gt; {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long to">
+<meta property="og:updated_time" content="2018-09-10T17:18:23.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AsyncTask源码分析">
-<meta name="twitter:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long totalSize = 0;          for">
+<meta name="twitter:description" content="AsyncTask源码分析使用规则用法   private class DownloadFilesTask extends AsyncTask&amp;lt;URL, Integer, Long&amp;gt; {      protected Long doInBackground(URL... urls) {          int count = urls.length;          long to">
   
     <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
   
@@ -103,7 +103,7 @@
 
                 <h2 id="AsyncTask源码分析"><a href="#AsyncTask源码分析" class="headerlink" title="AsyncTask源码分析"></a>AsyncTask源码分析</h2><h3 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h3><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><pre>
 
- private class DownloadFilesTask extends AsyncTask<url, integer,="" long=""> {
+ private class DownloadFilesTask extends AsyncTask&lt;URL, Integer, Long&gt; {
      protected Long doInBackground(URL... urls) {
          int count = urls.length;
          long totalSize = 0;
@@ -127,15 +127,15 @@
 
   new DownloadFilesTask().execute(url1, url2, url3);
 
-</url,></pre>
+</pre>
 
 <h4 id="AsyncTask的泛型类型"><a href="#AsyncTask的泛型类型" class="headerlink" title="AsyncTask的泛型类型"></a>AsyncTask的泛型类型</h4><ol>
 <li>Params，执行时发送给任务的参数类型。</li>
 <li>Progress，后台计算期间发布的进度单元的类型。</li>
 <li>Result，背景计算结果的类型。</li>
 <li>要将类型标记为未使用，只需使用以下类型Void：<br><pre>
-private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
-</void,></pre>
+private class MyTask extends AsyncTask&lt;Void, Void, Void&gt; { ... }
+</pre>
 
 </li>
 </ol>
@@ -214,7 +214,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
             ? getMainHandler()
             : new Handler(callbackLooper);
 
-     mWorker = new WorkerRunnable<params, result="">() {
+     mWorker = new WorkerRunnable&lt;Params, Result&gt;() {
          public Result call() throws Exception {
              mTaskInvoked.set(true);
              Result result = null;
@@ -233,7 +233,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
          }
      };
 
-     mFuture = new FutureTask<result>(mWorker) {
+     mFuture = new FutureTask&lt;Result&gt;(mWorker) {
          @Override
          protected void done() {
              try {
@@ -250,7 +250,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
      };
  }
 
-</result></params,></result></params,></pre>
+</result></params,></pre>
 
 <p><strong><br>通过ArrayDeque(线程不安全，当用作堆栈时，此类可能比Stack快，并且在用作队列时比LinkedList更快)缓存任务，如果执行任务失败调用scheduleNext();执行下一个任务，如果下一个任务为空，继续执行下一个任务<br></strong></p>
 <pre>
@@ -259,7 +259,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
  public static final Executor SERIAL_EXECUTOR = new SerialExecutor();
 
  private static class SerialExecutor implements Executor {
-     final ArrayDeque<runnable> mTasks = new ArrayDeque<runnable>();
+     final ArrayDeque&lt;Runnable&gt; mTasks = new ArrayDeque&lt;Runnable&gt;();
      Runnable mActive;
 
      public synchronized void execute(final Runnable r) {
@@ -284,7 +284,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
      }
  }
 
-</runnable></runnable></pre>
+</pre>
 
 <h5 id="getMainHandler-创建主线程handler"><a href="#getMainHandler-创建主线程handler" class="headerlink" title="getMainHandler() 创建主线程handler"></a>getMainHandler() 创建主线程handler</h5><pre>
 
@@ -305,7 +305,7 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
      @SuppressWarnings({"unchecked", "RawUseOfParameterizedType"})
      @Override
      public void handleMessage(Message msg) {
-         AsyncTaskResult<?> result = (AsyncTaskResult<?>) msg.obj;
+         AsyncTaskResult&lt;?&gt; result = (AsyncTaskResult&lt;?&gt;) msg.obj;
          switch (msg.what) {
              case MESSAGE_POST_RESULT:
                  // There is only one result
@@ -331,12 +331,12 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
 <p>-&gt; postResult(result);结果发送到mHandler<br><br>-&gt; finish(Result result);<br><br>-&gt; onPostExecute(result);<br></p>
 <pre>
 
- public final AsyncTask<params, progress,="" result=""> execute(Params... params) {
+ public final AsyncTask&lt;Params, Progress, Result&gt; execute(Params... params) {
      return executeOnExecutor(sDefaultExecutor, params);
  }
 
  @MainThread
- public final AsyncTask<params, progress,="" result=""> executeOnExecutor(Executor exec,
+ public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,
          Params... params) {
      if (mStatus != Status.PENDING) {
          switch (mStatus) {
@@ -363,12 +363,12 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
    private Result postResult(Result result) {
      @SuppressWarnings("unchecked")
      Message message = getHandler().obtainMessage(MESSAGE_POST_RESULT,
-             new AsyncTaskResult<result>(this, result));
+             new AsyncTaskResult&lt;Result&gt;(this, result));
      message.sendToTarget();
      return result;
  }
 
-</result></params,></params,></pre>
+</pre>
 
 
             <!-- / the end of articles -->
@@ -410,9 +410,9 @@ private class MyTask extends AsyncTask<void, void,="" void=""> { ... }
                 </a>
             
             
-                <a href="/myblog/2018/08/23/国际化笔记/" class="styled-border">
+                <a href="/myblog/2018/08/23/程序员誓言/" class="styled-border">
                     
-                    国际化适配笔记
+                    The Programmer&#39;s Oath
                     →
                 </a>
             

@@ -134,6 +134,135 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识5_小结/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_小结_并发技巧清单</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   并发技巧清单  
+ 可变状态是至关重要的。 
+ 
+ 所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。 
+ 
+ 尽量将域声明为final类型，除非需要它们是可变的。 
+ 不可变对象一定是线程安全的。 
+ 
+ 不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。 
+ 
+ 封装有助于管理复杂性。 
+ 
+ 在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识5_小结/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="title-link" style="color: #3498db;">C++PrimerPlus内存模型和名称空间</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   单独编译  组织程序的策略 
+ 
+ 头文件:包含结构声明和使用这些结构的函数的原型，包含： 
+ 函数原型 
+ 使用#define或const定义的符号常量 
+ 结构声明 
+ 类声明 
+ 模板声明 
+ 内联函数 
+ 
+ 
+ 源代码文件:包含与结构有关的函数的代码 
+ 源代码文件:包含调用与结构相关的函数的代码 
+ 
+   头文件管理  在同一个文件中只...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+ 
+ 找出构成对象状态的所有变量。 
+ 找出约束状态变量的不变性条件。 
+ 简历对象状态的并发访问管理策略 
+ 
+   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
+ &lt;a href=&quot;#...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 线程最主要的目的就是提高程序的运行性能。 
+   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
+ 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
+ 要想通过并发来获得更好的性能，需要努力做好两件事情： 
+ 
+ 更有效地利用现有处理资源 
+ 在出现新的处理资源时使程序尽可能地利用这些资源。 
+ 
+ &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
+ 不在线程之间共享该状态变量 
+ 将状态变量修改为不可变的变量 
+&lt;l...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-基础知识2_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识2_对象的共享</a>
                     <div class="sub header">
                         2018-7-23
@@ -188,131 +317,6 @@ public class MutableInteger{
 
  &lt;a href=&quot;#Looper&quot; class=&quot;headerl...</p>
                 <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 线程最主要的目的就是提高程序的运行性能。 
-   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
- 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
- 要想通过并发来获得更好的性能，需要努力做好两件事情： 
- 
- 更有效地利用现有处理资源 
- 在出现新的处理资源时使程序尽可能地利用这些资源。 
- 
- &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-活跃性、性能与测试2_性能与可伸缩性/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_1线程安全</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
- 不在线程之间共享该状态变量 
- 将状态变量修改为不可变的变量 
-&lt;l...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识1_线程安全/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-基础知识_对象的组合</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
- 
- 找出构成对象状态的所有变量。 
- 找出约束状态变量的不变性条件。 
- 简历对象状态的并发访问管理策略 
- 
-   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
- &lt;a href=&quot;#...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-基础知识3_对象的组合/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="title-link" style="color: #3498db;">C++PrimerPlus内存模型和名称空间</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   单独编译  组织程序的策略 
- 
- 头文件:包含结构声明和使用这些结构的函数的原型，包含： 
- 函数原型 
- 使用#define或const定义的符号常量 
- 结构声明 
- 类声明 
- 模板声明 
- 内联函数 
- 
- 
- 源代码文件:包含与结构有关的函数的代码 
- 源代码文件:包含调用与结构相关的函数的代码 
- 
-   头文件管理  在同一个文件中只...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="title-link" style="color: #3498db;">C++PrimerPlus处理数据</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   C++变量的命名规则  
- 在名称中只能使用字母字符、数字和下划线_ 
- 名称的第一个字符不能使数字 
- 区分大小写字符与小写字符 
- 不能将C++关键字用作名称 
- 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 
- C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制 
- 
- &lt;a href=&quot;#整型-short-int-long-long-long&quot; class=...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
