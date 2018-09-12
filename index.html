@@ -103,7 +103,7 @@
  构造函数不对外开放，一般为Private。 
  通过一个静态方法或者枚举返回单例类对象。 
  确保单例类的对象有且只有一个，尤其是在多线程环境下。 
- 确保单例类对象在反序列化时不会重新构建对象。 
+ 确保单例类对象在反序列化是不会重新构建对象。 
  
  &lt;a href=&quot;#饿汉式&quot; class=&quot;headerlink...</p>
                 <a href="/myblog/2018/09/10/Android开发艺术探索_2单例模式/" class="ts circular button">Read More</a>
@@ -216,6 +216,29 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 根据 okhttp 使用，分析每一步相关源码 
+ 
+OkHttpClient.Builder builder = new OkHttpClient.Builder();
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+OkHttpClient client = builder
+    .addNetworkInterceptor(ne...</p>
+                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
                     <div class="sub header">
                         2018-7-23
@@ -229,27 +252,6 @@
                 <p>   The Programmer’s Oath  转自 The Programmer’s Oath  
  &lt;a href=&quot;#In-ord...</p>
                 <a href="/myblog/2018/08/23/程序员誓言/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/国际化笔记/" class="title-link" style="color: #3498db;">国际化适配笔记</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   resource  
- 是否支持rtl 从右到左布局方式   在清单文件中配置   
- 设置组件xml属性 android:layoutDirection=”ltr”强制设置布局方法 
- 在api17以上使用带有end或start的属性替换带有left或reght的属性 例： android:layout_marginEnd=&amp;quot;15dp&amp;quot;  
- 使用vector 根据布局方向自动改方向  &amp;lt;vect...</p>
-                <a href="/myblog/2018/08/23/国际化笔记/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -278,7 +280,7 @@ Api api = new Retrofit.Builder()
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
+                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -288,14 +290,9 @@ Api api = new Retrofit.Builder()
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 根据 okhttp 使用，分析每一步相关源码 
- 
-OkHttpClient.Builder builder = new OkHttpClient.Builder();
-HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-OkHttpClient client = builder
-    .addNetworkInterceptor(ne...</p>
-                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
+                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
+   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
+                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
