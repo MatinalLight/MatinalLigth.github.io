@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android源码设计模式_3原型模式 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="定义用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 使用场景 类初始化需要消耗非常多的资源，这个资源包括数据、硬件资源等，通过原型拷贝避免这些消耗。 通过new产生一个对象需要非常繁琐的数据准备或访问权限，这时可以使用原型模式。 一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。  注意： 通过实现Clo">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android源码设计模式_3原型模式">
+<meta property="og:url" content="https://matinallight.github.io/2018/09/15/Android源码设计模式_3原型模式/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="定义用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 使用场景 类初始化需要消耗非常多的资源，这个资源包括数据、硬件资源等，通过原型拷贝避免这些消耗。 通过new产生一个对象需要非常繁琐的数据准备或访问权限，这时可以使用原型模式。 一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。  注意： 通过实现Clo">
+<meta property="og:updated_time" content="2018-09-15T07:35:27.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android源码设计模式_3原型模式">
+<meta name="twitter:description" content="定义用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 使用场景 类初始化需要消耗非常多的资源，这个资源包括数据、硬件资源等，通过原型拷贝避免这些消耗。 通过new产生一个对象需要非常繁琐的数据准备或访问权限，这时可以使用原型模式。 一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。  注意： 通过实现Clo">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Android源码设计模式_3原型模式</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/8/15 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ol>
+<li>类初始化需要消耗非常多的资源，这个资源包括数据、硬件资源等，通过原型拷贝避免这些消耗。</li>
+<li>通过new产生一个对象需要非常繁琐的数据准备或访问权限，这时可以使用原型模式。</li>
+<li>一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。<br></li>
+</ol>
+<p><b>注意： 通过实现Cloneable接口的原型模式在调用clone函数构造实例时并不一定比通过new操作速度快，只有当通过new构造对象较为耗时或者说成本较高时，通过clone方法才能够获得效率上的提升。</b></p>
+<h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><p>WordDocument扮演的是ConcretePrototype角色，而Cloneable是代表prototype角色。Cloneable是一个标识接口，标识这个类的对象是可拷贝的。如果没有实现Cloneable接口却调用了clone()函数将抛出异常。</p>
+<pre>
+ public class WordDocument implements Cloneable{
+     private String mText;
+     private ArrayList&lt;String&gt; mImages=new ArrayList();
+
+     public WordDocument(){}
+
+     //clone是Object的方法
+     @Override
+     protected WordDocument clone(){
+         try{
+             WordDocument doc = (WordDocument) super.clone();
+             doc.mText=this.mText;
+             doc.mImages=this.mImages;
+             return doc;
+         } catch (Exception e){
+         }
+         return null;
+     }
+ }
+</pre>
+
+<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><p>拷贝规则：</p>
+<ol>
+<li><p>基本类型<br></p>
+<p> 如果变量是基本很类型，则拷贝其值，比如int、float等。</p>
+</li>
+<li><p>对象<br></p>
+<p> 如果变量是一个实例对象，则拷贝其地址引用，也就是说此时新对象与原来对象是公用该实例变量。</p>
+</li>
+<li><p>String字符串<br></p>
+<p> 若变量为String字符串，则拷贝其地址引用。但是在修改时，它会从字符串池中重新生成一个新的字符串，原有字符串对象保持不变。</p>
+</li>
+</ol>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>上述原型模式的实现实际上只是一个浅拷贝，也成为影子拷贝，这份拷贝实际上并不是将原始文档的所有字段都重新构造了一份，而是副本文档引用原始文档的字段。当修改副本时原始文档也会改变。</p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>在拷贝对象时，对于引用型的字段也要采用拷贝的形式，而不是单纯引用的形式。</p>
+<pre>
+ public class WordDocument implements Cloneable{
+     private String mText;
+     private ArrayList&lt;String&gt; mImages=new ArrayList();
+
+     public WordDocument(){}
+
+     //clone是Object的方法
+     @Override
+     protected WordDocument clone(){
+         try{
+             WordDocument doc = (WordDocument) super.clone();
+             doc.mText=this.mText;
+             //对mImages对象也调用clone()函数，进行深拷贝
+             doc.mImages=(ArrayLis)this.mImages.clone;
+             return doc;
+         } catch (Exception e){
+         }
+         return null;
+     }
+ }
+</pre>
+
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>原型模式是在内存中二进制流的拷贝，要比直接new一个对象性能好很多，特别时要求在循环体内产生大量的对象时，原型模式可以更好地体现其优点。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>直接在内存中拷贝，构造函数是不会执行的，在实际开发当中应该注意这个潜在的问题。</p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="#"></a>
+            
+            
+                <a href="/myblog/2018/09/10/Android源码设计模式_2单例模式/" class="styled-border">
+                    
+                    Android源码设计模式_2单例模式
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

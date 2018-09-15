@@ -88,7 +88,30 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/09/10/Android开发艺术探索_2单例模式/" class="title-link" style="color: #3498db;">Android开发艺术探索_2单例模式</a>
+                    <a href="/myblog/2018/09/15/Android源码设计模式_3原型模式/" class="title-link" style="color: #3498db;">Android源码设计模式_3原型模式</a>
+                    <div class="sub header">
+                        2018-8-15
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   定义  用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 
+   使用场景  
+ 类初始化需要消耗非常多的资源，这个资源包括数据、硬件资源等，通过原型拷贝避免这些消耗。 
+ 通过new产生一个对象需要非常繁琐的数据准备或访问权限，这时可以使用原型模式。 
+ 一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用，即保护性拷贝。  
+ 
+  注意： 通过实现Cloneable接口的原型...</p>
+                <a href="/myblog/2018/09/15/Android源码设计模式_3原型模式/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/09/10/Android源码设计模式_2单例模式/" class="title-link" style="color: #3498db;">Android源码设计模式_2单例模式</a>
                     <div class="sub header">
                         2018-8-10
                         ・
@@ -106,7 +129,7 @@
  确保单例类对象在反序列化是不会重新构建对象。 
  
  &lt;a href=&quot;#饿汉式&quot; class=&quot;headerlink...</p>
-                <a href="/myblog/2018/09/10/Android开发艺术探索_2单例模式/" class="ts circular button">Read More</a>
+                <a href="/myblog/2018/09/10/Android源码设计模式_2单例模式/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -216,7 +239,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
+                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -226,14 +249,9 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 根据 okhttp 使用，分析每一步相关源码 
- 
-OkHttpClient.Builder builder = new OkHttpClient.Builder();
-HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-OkHttpClient client = builder
-    .addNetworkInterceptor(ne...</p>
-                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
+                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
+   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
+                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -275,24 +293,6 @@ Api api = new Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数对象和json转换器
     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Call转换为Rxjava的Observ...</p>
                 <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
-   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
-                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
