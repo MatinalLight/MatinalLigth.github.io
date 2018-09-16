@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Java并发编程实战-5基础知识_小结_并发技巧清单 | 学习笔记</title>
+  <title>Android源码设计模式_4策略模式 | 学习笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="并发技巧清单 可变状态是至关重要的。  所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。  尽量将域声明为final类型，除非需要它们是可变的。 不可变对象一定是线程安全的。  不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。  封装有助于管理复杂性。  在编写线程安全的程序时，虽然可以将所有数据">
-<meta name="keywords" content="Java 并发编程实战">
+  <meta name="description" content="定义策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。 使用场景 针对同一类型问题的多种处理方式，仅仅是具体行为有差别时。 需要安全地封装多种同一类型的操作时。 出现同一抽象类有多个子类，而又需要使用if-else或者switch-case来选择具体子类时。  简单实现 Context——用来操作策略的上下文环境。 Strag">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java并发编程实战-5基础知识_小结_并发技巧清单">
-<meta property="og:url" content="https://matinallight.github.io/2018/08/23/Java并发编程实战-5基础知识_小结/index.html">
+<meta property="og:title" content="Android源码设计模式_4策略模式">
+<meta property="og:url" content="https://matinallight.github.io/2018/09/16/Android源码设计模式_4策略模式/index.html">
 <meta property="og:site_name" content="学习笔记">
-<meta property="og:description" content="并发技巧清单 可变状态是至关重要的。  所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。  尽量将域声明为final类型，除非需要它们是可变的。 不可变对象一定是线程安全的。  不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。  封装有助于管理复杂性。  在编写线程安全的程序时，虽然可以将所有数据">
-<meta property="og:updated_time" content="2018-09-12T13:43:13.294Z">
+<meta property="og:description" content="定义策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。 使用场景 针对同一类型问题的多种处理方式，仅仅是具体行为有差别时。 需要安全地封装多种同一类型的操作时。 出现同一抽象类有多个子类，而又需要使用if-else或者switch-case来选择具体子类时。  简单实现 Context——用来操作策略的上下文环境。 Strag">
+<meta property="og:updated_time" content="2018-09-16T08:39:29.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java并发编程实战-5基础知识_小结_并发技巧清单">
-<meta name="twitter:description" content="并发技巧清单 可变状态是至关重要的。  所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。  尽量将域声明为final类型，除非需要它们是可变的。 不可变对象一定是线程安全的。  不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。  封装有助于管理复杂性。  在编写线程安全的程序时，虽然可以将所有数据">
+<meta name="twitter:title" content="Android源码设计模式_4策略模式">
+<meta name="twitter:description" content="定义策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。 使用场景 针对同一类型问题的多种处理方式，仅仅是具体行为有差别时。 需要安全地封装多种同一类型的操作时。 出现同一抽象类有多个子类，而又需要使用if-else或者switch-case来选择具体子类时。  简单实现 Context——用来操作策略的上下文环境。 Strag">
   
     <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
   
@@ -93,36 +93,69 @@
             <!-- Articles -->
                 
                 <h1 class="ts header">
-                    <span style="color: #333;">Java并发编程实战-5基础知识_小结_并发技巧清单</span>
-                    <div class="sub header" style="color: #808080;">Publish: 2018/7/23 
+                    <span style="color: #333;">Android源码设计模式_4策略模式</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/8/16 
                      &nbsp;&nbsp;
-                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
                     
                     </div>
                 </h1>
 
-                <h2 id="并发技巧清单"><a href="#并发技巧清单" class="headerlink" title="并发技巧清单"></a>并发技巧清单</h2><ul>
-<li>可变状态是至关重要的。</li>
+                <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ol>
+<li>针对同一类型问题的多种处理方式，仅仅是具体行为有差别时。</li>
+<li>需要安全地封装多种同一类型的操作时。</li>
+<li>出现同一抽象类有多个子类，而又需要使用if-else或者switch-case来选择具体子类时。</li>
+</ol>
+<h2 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h2><ul>
+<li>Context——用来操作策略的上下文环境。</li>
+<li>Stragety——策略的抽象类。</li>
+<li>ConcreteStragetyA、ConcreteStragetyB——具体的策略实现。<br></li>
 </ul>
-<p>所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。</p>
-<ul>
-<li>尽量将域声明为final类型，除非需要它们是可变的。</li>
-<li>不可变对象一定是线程安全的。</li>
+<pre>
+ public class Context{
+     private Stragety mStragety;
+
+     public void setStragety(Stragety mStragety){
+         this.mStragety=mStragety;
+     }
+
+     public void algorithm(){
+         mStragety.algorithm();
+     }
+
+     public static void main(String[] args){
+         Context context=new Context();
+         context.setStragety(new ConcreteStragetyA());
+         context.algorithm();
+         context.setStragety(new ConcreteStragetyB());
+         context.algorithm();
+     }
+ }
+
+ public interface Stragety{
+     void algorithm();  
+ }
+
+ public ConcreteStragetyA implements Stragety{
+     public void algorithm(){
+         System.out.println("ConcreteStragetyA");
+     }
+ }
+
+ public ConcreteStragetyB implements Stragety{
+     public void algorithm(){
+         System.out.println("ConcreteStragetyB");
+     }
+ }
+</pre>
+
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>结构清晰明了，使用简单直观。</li>
+<li>耦合度相对而言较低，扩展方便。</li>
+<li>操作封装也更为彻底，数据更为安全。</li>
 </ul>
-<p>不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。</p>
-<ul>
-<li>封装有助于管理复杂性。</li>
-</ul>
-<p>在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步机制封装在对象中，更易于遵循同步策略。</p>
-<ul>
-<li>用锁来保护每个可变变量。</li>
-<li>当保护同一个不可变性条件中的所有变量时，要使用同一个锁。</li>
-<li>在执行复合操作期间，要持有锁。</li>
-<li>如果从多个线程中访问同一个可变变量时没有同步机制，那么程序会出现问题。</li>
-<li>不要故作聪明地推断出不需要使用同步。</li>
-<li>在设计过程中考虑线程安全，或者在文档中明确地指出它不是线程安全的</li>
-<li>将同步策略文档化。</li>
-</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>随着策略的增加，子类也会变得繁多。</p>
 
             <!-- / the end of articles -->
         </div>
@@ -156,16 +189,12 @@
         <hr/>
         <div class="next-prev-post-section">
             
-                <a href="/myblog/2018/08/23/Handler、Looper、Message源码分析/" class="styled-border">
-                    ←
-                    Handler、Looper、Message源码分析
-                    
-                </a>
+                <a href="#"></a>
             
             
-                <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="styled-border">
+                <a href="/myblog/2018/09/15/Android源码设计模式_3原型模式/" class="styled-border">
                     
-                    Java并发编程实战-3基础知识_对象的组合
+                    Android源码设计模式_3原型模式
                     →
                 </a>
             

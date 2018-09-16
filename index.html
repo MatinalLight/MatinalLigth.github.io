@@ -88,6 +88,29 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/09/16/Android源码设计模式_4策略模式/" class="title-link" style="color: #3498db;">Android源码设计模式_4策略模式</a>
+                    <div class="sub header">
+                        2018-8-16
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   定义  策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。 
+   使用场景  
+ 针对同一类型问题的多种处理方式，仅仅是具体行为有差别时。 
+ 需要安全地封装多种同一类型的操作时。 
+ 出现同一抽象类有多个子类，而又需要使用if-else或者switch-case来选择具体子类时。 
+ 
+ &lt;a href=&quot;#简单实现&quot; class=&quot;headerlink&quot; title...</p>
+                <a href="/myblog/2018/09/16/Android源码设计模式_4策略模式/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/09/15/Android源码设计模式_3原型模式/" class="title-link" style="color: #3498db;">Android源码设计模式_3原型模式</a>
                     <div class="sub header">
                         2018-8-15
@@ -257,25 +280,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/转载/">转载</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   The Programmer’s Oath  转自 The Programmer’s Oath  
- &lt;a href=&quot;#In-ord...</p>
-                <a href="/myblog/2018/08/23/程序员誓言/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="title-link" style="color: #3498db;">Retrofit 源码分析</a>
+                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -285,14 +290,14 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 根据 Retrofit 使用，分析每一步相关源码 
+                <p> 根据 okhttp 使用，分析每一步相关源码 
  
-Api api = new Retrofit.Builder()
-    .baseUrl(BASE_URL)//配置生产或测试环境
-    .client(getOkHttpClient())//HTTP 请求
-    .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数对象和json转换器
-    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Call转换为Rxjava的Observ...</p>
-                <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="ts circular button">Read More</a>
+OkHttpClient.Builder builder = new OkHttpClient.Builder();
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+OkHttpClient client = builder
+    .addNetworkInterceptor(ne...</p>
+                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->

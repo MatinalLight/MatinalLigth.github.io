@@ -88,7 +88,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="title-link" style="color: #3498db;">Java并发编程实战-7结构化并发应用程序_取消与关闭</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-14高级主题_原子变量与非阻塞同步机制/" class="title-link" style="color: #3498db;">Java并发编程实战-14高级主题_原子变量与非阻塞同步机制</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -98,24 +98,19 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> Java没有提供任何机制来安全地终止线程。 
-   任务取消  取消某个操作的原因？ 
+                <p>   锁的劣势  
+  如果在基于锁的类中包含有细粒度的操作(例如同步容器类，在其大多数方法中只包含了少量操作)，那么在当锁上存在着激烈的竞争时，调度开销与工作开销的比值会非常高。 
  
- 用户请求取消 
- 有时间限制的操作 
- 应用程序事件 
- 取消 
- 关闭 
+  当一个线程正在等待锁时，它不能做任何其他事情。如果被阻塞线程的优先级较高，而持有锁的线程优先级较低，就会产生 “优先级反转” 。即使高优先级的线程可以抢先执行，但仍然需要等待锁被释放，从而导致它的优先级会将至低优先级线程的级别。 
  
- 一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些(What)操作。 
- &lt;a href=&quot;#中断&quot; class=&quot;headerlink&quot;...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="ts circular button">Read More</a>
+  与锁相比，volatile变量是一种更轻量级的同步机制，因为在使用这些变量时不会发生上下文切换货线程调度等操作。然而，volatile变量同...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-14高级主题_原子变量与非阻塞同步机制/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-1基础知识_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-1基础知识_线程安全</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="title-link" style="color: #3498db;">Java并发编程实战-12高级主题_显示锁</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -125,11 +120,14 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
- 不在线程之间共享该状态变量 
- 将状态变量修改为不可变的变量 
-&lt;l...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-1基础知识_线程安全/" class="ts circular button">Read More</a>
+                <p>   Lock与ReentrantLock  Lock提供了一种无条件的、可轮询的、定时的以及可中断的锁获取操作，所有加锁和解锁的方法都是显示的。 
+ 
+    public interface Lock{
+        void lock();
+        void lockInterruptibly() throws InterruptedExceptedException;
+        boolean tryLock();
+        boolean tryLock(long timeout,TimeUnit unit) throws I...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -166,7 +164,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-9活跃性、性能与测试_避免活跃性危险/" class="title-link" style="color: #3498db;">Java并发编程实战-9活跃性、性能与测试_避免活跃性危险</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-1基础知识_线程安全/" class="title-link" style="color: #3498db;">Java并发编程实战-1基础知识_线程安全</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -176,15 +174,36 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   死锁    锁顺序死锁  A-&amp;gt;锁住Left-&amp;gt;尝试锁住Right-&amp;gt;永久等待  B—&amp;gt;锁住Right-&amp;gt;尝试锁住Left-&amp;gt;永久等待 
- 
-    //注意：容易发生死锁
-    public class LeftRightDeadLock{
-        private final Object left=new Object();
-        private final Object right=new Object();
+                <p>   线程安全性    如果当多个线程访问同一个可变的状态变量时，没有使用合适的同步，程序就会出现错误，有三种方法修复这个问题？  
+ 不在线程之间共享该状态变量 
+ 将状态变量修改为不可变的变量 
+&lt;l...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-1基础知识_线程安全/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
 
-        publ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-9活跃性、性能与测试_避免活跃性危险/" class="ts circular button">Read More</a>
+                <p> 线程最主要的目的就是提高程序的运行性能。 
+   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
+ 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
+ 要想通过并发来获得更好的性能，需要努力做好两件事情： 
+ 
+ 更有效地利用现有处理资源 
+ 在出现新的处理资源时使程序尽可能地利用这些资源。 
+ 
+ &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -225,79 +244,6 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 线程最主要的目的就是提高程序的运行性能。 
-   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
- 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
- 要想通过并发来获得更好的性能，需要努力做好两件事情： 
- 
- 更有效地利用现有处理资源 
- 在出现新的处理资源时使程序尽可能地利用这些资源。 
- 
- &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-3基础知识_对象的组合</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
- 
- 找出构成对象状态的所有变量。 
- 找出约束状态变量的不变性条件。 
- 简历对象状态的并发访问管理策略 
- 
-   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
- &lt;a href=&quot;#...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-2基础知识_对象的共享</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
-   失效数据  get和set在没有同步的情况下访问value 
- 
-@NotThreadSafe
-public class MutableInteger{
-    private int value;
-
-   ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-5基础知识_小结/" class="title-link" style="color: #3498db;">Java并发编程实战-5基础知识_小结_并发技巧清单</a>
                     <div class="sub header">
                         2018-7-23
@@ -327,6 +273,30 @@ public class MutableInteger{
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-3基础知识_对象的组合</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+ 
+ 找出构成对象状态的所有变量。 
+ 找出约束状态变量的不变性条件。 
+ 简历对象状态的并发访问管理策略 
+ 
+   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
+ &lt;a href=&quot;#...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-4基础知识_基础构建模块/" class="title-link" style="color: #3498db;">Java并发编程实战-4基础知识_基础构建模块</a>
                     <div class="sub header">
                         2018-7-23
@@ -344,6 +314,30 @@ public class MutableInteger{
     //在客户端加锁的Vector上的复合操作
   ...</p>
                 <a href="/myblog/2018/08/23/Java并发编程实战-4基础知识_基础构建模块/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-2基础知识_对象的共享</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
+   失效数据  get和set在没有同步的情况下访问value 
+ 
+@NotThreadSafe
+public class MutableInteger{
+    private int value;
+
+   ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
