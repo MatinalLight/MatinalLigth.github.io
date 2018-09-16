@@ -88,6 +88,28 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/09/16/Android源码设计模式_5状态模式/" class="title-link" style="color: #3498db;">Android源码设计模式_5状态模式</a>
+                    <div class="sub header">
+                        2018-8-16
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   定义  当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是其改变了类。 
+   使用场景  
+ 一个对象的行为取决于它的状态，并且它必须在运行时根据状态改变它的行为。 
+ 代码中包含大量与对象状态有关的条件语句，例如一个操作中含有庞大的多分支语句(if-else或switch-case),且这些分支依赖于该对象的状态。 
+ 
+   实现示例&lt;/h2...</p>
+                <a href="/myblog/2018/09/16/Android源码设计模式_5状态模式/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/09/16/Android源码设计模式_4策略模式/" class="title-link" style="color: #3498db;">Android源码设计模式_4策略模式</a>
                     <div class="sub header">
                         2018-8-16
@@ -262,7 +284,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
+                    <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="title-link" style="color: #3498db;">Retrofit 源码分析</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -272,32 +294,14 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
-   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
-                <a href="/myblog/2018/08/23/RxJava2_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 根据 okhttp 使用，分析每一步相关源码 
+                <p> 根据 Retrofit 使用，分析每一步相关源码 
  
-OkHttpClient.Builder builder = new OkHttpClient.Builder();
-HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-OkHttpClient client = builder
-    .addNetworkInterceptor(ne...</p>
-                <a href="/myblog/2018/08/23/okhttp_源码分析/" class="ts circular button">Read More</a>
+Api api = new Retrofit.Builder()
+    .baseUrl(BASE_URL)//配置生产或测试环境
+    .client(getOkHttpClient())//HTTP 请求
+    .addConverterFactory(GsonConverterFactory.create(new Gson()))//参数对象和json转换器
+    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//Call转换为Rxjava的Observ...</p>
+                <a href="/myblog/2018/08/23/Retrofit_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
@@ -306,7 +310,7 @@ OkHttpClient client = builder
              
             <div class="ts basic horizontally fitted padded segment">
                 <div class="ts pagination menu">
-                    <span class="page-number current">1</span><a class="page-number" href="/myblog/page/2/">2</a><a class="page-number" href="/myblog/page/3/">3</a><a class="page-number" href="/myblog/page/4/">4</a><a class="extend next" rel="next" href="/myblog/page/2/">Next &raquo;</a>
+                    <span class="page-number current">1</span><a class="page-number" href="/myblog/page/2/">2</a><a class="page-number" href="/myblog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/myblog/page/5/">5</a><a class="extend next" rel="next" href="/myblog/page/2/">Next &raquo;</a>
                 </div>
             </div>
             
