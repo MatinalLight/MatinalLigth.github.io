@@ -88,6 +88,30 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-3基础知识_对象的组合</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+ 
+ 找出构成对象状态的所有变量。 
+ 找出约束状态变量的不变性条件。 
+ 简历对象状态的并发访问管理策略 
+ 
+   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
+ &lt;a href=&quot;#...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-4基础知识_基础构建模块/" class="title-link" style="color: #3498db;">Java并发编程实战-4基础知识_基础构建模块</a>
                     <div class="sub header">
                         2018-7-23
@@ -110,7 +134,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-9活跃性、性能与测试_避免活跃性危险/" class="title-link" style="color: #3498db;">Java并发编程实战-9活跃性、性能与测试_避免活跃性危险</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-2基础知识_对象的共享</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -120,92 +144,15 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   死锁    锁顺序死锁  A-&amp;gt;锁住Left-&amp;gt;尝试锁住Right-&amp;gt;永久等待  B—&amp;gt;锁住Right-&amp;gt;尝试锁住Left-&amp;gt;永久等待 
+                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
+   失效数据  get和set在没有同步的情况下访问value 
  
-    //注意：容易发生死锁
-    public class LeftRightDeadLock{
-        private final Object left=new Object();
-        private final Object right=new Object();
+@NotThreadSafe
+public class MutableInteger{
+    private int value;
 
-        publ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-9活跃性、性能与测试_避免活跃性危险/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="title-link" style="color: #3498db;">C++PrimerPlus处理数据</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   C++变量的命名规则  
- 在名称中只能使用字母字符、数字和下划线_ 
- 名称的第一个字符不能使数字 
- 区分大小写字符与小写字符 
- 不能将C++关键字用作名称 
- 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 
- C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制 
- 
- &lt;a href=&quot;#整型-short-int-long-long-long&quot; class=...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="title-link" style="color: #3498db;">C++PrimerPlus复合类型</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>  数组    字符串    string    结构    共同体    枚举  
-      
-   数组    数组声明  数组的声明应指出一下三点： 
- 
- 存储在每个元素中的值的类型 
- 数组名&lt;/li...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_4复合类型/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="title-link" style="color: #3498db;">C++PrimerPlus对象和类</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   面向对象编程  OOP特性： 
- 
- 抽象 
- 封装和数据隐藏 
- 多态 
- 继承 
- 代码的可重用性 
- 
-   类  类规范有两个部分组成 
- 
- 类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 
- 类方法定义:描述如何实现类成员函数 
- 
- &lt;a href=&quot;#类的创建&quot; class=&quot;headerlink&quot; title=&quot;类的创建...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="ts circular button">Read More</a>
+   ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -242,6 +189,83 @@
   statements
   return value;//value is type cast to type typ...</p>
                 <a href="/myblog/2018/08/23/C++PrimerPlus_7函数/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="title-link" style="color: #3498db;">C++PrimerPlus处理数据</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   C++变量的命名规则  
+ 在名称中只能使用字母字符、数字和下划线_ 
+ 名称的第一个字符不能使数字 
+ 区分大小写字符与小写字符 
+ 不能将C++关键字用作名称 
+ 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 
+ C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制 
+ 
+ &lt;a href=&quot;#整型-short-int-long-long-long&quot; class=...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   指针  指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 
+   声明和初始化指针  
+ 指针声明必须指定指针指向的数据的类型  typename * name; name是指针(地址)，*name是typename而不是指针 
+ *运算符两边的空格是可选的 
+  int * p1,p2 创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   内联函数  使用方式： 
+ 
+ 在函数声明前加上关键字inline 
+ 在函数定义前加上关键字inline 
+ 
+ 使用内联函数优点 
+ 
+ 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
+ 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
+ 与其他函数一样，可以使用所在类的保护成员及私有成员 
+ 
+ 使用内联函数的缺点 
+ 
+ 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
+ 不允许有循环或者开关语句，如...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -299,7 +323,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="title-link" style="color: #3498db;">C++PrimerPlus类的使用</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="title-link" style="color: #3498db;">C++PrimerPlus对象和类</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -309,46 +333,21 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 运算符重载 友元函数 
-   运算符重载  重载运算符格式：  operator 可重载运算符(argument-list)  
-  class Time
-{
-private:
-    int hours;
-public:
-    Time operator+(const Time &amp;amp; t) const;
-}
-
-Time Time::operator+(const Time &amp;amp; t) cosnt
-{
-    Time sum;
-    sum.hours=hours+t.hours;
-    return sum;    
-}
-//Time A,B,C,D;
-A=B+2...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="title-link" style="color: #3498db;">C++PrimerPlus指针</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   指针  指针是一个变量，其存储的是值得地址，而不是值本身。通过&amp;amp;name获取变量地址。 
-   声明和初始化指针  
- 指针声明必须指定指针指向的数据的类型  typename * name; name是指针(地址)，*name是typename而不是指针 
- *运算符两边的空格是可选的 
-  int * p1,p2 创建了一个指针(p1)和一个变量(p2)，对每个指针变量名，都需要使用一个* ...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_4指针/" class="ts circular button">Read More</a>
+                <p>   面向对象编程  OOP特性： 
+ 
+ 抽象 
+ 封装和数据隐藏 
+ 多态 
+ 继承 
+ 代码的可重用性 
+ 
+   类  类规范有两个部分组成 
+ 
+ 类声明:以数据成员的方式描述数据部分，以成员函数的方式描述共有接口 
+ 类方法定义:描述如何实现类成员函数 
+ 
+ &lt;a href=&quot;#类的创建&quot; class=&quot;headerlink&quot; title=&quot;类的创建...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_10对象和类/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
