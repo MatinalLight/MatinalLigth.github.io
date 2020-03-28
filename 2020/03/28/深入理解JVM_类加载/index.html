@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://matinallight.github.io/2020/03/28/深入理解JVM_类加载/index.html">
 <meta property="og:site_name" content="学习笔记">
 <meta property="og:description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
-<meta property="og:updated_time" content="2020-03-28T15:25:04.920Z">
+<meta property="og:updated_time" content="2020-03-28T16:08:43.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM_类加载">
 <meta name="twitter:description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
@@ -156,6 +156,12 @@
 </ul>
 <h4 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h4><p>除了主动使用的七种情况，其它使用Java类的方式都被看作是对类的被动使用，都不会导致类的初始化。</p>
 <pre><code>
+/*
+ * -XX:+TraceClassLoading,用于追踪类的加载信息并打印出来
+ * -XX:+&amp;lt;option&amp;gt;,表示开启option选项
+ * -XX:-&lt;&amp;lt;option&amp;gt;,表示关闭option选项
+ * -XX:&amp;lt;option&amp;gt;=&amp;lt;value&amp;gt;,表示将option选项的值设置为value
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -174,6 +180,18 @@ public class Main {
         welcome
         初始化一个类的子类时，要求它的父类都已经被初始化完毕。
         */
+        System.out.println(Parent1.stringParent1);
+        /*
+        输出结果
+        hello parent1
+        在编译阶段，常量就会被存入到调用这个常量的方法所在的类的常量池当中，
+        本质上，调用类并没有直接引用到定义常量的类，因此并不会触发定义常量类
+        的初始化。
+
+        注意：这里指的是将常量存放到了Main的常量池中，
+        之后Parent1与Main就没有任何关系了，
+        甚至可以将Parent1的class文件删除。
+        */
     }
 }
 
@@ -188,12 +206,26 @@ class Parent {
 class Child extends Parent {
     public static String stringChild = &quot;welcome&quot;;
 
-
     static {
         System.out.println(&quot;Child static block&quot;);
     }
 }
-</code></pre><h3 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h3><ul>
+
+class Parent1 {
+    public static final String stringParent1 = &quot;hello parent1&quot;;
+
+    static {
+        System.out.println(&quot;Parent1 static block&quot;);
+    }
+}
+</code></pre><p>助记符：</p>
+<ul>
+<li>ldc表示将int,flot或是String类型的常量值从常量池中推送至栈顶。</li>
+<li>bipush表示将单字节(-128 ~ 127)的常量值推送至栈顶。</li>
+<li>sipush表示将一个短整型常量值(-32768 ~ 32767)推送至栈顶。</li>
+<li>iconst_1表示将int类型1推送值栈顶(iconst_1 ~ iconst_5)。</li>
+</ul>
+<h3 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h3><ul>
 <li>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区中，然后在内存中创建一个java.lang.Class对象(规范并未说明Class对象位于哪里，HotSpot虚拟机将其放在了方法区中)来封装类在方法区内的数据结构。</li>
 <li>加载.class文件的方式<ul>
 <li>从本地系统中直接加载。</li>

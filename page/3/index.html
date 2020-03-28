@@ -88,32 +88,6 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-8结构化并发应用程序_线程池的使用/" class="title-link" style="color: #3498db;">Java并发编程实战-8结构化并发应用程序_线程池的使用</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   在任务与执行策咯之间的隐性耦合  需要明确指定执行策咯的任务： 
- 
-  依赖性任务 
-    大多数行为正确的任务都是独立的：它们不依赖于其他任务的执行时序、执行结果或其他效果.  
- 
-  使用线程封闭机制的任务 
-    单线程的Executor能确保任务不会并发地执行,使你能够放宽代码对线程安全的要求.  
- 
-  对响应时间敏感的任务 
-    如果将一个运行时间较长的任务提交到单线程的Executor中,或者将多个运行时...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-8结构化并发应用程序_线程池的使用/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-11活跃性、性能与测试_并发程序的测试/" class="title-link" style="color: #3498db;">Java并发编程实战-11活跃性、性能与测试_并发程序的测试</a>
                     <div class="sub header">
                         2018-7-23
@@ -146,7 +120,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="title-link" style="color: #3498db;">Java并发编程实战-7结构化并发应用程序_取消与关闭</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-15高级主题_Java内存模型/" class="title-link" style="color: #3498db;">Java并发编程实战-15高级主题_Java内存模型</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -156,61 +130,9 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> Java没有提供任何机制来安全地终止线程。 
-   任务取消  取消某个操作的原因？ 
- 
- 用户请求取消 
- 有时间限制的操作 
- 应用程序事件 
- 取消 
- 关闭 
- 
- 一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些(What)操作。 
- &lt;a href=&quot;#中断&quot; class=&quot;headerlink&quot;...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="title-link" style="color: #3498db;">Java并发编程实战-12高级主题_显示锁</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   Lock与ReentrantLock  Lock提供了一种无条件的、可轮询的、定时的以及可中断的锁获取操作，所有加锁和解锁的方法都是显示的。 
- 
-    public interface Lock{
-        void lock();
-        void lockInterruptibly() throws InterruptedExceptedException;
-        boolean tryLock();
-        boolean tryLock(long timeout,TimeUnit unit) throws I...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-13高级主题_构建自定义的同步工具/" class="title-link" style="color: #3498db;">Java并发编程实战-13高级主题_构建自定义的同步工具</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   状态依赖性的管理  在并发程序中，基于状态的条件可能会由于其他线程的操作而改变：一个资源池可能在几条指令之前还是空的，但现在却变为非空的，因为另一个线程可能会返回一个元素到资源池。依赖状态的操作可以一直阻塞直到可以继续执行，这比使它们先失败再实现起来要更为方便且更不易出错。 
- 有界缓存提供的put和take操作中都包含有一个前提条件：不能从空缓存中获取元素，也不能将元素放入已满的缓存中。当前提条件未满足时，依赖状态的操作可以抛出一个异常或返回一个错误状态(使其成为调用者的一个问题)，也可以保持阻塞直到对象进入正确的状态。 
-  有界缓存的几种实现:  
- 每种实现...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-13高级主题_构建自定义的同步工具/" class="ts circular button">Read More</a>
+                <p>   什么是内存模型，为什么需要它    平台的内存模型  为了使Java开发人员无须关系不同架构上内存模型之间的差异，Java还提供了自己的内存模型，并且JVM通过在适当的位置上插入内存栅栏来屏蔽JMM与底层平台内存模型之间的差异。 
+   重排序  如果没有同步，那么推断处执行顺序将是非常困难的，而要确保在...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-15高级主题_Java内存模型/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -262,7 +184,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性/" class="title-link" style="color: #3498db;">Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-6结构化并发应用程序_执行任务/" class="title-link" style="color: #3498db;">Java并发编程实战-6结构化并发应用程序_执行任务</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -272,16 +194,118 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> 线程最主要的目的就是提高程序的运行性能。 
-   对性能的思考  提升性能意味着用更少的资源做更多的事。当操作性能由于某种特定的资源而受到限制时，通常将该操作称为资源密集型的操作，如CPU密集型、数据库密集型。 
- 造成性能开销的操作包括：线程之间的协调(如加锁，触发信号以及内存同步等)，增加的上下文切换，线程的创建和销毁，以及线程的调度等。 
- 要想通过并发来获得更好的性能，需要努力做好两件事情： 
+                <p>   在线程中执行任务  当围绕”任务执行”来设计应用程序结构时，第一步就是要找出清晰的任务边界。  大多数服务器应用程序都提供了一种自然的任务边界选择方式：以独立的客户请求为边界。 
+   串行地执行任务  在单个线程中串行地执行各项任务。大多数GUI框架都是通过单一的线程来串行地处理任务。 
+  ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-6结构化并发应用程序_执行任务/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-8结构化并发应用程序_线程池的使用/" class="title-link" style="color: #3498db;">Java并发编程实战-8结构化并发应用程序_线程池的使用</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   在任务与执行策咯之间的隐性耦合  需要明确指定执行策咯的任务： 
  
- 更有效地利用现有处理资源 
- 在出现新的处理资源时使程序尽可能地利用这些资源。 
+  依赖性任务 
+    大多数行为正确的任务都是独立的：它们不依赖于其他任务的执行时序、执行结果或其他效果.  
  
- &lt;a href=&quot;#性能与可伸缩性&quot; ...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-10活跃性、性能与测试_性能与可伸缩性/" class="ts circular button">Read More</a>
+  使用线程封闭机制的任务 
+    单线程的Executor能确保任务不会并发地执行,使你能够放宽代码对线程安全的要求.  
+ 
+  对响应时间敏感的任务 
+    如果将一个运行时间较长的任务提交到单线程的Executor中,或者将多个运行时...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-8结构化并发应用程序_线程池的使用/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="title-link" style="color: #3498db;">Java并发编程实战-7结构化并发应用程序_取消与关闭</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> Java没有提供任何机制来安全地终止线程。 
+   任务取消  取消某个操作的原因？ 
+ 
+ 用户请求取消 
+ 有时间限制的操作 
+ 应用程序事件 
+ 取消 
+ 关闭 
+ 
+ 一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些(What)操作。 
+ &lt;a href=&quot;#中断&quot; class=&quot;headerlink&quot;...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="title-link" style="color: #3498db;">C++PrimerPlus内存模型和名称空间</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   单独编译  组织程序的策略 
+ 
+ 头文件:包含结构声明和使用这些结构的函数的原型，包含： 
+ 函数原型 
+ 使用#define或const定义的符号常量 
+ 结构声明 
+ 类声明 
+ 模板声明 
+ 内联函数 
+ 
+ 
+ 源代码文件:包含与结构有关的函数的代码 
+ 源代码文件:包含调用与结构相关的函数的代码 
+ 
+   头文件管理  在同一个文件中只...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="title-link" style="color: #3498db;">Java并发编程实战-3基础知识_对象的组合</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   设计线程安全的类  在设计线程安全类的过程中，需要包含以下三个基本要素： 
+ 
+ 找出构成对象状态的所有变量。 
+ 找出约束状态变量的不变性条件。 
+ 简历对象状态的并发访问管理策略 
+ 
+   收集同步需求  如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性于封装性。 
+ &lt;a href=&quot;#...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-3基础知识_对象的组合/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -311,41 +335,6 @@
  
  在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步...</p>
                 <a href="/myblog/2018/08/23/Java并发编程实战-5基础知识_小结/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Android_Handler、Looper、Message源码分析/" class="title-link" style="color: #3498db;">Handler、Looper、Message源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 
-    class LooperThread extends Thread {
-      public Handler mHandler;
-
-      public void run() {
-          Looper.prepare();
-
-          mHandler = new Handler() {
-              public void handleMessage(Message msg) {
-                  // process incoming messages here
-              }
-          };
-
-          Looper.loop();
-      }
-  }
- 
-
- &lt;a href=&quot;#Looper&quot; class=&quot;headerl...</p>
-                <a href="/myblog/2018/08/23/Android_Handler、Looper、Message源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
