@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android源码设计模式_7命令模式 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="定义将一个请求封装成一个对象，从而让用户使用不同的请求把客户端参数化;对请求排队或者记录请求日志，以及支持可撤销的操作。 使用场景 需要抽象出待执行的动作，然后以参数的形式提供出来——类似于过程设计中的回调机制，而命令模式正是回调机制的一个面向对象的替代品。 在不同的时刻指定、排列和执行请求。一个命令对象可以有于初始请求无关的生存期。 需要支持取消操作。 支持修改日志功能，这样当系统崩溃时，这些修">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android源码设计模式_7命令模式">
+<meta property="og:url" content="https://matinallight.github.io/2018/09/22/Android源码设计模式_7命令模式/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="定义将一个请求封装成一个对象，从而让用户使用不同的请求把客户端参数化;对请求排队或者记录请求日志，以及支持可撤销的操作。 使用场景 需要抽象出待执行的动作，然后以参数的形式提供出来——类似于过程设计中的回调机制，而命令模式正是回调机制的一个面向对象的替代品。 在不同的时刻指定、排列和执行请求。一个命令对象可以有于初始请求无关的生存期。 需要支持取消操作。 支持修改日志功能，这样当系统崩溃时，这些修">
+<meta property="og:updated_time" content="2018-09-22T09:17:05.571Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android源码设计模式_7命令模式">
+<meta name="twitter:description" content="定义将一个请求封装成一个对象，从而让用户使用不同的请求把客户端参数化;对请求排队或者记录请求日志，以及支持可撤销的操作。 使用场景 需要抽象出待执行的动作，然后以参数的形式提供出来——类似于过程设计中的回调机制，而命令模式正是回调机制的一个面向对象的替代品。 在不同的时刻指定、排列和执行请求。一个命令对象可以有于初始请求无关的生存期。 需要支持取消操作。 支持修改日志功能，这样当系统崩溃时，这些修">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Android源码设计模式_7命令模式</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/8/22 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>将一个请求封装成一个对象，从而让用户使用不同的请求把客户端参数化;对请求排队或者记录请求日志，以及支持可撤销的操作。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ol>
+<li>需要抽象出待执行的动作，然后以参数的形式提供出来——类似于过程设计中的回调机制，而命令模式正是回调机制的一个面向对象的替代品。</li>
+<li>在不同的时刻指定、排列和执行请求。一个命令对象可以有于初始请求无关的生存期。</li>
+<li>需要支持取消操作。</li>
+<li>支持修改日志功能，这样当系统崩溃时，这些修改可以被重做一遍。</li>
+<li>需要支持事务操作。</li>
+</ol>
+<h2 id="实现示例"><a href="#实现示例" class="headerlink" title="实现示例"></a>实现示例</h2><ul>
+<li>Receiver:接收者角色。</li>
+<li>Command:命令角色。定义所有具体命令类的抽象接口。</li>
+<li>ConcreteCommand:具体命令角色。该类实现了Command接口。</li>
+<li>Invoker:请求者角色。</li>
+<li>Client:客户端角色。</li>
+</ul>
+<pre>
+
+ public class Receiver{
+     /**
+      * 真正执行具体命令逻辑的方法
+      */
+     public void action(){
+         System.out.println("执行具体操作");
+     }
+ }
+
+ public interface Command{
+     /**
+      * 执行具体操作的命令
+      */
+     void execute();
+ }
+
+ public class ConcreteCommand implements Command{
+     private Receiver receiver;//持有一个对接收者对象的引用
+
+     public ConcreteCommand(Receiver receiver){
+         this.receiver = receiver;
+     }
+
+     @Override
+     public void execute(){
+        //调用接收者的相关方法来执行具体逻辑
+        receiver.action();
+     }
+ }
+
+ public class Invoker{
+     private Command command;//持有一个对相应命令对象的引用
+
+     public Invoker(Command command){
+         this.command = command;
+     }
+
+     public void action(){
+         //调用具体命令对象的相关方法，执行具体命令
+         command.execute();
+     }
+ }
+
+ public class Client{
+     public static void main(String[] args){
+         //构造一个接收者对象
+         Receiver receiver = new Receiver;
+
+         // 根据接收者对象构造一个命令对象
+         Command command = new ConcreteCommand(receiver);
+
+         //根据具体的对象构造请求者对象
+         Invoker invoker = new Invoker(command);
+
+         //执行请求方法
+         invoker.action(); 
+      }
+ }
+
+</pre>
+
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>类的膨胀，大量衍生类的创建。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>更弱的耦合性、更灵活的控制性以及更好的扩展性。</p>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/myblog/2018/09/26/Android源码设计模式_8观察者模式/" class="styled-border">
+                    ←
+                    Android源码设计模式_8观察者模式
+                    
+                </a>
+            
+            
+                <a href="/myblog/2018/09/17/Android源码设计模式_6责任链模式/" class="styled-border">
+                    
+                    Android源码设计模式_6责任链模式
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>

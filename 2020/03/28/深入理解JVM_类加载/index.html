@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入理解JVM_类加载 | 学习笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
+<meta name="keywords" content="Java,JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JVM_类加载">
+<meta property="og:url" content="https://matinallight.github.io/2020/03/28/深入理解JVM_类加载/index.html">
+<meta property="og:site_name" content="学习笔记">
+<meta property="og:description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
+<meta property="og:updated_time" content="2020-03-28T15:25:04.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解JVM_类加载">
+<meta name="twitter:description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
+  
+    <link rel="alternate" href="/atom.xml" title="学习笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/myblog/css/tocas.css">
+  <link rel="stylesheet" href="/myblog/css/animate.css">
+  <link rel="stylesheet" href="/myblog/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #333333;
+    }
+
+    #menu-color-id a{
+        color: white;
+    }
+  </style>
+  <script src="/myblog/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/myblog/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/myblog/">Home</a>
+        
+            <a class="item" href="/myblog/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #34bed0;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: white;" id="big-title">学习笔记</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: white;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">深入理解JVM_类加载</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2020/2/28 
+                     &nbsp;&nbsp;
+                        <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/JVM/">JVM</a></li><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java/">Java</a></li></ul>
+                    
+                    </div>
+                </h1>
+
+                <h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p>在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。</p>
+</li>
+<li><p>提供了更大的灵活性，增加了更多的可能性。</p>
+</li>
+</ul>
+<h3 id="类加载器深入刨析"><a href="#类加载器深入刨析" class="headerlink" title="类加载器深入刨析"></a>类加载器深入刨析</h3><ul>
+<li>Java虚拟机与程序的生命周期</li>
+<li>在如下几种情况，Java虚拟机将结束生命周期<ul>
+<li>执行了System.exit()方法。</li>
+<li>程序正常执行结束。</li>
+<li>程序正在执行过程中遇到了异常或错误而异常终止。</li>
+<li>由于操作系统出现错误而导致Java虚拟机进程终止。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="类的使用过程"><a href="#类的使用过程" class="headerlink" title="类的使用过程"></a>类的使用过程</h3><ul>
+<li>加载：查找并加载类的二进制数据。</li>
+<li>连接<ul>
+<li>验证：确保被加载类的正确性。</li>
+<li>准备：为类的静态变量分配内存，并将其初始化为默认值。</li>
+<li>解析：吧类中的符号引用转换为直接引用。</li>
+</ul>
+</li>
+<li>初始化：为类的静态变量赋予正确的初始值。</li>
+<li>使用。</li>
+<li>卸载。 </li>
+</ul>
+<h3 id="类的加载、连接与初始化"><a href="#类的加载、连接与初始化" class="headerlink" title="类的加载、连接与初始化"></a>类的加载、连接与初始化</h3><ul>
+<li>Java程序对类的使用方式分为两种<ul>
+<li>主动使用</li>
+<li>被动使用</li>
+</ul>
+</li>
+<li>所有Java虚拟机实现必须在每个类或接口被Java程序”首次主动使用”时才初始化他们。</li>
+</ul>
+<h4 id="主动使用-七种"><a href="#主动使用-七种" class="headerlink" title="主动使用(七种)"></a>主动使用(七种)</h4><ul>
+<li>创建类的实例。</li>
+<li>访问某个类或接口的静态变量，或者对该静态变量赋值。</li>
+<li>调用类的静态方法。<ul>
+<li>助记符(javap 反编译)：<ul>
+<li>访问：getstatic</li>
+<li>赋值：putstatic</li>
+<li>调用：invokestatic</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>反射(如Class.forName(“com.test.Test”)).</li>
+<li>初始化一个类的子类。</li>
+<li>Java虚拟机启动时被标明为启动类的类(带有main方法的类)。</li>
+<li>JDK1.7开始提供的动态语言支持:<br>java.lang.invoke.MethodHandle实例的解析结果REF_invokeStatic句柄对应的类没有初始化，则初始化。</li>
+</ul>
+<h4 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h4><p>除了主动使用的七种情况，其它使用Java类的方式都被看作是对类的被动使用，都不会导致类的初始化。</p>
+<pre><code>
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println(Child.stringParent);
+        /*
+        输出结果
+        Parent static block
+        hello world
+        对于静态字段来说，只有直接定义了该字段的类才会被初始化。
+        */
+        System.out.println(Child.stringChild);
+        /*
+        输出结果
+        Parent static block
+        Child static block
+        welcome
+        初始化一个类的子类时，要求它的父类都已经被初始化完毕。
+        */
+    }
+}
+
+class Parent {
+    public static String stringParent = &quot;hello world&quot;;
+
+    static {
+        System.out.println(&quot;Parent static block&quot;);
+    }
+}
+
+class Child extends Parent {
+    public static String stringChild = &quot;welcome&quot;;
+
+
+    static {
+        System.out.println(&quot;Child static block&quot;);
+    }
+}
+</code></pre><h3 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h3><ul>
+<li>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区中，然后在内存中创建一个java.lang.Class对象(规范并未说明Class对象位于哪里，HotSpot虚拟机将其放在了方法区中)来封装类在方法区内的数据结构。</li>
+<li>加载.class文件的方式<ul>
+<li>从本地系统中直接加载。</li>
+<li>通过网络下载.class文件。</li>
+<li>从zip，jar等归档文件中加载.class文件。</li>
+<li>从专有数据库中提取.class文件。</li>
+<li>将Java源文件动态编译为.class文件。</li>
+</ul>
+</li>
+</ul>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="#"></a>
+            
+            
+                <a href="/myblog/2018/09/26/Android源码设计模式_8观察者模式/" class="styled-border">
+                    
+                    Android源码设计模式_8观察者模式
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["If you make your foundations strong, then you can rise high and touch the sky.","Knowledge comes to those who crave for it."];
+</script>
+<script src="/myblog/js/script.js"></script>
+</body>
+</html>
