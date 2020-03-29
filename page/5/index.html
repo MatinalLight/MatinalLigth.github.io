@@ -88,7 +88,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="title-link" style="color: #3498db;">C++PrimerPlus函数探幽</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_13类继承/" class="title-link" style="color: #3498db;">C++PrimerPlus类继承</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -98,22 +98,16 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   内联函数  使用方式： 
+                <p>   基类和派生类  从一个类派生出另一个类时，原始类称为基类，继承类称为派生类 
+   派生类   class RatedPlayer : public TableTennisPlayer
+{
+    ...
+}
+    : 指出RatedPlayer类的基类是TableTennisPlayer类 
+ ReatedPlayer对象具有以下特征 
  
- 在函数声明前加上关键字inline 
- 在函数定义前加上关键字inline 
- 
- 使用内联函数优点 
- 
- 内联函数代码被放入符号表中，在使用时进行替换，和宏展开一样，效率很高 
- 编译器在调用一个内联函数，首先会检查参数问题，保证调用正确，与对待普通函数一样，消除了隐患及局限性 
- 与其他函数一样，可以使用所在类的保护成员及私有成员 
- 
- 使用内联函数的缺点 
- 
- 不允许过多的代码，代码过多的话会造成大的内存消耗，最好在5行以内 
- 不允许有循环或者开关语句，如...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_8函数探幽/" class="ts circular button">Read More</a>
+ 派生类对象存储了基类的数据成员(派生类继承了基类的实现) ...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_13类继承/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -146,7 +140,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="title-link" style="color: #3498db;">C++PrimerPlus处理数据</a>
+                    <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="title-link" style="color: #3498db;">C++PrimerPlus类的使用</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -156,16 +150,25 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   C++变量的命名规则  
- 在名称中只能使用字母字符、数字和下划线_ 
- 名称的第一个字符不能使数字 
- 区分大小写字符与小写字符 
- 不能将C++关键字用作名称 
- 以两个下划线或下划线和大写字母打头的名称被保留给实现使用。一个下划线开头的名称被保留给实现，用作全局标识符。 
- C++对于名称的长度没有限制，名称中所有的字符都有意义，但有些平台有长度限制 
- 
- &lt;a href=&quot;#整型-short-int-long-long-long&quot; class=...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_3处理数据/" class="ts circular button">Read More</a>
+                <p> 运算符重载 友元函数 
+   运算符重载  重载运算符格式：  operator 可重载运算符(argument-list)  
+  class Time
+{
+private:
+    int hours;
+public:
+    Time operator+(const Time &amp;amp; t) const;
+}
+
+Time Time::operator+(const Time &amp;amp; t) cosnt
+{
+    Time sum;
+    sum.hours=hours+t.hours;
+    return sum;    
+}
+//Time A,B,C,D;
+A=B+2...</p>
+                <a href="/myblog/2018/08/23/C++PrimerPlus_11类的使用/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
