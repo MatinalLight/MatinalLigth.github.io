@@ -154,65 +154,6 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Android_okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 根据 okhttp 使用，分析每一步相关源码 
- 
-OkHttpClient.Builder builder = new OkHttpClient.Builder();
-HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-OkHttpClient client = builder
-    .addNetworkInterceptor(ne...</p>
-                <a href="/myblog/2018/08/23/Android_okhttp_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Android_RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
-   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
-                <a href="/myblog/2018/08/23/Android_RxJava2_源码分析/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/转载/">转载</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   The Programmer’s Oath  转自 The Programmer’s Oath  
- &lt;a href=&quot;#In-ord...</p>
-                <a href="/myblog/2018/08/23/程序员誓言/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Android_Retrofit_源码分析/" class="title-link" style="color: #3498db;">Retrofit 源码分析</a>
                     <div class="sub header">
                         2018-7-23
@@ -257,28 +198,60 @@ Api api = new Retrofit.Builder()
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="title-link" style="color: #3498db;">Java并发编程实战-7结构化并发应用程序_取消与关闭</a>
+                    <a href="/myblog/2018/08/23/程序员誓言/" class="title-link" style="color: #3498db;">The Programmer&#39;s Oath</a>
                     <div class="sub header">
                         2018-7-23
                         ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/转载/">转载</a></li></ul>
                         
                     </div>
                 </div>
                 <!-- / the end of title bar -->
 
-                <p> Java没有提供任何机制来安全地终止线程。 
-   任务取消  取消某个操作的原因？ 
+                <p>   The Programmer’s Oath  转自 The Programmer’s Oath  
+ &lt;a href=&quot;#In-ord...</p>
+                <a href="/myblog/2018/08/23/程序员誓言/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Android_okhttp_源码分析/" class="title-link" style="color: #3498db;">okhttp 源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 根据 okhttp 使用，分析每一步相关源码 
  
- 用户请求取消 
- 有时间限制的操作 
- 应用程序事件 
- 取消 
- 关闭 
- 
- 一个可取消的任务必须拥有取消策略(Cancellaion Policy)，在这个策略中将详细地定义取消操作的”How”、”When”以及”What”，即其他代码如何(How)请求取消该任务，任务在何时(When)检查是否已经请求了取消，以及在响应取消时应该执行哪些(What)操作。 
- &lt;a href=&quot;#中断&quot; class=&quot;headerlink&quot;...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-7结构化并发应用程序_取消与关闭/" class="ts circular button">Read More</a>
+OkHttpClient.Builder builder = new OkHttpClient.Builder();
+HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+logging.setLevel(Constants.ISDEBUG? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+OkHttpClient client = builder
+    .addNetworkInterceptor(ne...</p>
+                <a href="/myblog/2018/08/23/Android_okhttp_源码分析/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Android_RxJava2_源码分析/" class="title-link" style="color: #3498db;">RxJava2 源码分析</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Android/">Android</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p> 结合 Retrofit 中 RxJava2 的使用，分析每一步相关源码 
+   关联Rxjava  &lt;a href=&quot;#RxJava2CallAdapterFactory-create&quot; class=&quot;hea...</p>
+                <a href="/myblog/2018/08/23/Android_RxJava2_源码分析/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -298,6 +271,24 @@ Api api = new Retrofit.Builder()
    串行地执行任务  在单个线程中串行地执行各项任务。大多数GUI框架都是通过单一的线程来串行地处理任务。 
   ...</p>
                 <a href="/myblog/2018/08/23/Java并发编程实战-6结构化并发应用程序_执行任务/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-15高级主题_Java内存模型/" class="title-link" style="color: #3498db;">Java并发编程实战-15高级主题_Java内存模型</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   什么是内存模型，为什么需要它    平台的内存模型  为了使Java开发人员无须关系不同架构上内存模型之间的差异，Java还提供了自己的内存模型，并且JVM通过在适当的位置上插入内存栅栏来屏蔽JMM与底层平台内存模型之间的差异。 
+   重排序  如果没有同步，那么推断处执行顺序将是非常困难的，而要确保在...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-15高级主题_Java内存模型/" class="ts circular button">Read More</a>
             </div>
             
             <!-- / the end of articles -->
