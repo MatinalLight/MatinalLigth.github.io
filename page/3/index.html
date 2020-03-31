@@ -88,7 +88,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-13高级主题_构建自定义的同步工具/" class="title-link" style="color: #3498db;">Java并发编程实战-13高级主题_构建自定义的同步工具</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-15高级主题_Java内存模型/" class="title-link" style="color: #3498db;">Java并发编程实战-15高级主题_Java内存模型</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -98,11 +98,9 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   状态依赖性的管理  在并发程序中，基于状态的条件可能会由于其他线程的操作而改变：一个资源池可能在几条指令之前还是空的，但现在却变为非空的，因为另一个线程可能会返回一个元素到资源池。依赖状态的操作可以一直阻塞直到可以继续执行，这比使它们先失败再实现起来要更为方便且更不易出错。 
- 有界缓存提供的put和take操作中都包含有一个前提条件：不能从空缓存中获取元素，也不能将元素放入已满的缓存中。当前提条件未满足时，依赖状态的操作可以抛出一个异常或返回一个错误状态(使其成为调用者的一个问题)，也可以保持阻塞直到对象进入正确的状态。 
-  有界缓存的几种实现:  
- 每种实现...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-13高级主题_构建自定义的同步工具/" class="ts circular button">Read More</a>
+                <p>   什么是内存模型，为什么需要它    平台的内存模型  为了使Java开发人员无须关系不同架构上内存模型之间的差异，Java还提供了自己的内存模型，并且JVM通过在适当的位置上插入内存栅栏来屏蔽JMM与底层平台内存模型之间的差异。 
+   重排序  如果没有同步，那么推断处执行顺序将是非常困难的，而要确保在...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-15高级主题_Java内存模型/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -130,6 +128,26 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
+                    <a href="/myblog/2018/08/23/Java并发编程实战-13高级主题_构建自定义的同步工具/" class="title-link" style="color: #3498db;">Java并发编程实战-13高级主题_构建自定义的同步工具</a>
+                    <div class="sub header">
+                        2018-7-23
+                        ・
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
+                        
+                    </div>
+                </div>
+                <!-- / the end of title bar -->
+
+                <p>   状态依赖性的管理  在并发程序中，基于状态的条件可能会由于其他线程的操作而改变：一个资源池可能在几条指令之前还是空的，但现在却变为非空的，因为另一个线程可能会返回一个元素到资源池。依赖状态的操作可以一直阻塞直到可以继续执行，这比使它们先失败再实现起来要更为方便且更不易出错。 
+ 有界缓存提供的put和take操作中都包含有一个前提条件：不能从空缓存中获取元素，也不能将元素放入已满的缓存中。当前提条件未满足时，依赖状态的操作可以抛出一个异常或返回一个错误状态(使其成为调用者的一个问题)，也可以保持阻塞直到对象进入正确的状态。 
+  有界缓存的几种实现:  
+ 每种实现...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-13高级主题_构建自定义的同步工具/" class="ts circular button">Read More</a>
+            </div>
+            
+            <div class="ts horizontally fitted basic segment">
+                <!-- title bar -->
+                <div class="ts huge header">
                     <a href="/myblog/2018/08/23/Java并发编程实战-8结构化并发应用程序_线程池的使用/" class="title-link" style="color: #3498db;">Java并发编程实战-8结构化并发应用程序_线程池的使用</a>
                     <div class="sub header">
                         2018-7-23
@@ -151,29 +169,6 @@
   对响应时间敏感的任务 
     如果将一个运行时间较长的任务提交到单线程的Executor中,或者将多个运行时...</p>
                 <a href="/myblog/2018/08/23/Java并发编程实战-8结构化并发应用程序_线程池的使用/" class="ts circular button">Read More</a>
-            </div>
-            
-            <div class="ts horizontally fitted basic segment">
-                <!-- title bar -->
-                <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="title-link" style="color: #3498db;">Java并发编程实战-12高级主题_显示锁</a>
-                    <div class="sub header">
-                        2018-7-23
-                        ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
-                        
-                    </div>
-                </div>
-                <!-- / the end of title bar -->
-
-                <p>   Lock与ReentrantLock  Lock提供了一种无条件的、可轮询的、定时的以及可中断的锁获取操作，所有加锁和解锁的方法都是显示的。 
- 
-    public interface Lock{
-        void lock();
-        void lockInterruptibly() throws InterruptedExceptedException;
-        boolean tryLock();
-        boolean tryLock(long timeout,TimeUnit unit) throws I...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
@@ -262,7 +257,7 @@
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/Java并发编程实战-5基础知识_小结/" class="title-link" style="color: #3498db;">Java并发编程实战-5基础知识_小结_并发技巧清单</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="title-link" style="color: #3498db;">Java并发编程实战-12高级主题_显示锁</a>
                     <div class="sub header">
                         2018-7-23
                         ・
@@ -272,51 +267,38 @@
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   并发技巧清单  
- 可变状态是至关重要的。 
+                <p>   Lock与ReentrantLock  Lock提供了一种无条件的、可轮询的、定时的以及可中断的锁获取操作，所有加锁和解锁的方法都是显示的。 
  
- 所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全性。 
- 
- 尽量将域声明为final类型，除非需要它们是可变的。 
- 不可变对象一定是线程安全的。 
- 
- 不可变对象能极大地降低并发编程的复杂性。它们更为简单而且安全，可以任意共享而无须使用加锁或保护性复制等机制。 
- 
- 封装有助于管理复杂性。 
- 
- 在编写线程安全的程序时，虽然可以将所有数据都保存在全局变量中，但为什么要这样做？将数据封装在对象中，更易于维持不变性条件：将同步...</p>
-                <a href="/myblog/2018/08/23/Java并发编程实战-5基础知识_小结/" class="ts circular button">Read More</a>
+    public interface Lock{
+        void lock();
+        void lockInterruptibly() throws InterruptedExceptedException;
+        boolean tryLock();
+        boolean tryLock(long timeout,TimeUnit unit) throws I...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-12高级主题_显示锁/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">
                 <!-- title bar -->
                 <div class="ts huge header">
-                    <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="title-link" style="color: #3498db;">C++PrimerPlus内存模型和名称空间</a>
+                    <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="title-link" style="color: #3498db;">Java并发编程实战-2基础知识_对象的共享</a>
                     <div class="sub header">
                         2018-7-23
                         ・
-                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/C-11/">C++11</a></li></ul>
+                        <ul class="unstyled tag-list -list"><li class="unstyled tag-list -list-item"><a class="unstyled tag-list -list-link" href="/myblog/tags/Java-并发编程实战/">Java 并发编程实战</a></li></ul>
                         
                     </div>
                 </div>
                 <!-- / the end of title bar -->
 
-                <p>   单独编译  组织程序的策略 
+                <p>   可见性  内存可见性：当一个线程修改了对象的状态后，其他线程能够看到发生的状态变化。  重排序：在缺少同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。 
+   失效数据  get和set在没有同步的情况下访问value 
  
- 头文件:包含结构声明和使用这些结构的函数的原型，包含： 
- 函数原型 
- 使用#define或const定义的符号常量 
- 结构声明 
- 类声明 
- 模板声明 
- 内联函数 
- 
- 
- 源代码文件:包含与结构有关的函数的代码 
- 源代码文件:包含调用与结构相关的函数的代码 
- 
-   头文件管理  在同一个文件中只...</p>
-                <a href="/myblog/2018/08/23/C++PrimerPlus_9内存模型和名称空间/" class="ts circular button">Read More</a>
+@NotThreadSafe
+public class MutableInteger{
+    private int value;
+
+   ...</p>
+                <a href="/myblog/2018/08/23/Java并发编程实战-2基础知识_对象的共享/" class="ts circular button">Read More</a>
             </div>
             
             <div class="ts horizontally fitted basic segment">

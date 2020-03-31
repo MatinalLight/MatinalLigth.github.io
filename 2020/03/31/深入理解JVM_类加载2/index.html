@@ -9,10 +9,10 @@
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM_类加载">
-<meta property="og:url" content="https://matinallight.github.io/2020/03/28/深入理解JVM_类加载/index.html">
+<meta property="og:url" content="https://matinallight.github.io/2020/03/31/深入理解JVM_类加载2/index.html">
 <meta property="og:site_name" content="学习笔记">
 <meta property="og:description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
-<meta property="og:updated_time" content="2020-03-30T16:01:05.672Z">
+<meta property="og:updated_time" content="2020-03-31T14:32:25.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM_类加载">
 <meta name="twitter:description" content="类加载基本概念 在Java代码中，类型的加载、连接与初始化过程都是在程序运行期间完成的。  提供了更大的灵活性，增加了更多的可能性。   类加载器深入刨析 Java虚拟机与程序的生命周期 在如下几种情况，Java虚拟机将结束生命周期 执行了System.exit()方法。 程序正常执行结束。 程序正在执行过程中遇到了异常或错误而异常终止。 由于操作系统出现错误而导致Java虚拟机进程终止。">
@@ -94,7 +94,7 @@
                 
                 <h1 class="ts header">
                     <span style="color: #333;">深入理解JVM_类加载</span>
-                    <div class="sub header" style="color: #808080;">Publish: 2020/2/28 
+                    <div class="sub header" style="color: #808080;">Publish: 2020/2/31 
                      &nbsp;&nbsp;
                         <ul class="unstyled radius-tag -list"><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/JVM/">JVM</a></li><li class="unstyled radius-tag -list-item"><a class="unstyled radius-tag -list-link" href="/myblog/tags/Java/">Java</a></li></ul>
                     
@@ -401,6 +401,9 @@ class Singleton {
 <li>只有当程序访问的静态变量或静态方法确实在当前类或当前接口中定义时，才可以认为是对类或接口的主动使用。</li>
 <li>调用ClassLoader类的loadClass方法加载一个类，并不是对类的主动使用，不会导致类的初始化。</li>
 </ul>
+<h3 id="类加载和类初始化深度刨析"><a href="#类加载和类初始化深度刨析" class="headerlink" title="类加载和类初始化深度刨析"></a>类加载和类初始化深度刨析</h3><ul>
+<li>当一个接口在初始化时，并不要求其父接口都完成了初始化，只有在真正使用到父接口的时候(如引用接口中所定义的常量时)，才会初始化。</li>
+</ul>
 <pre><code>
 import java.util.UUID;
 
@@ -417,7 +420,7 @@ public class Main {
         0
         classLoader.Parent4 invoked
 
-        当一个接口在初始化时，并不要求其父接口都完成了初始化
+        当一个接口在初始化时，并不要求其父接口都完成了初始化，
         只有在真正使用到父接口的时候(如引用接口中所定义的常量时)，才会初始化
         */
 
@@ -442,6 +445,78 @@ interface Child4 extends Parent4 {
 
 class Child5 implements Child4 {
     public static int c = 5;
+}
+</code></pre><ul>
+<li>如果用子类类名访问父类的静态变量或静态方法，都表示对父类的主动使用，而不是对子类的主动使用。</li>
+</ul>
+<pre><code>
+package classLoader;
+
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(Child6.a);
+        System.out.println(&quot;-----------&quot;);
+        Child6.doSomething();
+        /*
+        输出结果：
+        Parent6 static block
+        3
+        -----------
+        do something
+
+        如果用子类类名访问父类的静态变量或静态方法，
+        都表示对父类的主动使用，而不是对子类的主动使用。
+        */
+    }
+}
+
+class Parent6{
+    static int a = 3;
+
+    static {
+        System.out.println(&quot;Parent6 static block&quot;);
+    }
+
+    static void doSomething(){
+        System.out.println(&quot;do something&quot;);
+    }
+}
+
+class Child6 extends Parent6{
+    static {
+        System.out.println(&quot;Child6 static block&quot;);
+    }
+}
+</code></pre><ul>
+<li>调用ClassLoader类的loadClass方法加载一个类，并不是对类的主动使用，不会导致类的初始化。</li>
+</ul>
+<pre><code>
+package classLoader;
+
+public class Test2 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        Class&lt;?&gt; clazz = classLoader.loadClass(&quot;classLoader.CL&quot;);
+        System.out.println(clazz);
+        System.out.println(&quot;---------&quot;);
+        clazz = Class.forName(&quot;classLoader.CL&quot;);
+        System.out.println(clazz);
+        /*
+        class classLoader.CL
+        ---------
+        Class CL
+        class classLoader.CL
+
+        调用ClassLoader类的loadClass方法加载一个类，
+        并不是对类的主动使用，不会导致类的初始化。
+        */
+    }
+}
+
+class CL{
+    static {
+        System.out.println(&quot;Class CL&quot;);
+    }
 }
 </code></pre>
             <!-- / the end of articles -->
@@ -479,9 +554,9 @@ class Child5 implements Child4 {
                 <a href="#"></a>
             
             
-                <a href="/myblog/2018/09/26/Android源码设计模式_8观察者模式/" class="styled-border">
+                <a href="/myblog/2020/03/28/深入理解JVM_类加载1/" class="styled-border">
                     
-                    Android源码设计模式_8观察者模式
+                    深入理解JVM_类加载1
                     →
                 </a>
             
